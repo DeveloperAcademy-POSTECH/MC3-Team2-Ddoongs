@@ -9,7 +9,7 @@ ex) UI 재사용 및 개발효율 증대를 위한 공통 UI 컴포넌트 생성
   - [ ] 의존성, 환경 변수, 빌드 관련 코드 업데이트 (프로젝트 코드 변경 없음)
 
 ### 반영 브랜치
-ex) feat/Avery/login -> main
+ex) feat/3-MainView수정 -> develop
 
 <br/>
 
