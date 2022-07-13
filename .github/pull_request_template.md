@@ -31,7 +31,7 @@ ex) 베이스 브랜치에 포함되기 위한 코드는 모두 정상적으로 
   <img width="200" alt="화면3" src="이미지URL">
 </p>
 
--> 한줄용 
+-> 한줄 스크린샷 
 <img width="950" alt="스샷" src="이미지URL">
 
 <br/>
@@ -49,7 +49,6 @@ ex) 작업 진행 예정사항 및 개선하고 싶은 내용이 있다면 추�
 
 ## Checklist
 
-- [ ] Is the branch you are merging on correct?
-- [ ] Do you comply with coding conventions?
+- [ ] 올바른 branch에 merge 하시는 건가요?
+- [ ] coding convention 맞추었나요?
 - [ ] Are there any changes not related to PR?
-- [ ] Has my code been self-reviewed?
