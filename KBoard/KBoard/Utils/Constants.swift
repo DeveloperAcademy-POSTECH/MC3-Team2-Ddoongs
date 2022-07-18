@@ -6,7 +6,3 @@
 //
 
 import Foundation
-
-struct Constants {
-    
-}
