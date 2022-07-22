@@ -24,7 +24,7 @@ class CustomTableCell: UITableViewCell {
     lazy var categoryName: UILabel = {
         let lable = UILabel()
         lable.textColor = .black
-        lable.font = UIFont.boldSystemFont(ofSize: 30)
+        lable.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         return lable
     }()
     
@@ -37,6 +37,7 @@ class CustomTableCell: UITableViewCell {
     lazy var moreButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(tapMoreButton), for: .touchUpInside)
         return button
     }()
@@ -50,21 +51,14 @@ class CustomTableCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        // 셀띄우는 코드라는데 내꺼는 안의 여백이 늘어남
-        // contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0.0, left: 0, bottom: 20, right: 0))
-        
         self.backgroundColor = .white
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 1
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
-
-        // 그림자 코드
-//        self.layer.shadowOffset = CGSize(width: 0, height: 0)
-//        self.layer.shadowColor = UIColor.gray.cgColor
-//        self.layer.shadowOpacity = 0.3
-//        self.layer.shadowRadius = 5
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowRadius = 5
+        self.layer.masksToBounds = false
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -75,13 +69,10 @@ class CustomTableCell: UITableViewCell {
     private func setCellConstraint() {
         let hstack = UIStackView(arrangedSubviews: [categoryName, moreButton])
         hstack.axis = .horizontal
-        hstack.spacing = 4
         
         let vstack = UIStackView(arrangedSubviews: [hstack, categoryWordsCount])
         vstack.axis = .vertical
-        vstack.spacing = 30
-        vstack.backgroundColor = .blue
-        
+        vstack.spacing = 40
         self.contentView.addSubview(vstack)
         vstack.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingBottom: 15, paddingRight: 20)
     }
