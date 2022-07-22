@@ -27,10 +27,6 @@ class WordDetailViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        wordDescriptionView.layer.masksToBounds = false
-        wordDescriptionView.layer.shadowRadius = 5
-        wordDescriptionView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        wordDescriptionView.layer.shadowOpacity = 0.2
         
     }
 
