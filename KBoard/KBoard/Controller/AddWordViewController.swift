@@ -62,8 +62,8 @@ class AddWordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI() // addSubview 해주는 곳 UI 위치 배치
-        render() // backgroundColor 등 UI 색상 설정
+        render() // addSubview 해주는 곳 UI 위치 배치
+        configureUI() // backgroundColor 등 UI 색상 설정
         navigationSetting() // navigation bar에 대한 setting
         newWordTextField.delegate = self
         newWordCategoryPicker.delegate = self
@@ -72,7 +72,7 @@ class AddWordViewController: UIViewController {
         newWordDescriptionTextField.delegate = self
     }
     
-    private func configureUI() {
+    private func render() {
         view.addSubview(newWord)
         newWord.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 100, paddingLeft: 24)
         
@@ -95,8 +95,9 @@ class AddWordViewController: UIViewController {
         
     }
     
-    private func render() {
+    private func configureUI() {
         view.backgroundColor = .systemBackground
+        
     }
     
     private func navigationSetting() {
