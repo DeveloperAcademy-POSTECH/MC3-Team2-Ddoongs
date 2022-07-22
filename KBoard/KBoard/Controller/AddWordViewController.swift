@@ -41,6 +41,7 @@ class AddWordViewController: UIViewController {
     private let newWordCategoryTextField: UITextField = {
         let newWordCategoryTextField = UITextField()
         newWordCategoryTextField.text = "진최고"
+        newWordCategoryTextField.tintColor = .clear
         return newWordCategoryTextField
     }()
     private let newWordDescriptionTextField: UITextField = {
@@ -63,10 +64,12 @@ class AddWordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI() // addSubview 해주는 곳 UI 위치 배치
+        render() // backgroundColor 등 UI 색상 설정
         navigationSetting() // navigation bar에 대한 setting
         newWordTextField.delegate = self
         newWordCategoryPicker.delegate = self
         newWordCategoryPicker.dataSource = self
+        newWordCategoryTextField.delegate = self
         newWordDescriptionTextField.delegate = self
     }
     
@@ -91,6 +94,10 @@ class AddWordViewController: UIViewController {
         view.addSubview(newWordDescriptionTextField)
         newWordDescriptionTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 300, paddingLeft: 170)
         
+    }
+    
+    private func render() {
+        view.backgroundColor = .systemBackground
     }
     
     private func navigationSetting() {
@@ -119,6 +126,13 @@ extension AddWordViewController: UITextFieldDelegate {
         } else {
             print("new Word Description --> \(textField.text ?? "")")
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if newWordTextField.isEditing || newWordDescriptionTextField.isEditing {
+            return true
+        }
+        return false
     }
     
 }
