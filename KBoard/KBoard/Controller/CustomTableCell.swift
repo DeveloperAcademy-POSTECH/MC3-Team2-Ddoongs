@@ -15,9 +15,10 @@ protocol CategoryEditDelegate: AnyObject {
 // MARK: - UITableViewCell
 class CustomTableCell: UITableViewCell {
     
+    // MARK: - Properties
     var cellDelegate: CategoryEditDelegate?
     
-    var categoryInfo: [String]? {
+    var categoryInfo: Category? {
         didSet {configure()}
     }
     
@@ -42,6 +43,7 @@ class CustomTableCell: UITableViewCell {
         return button
     }()
     
+    // MARK: - Lifecycle
     // 코드로 cell을 만들면 Init을 해줘야함
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -69,7 +71,6 @@ class CustomTableCell: UITableViewCell {
     private func setCellConstraint() {
         let hstack = UIStackView(arrangedSubviews: [categoryName, moreButton])
         hstack.axis = .horizontal
-        
         let vstack = UIStackView(arrangedSubviews: [hstack, categoryWordsCount])
         vstack.axis = .vertical
         vstack.spacing = 40
@@ -79,8 +80,8 @@ class CustomTableCell: UITableViewCell {
     
     func configure() {
         guard let categoryInfo = categoryInfo else {return}
-        categoryName.text = categoryInfo[0]
-        categoryWordsCount.text = categoryInfo[1]
+        categoryName.text = categoryInfo.categoryName
+        categoryWordsCount.text = categoryInfo.count
     }
     
     @objc func tapMoreButton() {
