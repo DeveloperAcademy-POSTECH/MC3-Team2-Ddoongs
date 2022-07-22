@@ -82,7 +82,7 @@ class WordDescriptionView: UIView {
     }
     
     private func configureUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         self.layer.cornerRadius = 15
         
     }

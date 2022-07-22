@@ -18,7 +18,7 @@ class WordDetailViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubview(wordDescriptionView)
         wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 20, width: UIScreen.main.bounds.width - 48)
         wordDescriptionView.centerX(inView: view)
