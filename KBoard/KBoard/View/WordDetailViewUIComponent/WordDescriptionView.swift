@@ -70,14 +70,14 @@ class WordDescriptionView: UIView {
         wordEnglish.anchor(top: wordKorean.bottomAnchor, left: self.leftAnchor, paddingTop: 3, paddingLeft: 20)
         
         self.addSubview(starButton)
-        starButton.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 50, paddingRight: 30, width: 25, height: 25)
+        starButton.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 50, paddingRight: 40)
         
         self.addSubview(seperator)
         seperator.anchor(top: wordEnglish.bottomAnchor, left: self.leftAnchor, paddingTop: 20, paddingLeft: 20, height: 1)
         seperator.centerX(inView: self)
         
         self.addSubview(wordDescription)
-        wordDescription.anchor(top: wordEnglish.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+        wordDescription.anchor(top: seperator.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
         
     }
     

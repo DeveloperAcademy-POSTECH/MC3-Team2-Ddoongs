@@ -20,13 +20,14 @@ class WordDetailViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(wordDescriptionView)
-        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 20, width: UIScreen.main.bounds.width - 48)
+        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         wordDescriptionView.centerX(inView: view)
         
         wordDescriptionView.layer.masksToBounds = false
         wordDescriptionView.layer.shadowRadius = 5
         wordDescriptionView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         wordDescriptionView.layer.shadowOpacity = 0.2
-    }
         
+    }
+
 }
