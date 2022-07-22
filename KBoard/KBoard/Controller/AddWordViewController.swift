@@ -48,7 +48,6 @@ class AddWordViewController: UIViewController {
         let newWordDescriptionTextField = UITextField()
         newWordDescriptionTextField.placeholder = "write some description"
         newWordDescriptionTextField.clearButtonMode = .whileEditing
-        newWordDescriptionTextField.frame = CGRect(x: 150, y: 450, width: 150, height: 100)
         return newWordDescriptionTextField
     }()
     // Toolbar REF: https://stackoverflow.com/a/37065109/19350352
@@ -81,7 +80,7 @@ class AddWordViewController: UIViewController {
         newWordCategory.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 200, paddingLeft: 24)
         
         view.addSubview(newWordTextField)
-        newWordTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 100, paddingLeft: 170)
+        newWordTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 100, paddingLeft: 170, paddingRight: 24)
         
         view.addSubview(newWordCategoryTextField)
         newWordCategoryTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 200, paddingLeft: 170)
@@ -92,7 +91,7 @@ class AddWordViewController: UIViewController {
         newWordDescription.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 300, paddingLeft: 24)
         
         view.addSubview(newWordDescriptionTextField)
-        newWordDescriptionTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 300, paddingLeft: 170)
+        newWordDescriptionTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 300, paddingLeft: 170, paddingRight: 24)
         
     }
     
