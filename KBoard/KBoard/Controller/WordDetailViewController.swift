@@ -13,16 +13,20 @@ class WordDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        render() // layout 배치
+        configureUI() // background 색상등 추가 설정
+        
+    }
+    
+    private func render() {
+        view.addSubview(wordDescriptionView)
+        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        wordDescriptionView.centerX(inView: view)
         
     }
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        view.addSubview(wordDescriptionView)
-        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-        wordDescriptionView.centerX(inView: view)
-        
         wordDescriptionView.layer.masksToBounds = false
         wordDescriptionView.layer.shadowRadius = 5
         wordDescriptionView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
