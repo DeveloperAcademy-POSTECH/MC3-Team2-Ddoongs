@@ -20,6 +20,7 @@
 		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
 		DF5056A0288A9A1900E6F8AA /* WordUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569F288A9A1900E6F8AA /* WordUsageView.swift */; };
 		DF5056A2288B126300E6F8AA /* UsageContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056A1288B126300E6F8AA /* UsageContext.swift */; };
+		DF5056A4288C34D600E6F8AA /* RelatedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056A3288C34D600E6F8AA /* RelatedWordsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		DF50569C288924F600E6F8AA /* WordDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptionView.swift; sourceTree = "<group>"; };
 		DF50569F288A9A1900E6F8AA /* WordUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordUsageView.swift; sourceTree = "<group>"; };
 		DF5056A1288B126300E6F8AA /* UsageContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageContext.swift; sourceTree = "<group>"; };
+		DF5056A3288C34D600E6F8AA /* RelatedWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedWordsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				DF50569C288924F600E6F8AA /* WordDescriptionView.swift */,
 				DF50569F288A9A1900E6F8AA /* WordUsageView.swift */,
 				DF5056A1288B126300E6F8AA /* UsageContext.swift */,
+				DF5056A3288C34D600E6F8AA /* RelatedWordsView.swift */,
 			);
 			path = WordDetailViewUIComponent;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				DF5056A2288B126300E6F8AA /* UsageContext.swift in Sources */,
 				79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */,
 				7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */,
+				DF5056A4288C34D600E6F8AA /* RelatedWordsView.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
 				DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */,
 				DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */,
