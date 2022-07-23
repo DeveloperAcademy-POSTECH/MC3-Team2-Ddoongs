@@ -23,7 +23,8 @@ class WordUsageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         dataSetting()
-        render()
+        defaultRender()
+        bottomAnchorRender()
         configureUI()
     }
     
@@ -35,31 +36,35 @@ class WordUsageView: UIView {
         // MARK: 아래 두 데이터는 뷰를 보기위해 가상의 데이터를 만들어주었다. 추후 데이터 세팅과 불러오는데 쓰일 예정
         let usageExample = UsageContext()
         let usageExample2 = UsageContext()
-        self.usageArray = [usageExample, usageExample2]
+        usageArray = [usageExample, usageExample2]
     }
     
-    private func render() {
+    private func defaultRender() {
         self.addSubview(usageLabel)
-        if usageArray.isEmpty { // Usage 개수가 0 인 case
-            usageLabel.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
-        } else {
-            usageLabel.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 20, paddingLeft: 20)
+        usageLabel.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        if !usageArray.isEmpty {
             for usage in usageArray {
                 self.addSubview(usage)
-                if usage == usageArray.first && usage != usageArray.last { // Usage 개수가 1개가 아닌 경우 Start Point
-                    usage.anchor(top: usageLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingRight: 20)
-                    tempUsage = usage
-                } else if usage == usageArray.first && usage == usageArray.last { // Usage 개수가 1개인 경우 Start Point
-                    usage.anchor(top: usageLabel.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
-                } else if usage == usageArray.last { // Usage 배열의 마지막 case
-                    guard let tempUsage = tempUsage else { return }
-                    usage.anchor(top: tempUsage.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
-                } else { // Usage 배열의 첫번째와 마지막이 아닌 case
-                    guard let tempUsage = tempUsage else { return }
-                    usage.anchor(top: tempUsage.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-                    self.tempUsage = usage
+                if usage == usageArray.first {
+                    usage.anchor(top: usageLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
+                } else {
+                    usage.anchor(top: self.tempUsage!.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
                 }
+                self.tempUsage = usage
             }
+        } else {
+            usageLabel.anchor(bottom: self.bottomAnchor, paddingBottom: 20)
+        }
+    }
+    
+    private func bottomAnchorRender() {
+        for usage in usageArray {
+            self.addSubview(usage)
+            if (usage == usageArray.first && usage == usageArray.last) || usage == usageArray.last {
+                // Usage 개수가 1개인 경우 Start Point OR 해당 context가 배열의 마지막 context일때
+                usage.anchor(bottom: self.bottomAnchor, paddingBottom: 20)
+            }
+            self.tempUsage = usage
         }
     }
     
