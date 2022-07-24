@@ -19,7 +19,7 @@ class RelatedWordsView: UIView {
     
     private let relatedWordButton: UIButton = {
         let relatedWordButton = UIButton()
-        relatedWordButton.setTitle("Inki-Gayo", for: .normal)
+        relatedWordButton.setTitle("Inki-Gayoasdfasdfsdfasdfasdfasdfasdfasd", for: .normal)
         relatedWordButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
         relatedWordButton.tintColor = .white
         relatedWordButton.backgroundColor = .systemBlue
@@ -44,7 +44,7 @@ class RelatedWordsView: UIView {
         relatedWordsLabel.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         self.addSubview(relatedWordButton)
-        relatedWordButton.anchor(top: relatedWordsLabel.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 20)
+        relatedWordButton.anchor(top: relatedWordsLabel.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
         
     }
     
