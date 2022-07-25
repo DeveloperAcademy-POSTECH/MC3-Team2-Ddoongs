@@ -7,12 +7,12 @@
 
 import UIKit
 
-private let reuseIdentifier = "CustomTableCell"
-// reuseIdentifier = 재사용 가능한 셀을 식별하는데 사용되는 문자열
-
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CategoryListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Properties
+    private let reuseIdentifier = "CustomTableCell"
+    // reuseIdentifier = 재사용 가능한 셀을 식별하는데 사용되는 문자열
+    
     private let tableView = UITableView()
     
     private let editButton: UIButton = {
@@ -120,15 +120,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         present(nav, animated: true, completion: nil)
     }
+    
+    // TO-DO : 카테고리 삭제 기능 구현 예정..
+    func remove(at indexPath: IndexPath, to tableView: UITableView) {
+        categories.remove(at: indexPath.section)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
 }
 
 // MARK: - UITableVIewDataSource
-
-extension ViewController {
+extension CategoryListViewController {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return categories.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -140,16 +147,10 @@ extension ViewController {
         return cell
     }
     
-    //TO-DO : 카테고리 삭제 기능 구현 예정..
-    func remove(at indexPath: IndexPath, to tableView: UITableView) {
-        categories.remove(at: indexPath.section)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
-    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
+        // TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
         print("카테고리선택됨")
     }
     
@@ -166,7 +167,7 @@ extension ViewController {
     
 }
 
-extension ViewController: CategoryEditDelegate {
+extension CategoryListViewController: CategoryEditDelegate {
     func tapMoreButton() {
         showActionSheet()
     }

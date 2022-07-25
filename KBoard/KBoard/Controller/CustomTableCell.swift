@@ -23,16 +23,16 @@ class CustomTableCell: UITableViewCell {
     }
     
     lazy var categoryName: UILabel = {
-        let lable = UILabel()
-        lable.textColor = .black
-        lable.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        return lable
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        return label
     }()
     
     lazy var categoryWordsCount: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 16)
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
     }()
     
     lazy var moreButton: UIButton = {
