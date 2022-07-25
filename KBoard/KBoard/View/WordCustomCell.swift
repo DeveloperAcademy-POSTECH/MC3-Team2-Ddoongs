@@ -58,7 +58,7 @@ class WordCustomCell : UITableViewCell, UITableViewDelegate{
     func render() {
         
         self.addSubview(RectangleView)
-        RectangleView.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.safeAreaLayoutGuide.leftAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, right: self.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 10)
+        RectangleView.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.safeAreaLayoutGuide.leftAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, right: self.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 16, paddingBottom: 10, paddingRight: 16)
 
         self.addSubview(HangleName)
         HangleName.anchor(top: RectangleView.topAnchor, left: RectangleView.leftAnchor, paddingTop: 20, paddingLeft: 20)
