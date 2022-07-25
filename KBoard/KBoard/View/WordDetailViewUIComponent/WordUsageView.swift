@@ -24,8 +24,8 @@ class WordUsageView: UIView {
         usageStack.spacing = 10
         return usageStack
     }()
-    private var usageArray: [UsageContext] = []
-    private var tempUsage: UsageContext?
+    private var usageArray: [UsageContextView] = []
+    private var tempUsage: UsageContextView?
     
     // MARK: - init
     override init(frame: CGRect) {
@@ -41,8 +41,8 @@ class WordUsageView: UIView {
     
     private func dataSetting() {
         // MARK: 아래 두 데이터는 뷰를 보기위해 가상의 데이터를 만들어주었다. 추후 데이터 세팅과 불러오는데 쓰일 예정
-        let usageExample = UsageContext()
-        let usageExample2 = UsageContext()
+        let usageExample = UsageContextView()
+        let usageExample2 = UsageContextView()
         usageArray = [usageExample, usageExample2]
         usageStack.addArrangedSubview(usageLabel)
         for usage in usageArray {

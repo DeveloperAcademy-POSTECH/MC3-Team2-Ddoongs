@@ -19,7 +19,7 @@
 		DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */; };
 		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
 		DF5056A0288A9A1900E6F8AA /* WordUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569F288A9A1900E6F8AA /* WordUsageView.swift */; };
-		DF5056A2288B126300E6F8AA /* UsageContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056A1288B126300E6F8AA /* UsageContext.swift */; };
+		DF5056A2288B126300E6F8AA /* UsageContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056A1288B126300E6F8AA /* UsageContextView.swift */; };
 		DF5056A4288C34D600E6F8AA /* RelatedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056A3288C34D600E6F8AA /* RelatedWordsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,7 @@
 		DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		DF50569C288924F600E6F8AA /* WordDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptionView.swift; sourceTree = "<group>"; };
 		DF50569F288A9A1900E6F8AA /* WordUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordUsageView.swift; sourceTree = "<group>"; };
-		DF5056A1288B126300E6F8AA /* UsageContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageContext.swift; sourceTree = "<group>"; };
+		DF5056A1288B126300E6F8AA /* UsageContextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageContextView.swift; sourceTree = "<group>"; };
 		DF5056A3288C34D600E6F8AA /* RelatedWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedWordsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,7 +157,7 @@
 			children = (
 				DF50569C288924F600E6F8AA /* WordDescriptionView.swift */,
 				DF50569F288A9A1900E6F8AA /* WordUsageView.swift */,
-				DF5056A1288B126300E6F8AA /* UsageContext.swift */,
+				DF5056A1288B126300E6F8AA /* UsageContextView.swift */,
 				DF5056A3288C34D600E6F8AA /* RelatedWordsView.swift */,
 			);
 			path = WordDetailViewUIComponent;
@@ -260,7 +260,7 @@
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				79318CB8287E539A003B27D9 /* ViewController.swift in Sources */,
 				DF5056A0288A9A1900E6F8AA /* WordUsageView.swift in Sources */,
-				DF5056A2288B126300E6F8AA /* UsageContext.swift in Sources */,
+				DF5056A2288B126300E6F8AA /* UsageContextView.swift in Sources */,
 				79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */,
 				7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */,
 				DF5056A4288C34D600E6F8AA /* RelatedWordsView.swift in Sources */,

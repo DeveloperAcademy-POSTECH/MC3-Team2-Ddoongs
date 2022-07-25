@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: UsageContext는 Korean, English Usage가 들어온다 가정하고 만든 class
-class UsageContext: UIView {
+class UsageContextView: UIView {
     
     // MARK: - property
     private let usageKorean: UILabel = {
