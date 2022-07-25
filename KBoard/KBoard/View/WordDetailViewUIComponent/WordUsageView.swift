@@ -16,6 +16,14 @@ class WordUsageView: UIView {
         usageLabel.font = .systemFont(ofSize: 16, weight: .bold)
         return usageLabel
     }()
+    private let usageStack: UIStackView = {
+        let usageStack = UIStackView()
+        usageStack.axis = .vertical
+        usageStack.distribution = .fillEqually
+        usageStack.alignment = .leading
+        usageStack.spacing = 10
+        return usageStack
+    }()
     private var usageArray: [UsageContext] = []
     private var tempUsage: UsageContext?
     
@@ -23,8 +31,7 @@ class WordUsageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         dataSetting()
-        defaultRender()
-        bottomAnchorRender()
+        render()
         configureUI()
     }
     
@@ -37,35 +44,15 @@ class WordUsageView: UIView {
         let usageExample = UsageContext()
         let usageExample2 = UsageContext()
         usageArray = [usageExample, usageExample2]
-    }
-    
-    private func defaultRender() {
-        self.addSubview(usageLabel)
-        usageLabel.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-        if !usageArray.isEmpty {
-            for usage in usageArray {
-                self.addSubview(usage)
-                if usage == usageArray.first {
-                    usage.anchor(top: usageLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-                } else {
-                    usage.anchor(top: self.tempUsage!.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-                }
-                self.tempUsage = usage
-            }
-        } else {
-            usageLabel.anchor(bottom: self.bottomAnchor, paddingBottom: 20)
-        }
-    }
-    
-    private func bottomAnchorRender() {
+        usageStack.addArrangedSubview(usageLabel)
         for usage in usageArray {
-            self.addSubview(usage)
-            if (usage == usageArray.first && usage == usageArray.last) || usage == usageArray.last {
-                // Usage 개수가 1개인 경우 Start Point OR 해당 context가 배열의 마지막 context일때
-                usage.anchor(bottom: self.bottomAnchor, paddingBottom: 20)
-            }
-            self.tempUsage = usage
+            usageStack.addArrangedSubview(usage)
         }
+    }
+    
+    private func render() {
+        self.addSubview(usageStack)
+        usageStack.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
     }
     
     private func configureUI() {
