@@ -20,7 +20,7 @@ class WordDetailViewController: UIViewController {
     
     private func render() {
         view.addSubview(wordDescriptionView)
-        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
         wordDescriptionView.centerX(inView: view)
         
     }
