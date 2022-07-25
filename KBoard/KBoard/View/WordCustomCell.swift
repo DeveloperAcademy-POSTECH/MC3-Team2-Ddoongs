@@ -27,7 +27,7 @@ class WordCustomCell : UITableViewCell, UITableViewDelegate{
     lazy var favoriteButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "star.fill"), for: .normal)
-//        button.tintColor = .secondaryLabel
+        button.tintColor = .systemYellow
         return button
     }()
     
@@ -55,34 +55,19 @@ class WordCustomCell : UITableViewCell, UITableViewDelegate{
         fatalError("init(coder: ) has not been implemneted")
     }
     
-    override func layoutSubviews() {
-         super.layoutSubviews()
-        
-         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 160, right: 16))
-        
-     }
-    
     func render() {
         
         self.addSubview(RectangleView)
-        
         RectangleView.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.safeAreaLayoutGuide.leftAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, right: self.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 10)
 
-        
         self.addSubview(HangleName)
-        
         HangleName.anchor(top: RectangleView.topAnchor, left: RectangleView.leftAnchor, paddingTop: 20, paddingLeft: 20)
         
-        
         self.addSubview(EnglishName)
-        
         EnglishName.anchor(top: HangleName.topAnchor, left: RectangleView.leftAnchor, bottom: RectangleView.bottomAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 20)
         
-        
         self.addSubview(favoriteButton)
-        
-        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        favoriteButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        favoriteButton.rightAnchor.constraint(equalTo: RectangleView.rightAnchor, constant: -20).isActive = true
+        favoriteButton.centerY(inView: RectangleView)
+        favoriteButton.anchor(right: RectangleView.rightAnchor, paddingRight: 20)
     }
 }
