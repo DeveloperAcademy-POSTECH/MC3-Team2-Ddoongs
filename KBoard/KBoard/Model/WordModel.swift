@@ -8,10 +8,10 @@
 import Foundation
 
 struct Word {
-    let hangleName : String
-    let englishName : String
-    let favorites : Bool
-    let category : String
+    let hangleName: String
+    let englishName: String
+    let favorites: Bool
+    let category: String
 }
 
 extension Word {
