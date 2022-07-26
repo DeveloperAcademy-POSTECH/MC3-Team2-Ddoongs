@@ -10,6 +10,7 @@
 		3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */; };
 		3F24E81C288D15AB0092CEC7 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81B288D15AB0092CEC7 /* WordListView.swift */; };
 		3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */; };
+		3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E868288FA7EA0092CEC7 /* WordModel.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
 		79318CB8287E539A003B27D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB7287E539A003B27D9 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewController.swift; sourceTree = "<group>"; };
 		3F24E81B288D15AB0092CEC7 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
 		3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCustomCell.swift; sourceTree = "<group>"; };
+		3F24E868288FA7EA0092CEC7 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79318CB5287E539A003B27D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		79F801F628801C4F00D3A172 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F24E868288FA7EA0092CEC7 /* WordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */,
 				79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */,
 				7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */,
+				3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */,
 				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				DF0445CE288FA872004AD0FF /* WordUsageView.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
