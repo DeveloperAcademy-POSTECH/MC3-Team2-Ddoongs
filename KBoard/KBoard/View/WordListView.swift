@@ -7,12 +7,12 @@
 
 import UIKit
 
-class WordListView : UIView {
+class WordListView: UIView {
     
-    private lazy var wordTableView : UITableView = {
+    private lazy var wordTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none // cell line 없애기
-        tableView.register(WordCustomCell.self , forCellReuseIdentifier: WordCustomCell.tableCellId)
+        tableView.register(WordCustomCell.self, forCellReuseIdentifier: WordCustomCell.tableCellId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -28,7 +28,7 @@ class WordListView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func render(){
+    func render() {
         self.addSubview(wordTableView)
 
         wordTableView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
@@ -38,7 +38,7 @@ class WordListView : UIView {
 }
 
 // MARK: UITableView Setting
-extension WordListView : UITableViewDelegate, UITableViewDataSource {
+extension WordListView: UITableViewDelegate, UITableViewDataSource {
     
     // 행의 개수를 설정하는 메소드
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,5 +64,3 @@ extension WordListView : UITableViewDelegate, UITableViewDataSource {
 //        navigationController?.pushViewController(vc, animated: true)
 //    }
 }
-
-

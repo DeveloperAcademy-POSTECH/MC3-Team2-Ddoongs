@@ -7,31 +7,31 @@
 
 import UIKit
 
-class WordCustomCell : UITableViewCell, UITableViewDelegate{
+class WordCustomCell: UITableViewCell, UITableViewDelegate {
     
     static let tableCellId = "TableCellId"
     
-    lazy var HangleName : UILabel = {
+    lazy var HangleName: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 25) // 기본 size 가 16
         return label
     }()
     
-    lazy var EnglishName : UILabel = {
+    lazy var EnglishName: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray2
         return label
     }()
     
-    lazy var favoriteButton : UIButton = {
+    lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "star.fill"), for: .normal)
         button.tintColor = .systemYellow
         return button
     }()
     
-    lazy var RectangleView : UIView = {
+    lazy var RectangleView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 200, height: 130)
         view.backgroundColor = UIColor.white

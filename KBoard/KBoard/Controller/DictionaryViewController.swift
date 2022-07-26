@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DictionaryViewController : UIViewController {
+class DictionaryViewController: UIViewController {
     
     private let wordListView = WordListView()
     
