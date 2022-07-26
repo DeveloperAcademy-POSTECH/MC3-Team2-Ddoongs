@@ -10,6 +10,8 @@ import UIKit
 class WordDetailViewController: UIViewController {
     
     private let wordDescriptionView = WordDescriptionView()
+    private let wordUsageView = WordUsageView()
+    private let relatedWordsView = RelatedWordsView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +22,14 @@ class WordDetailViewController: UIViewController {
     
     private func render() {
         view.addSubview(wordDescriptionView)
-        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
-        wordDescriptionView.centerX(inView: view)
+        wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
+        view.addSubview(wordUsageView)
+        wordUsageView.anchor(top: wordDescriptionView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        
+        view.addSubview(relatedWordsView)
+        relatedWordsView.anchor(top: wordUsageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+
     }
     
     private func configureUI() {
