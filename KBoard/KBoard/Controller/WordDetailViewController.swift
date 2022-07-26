@@ -29,7 +29,7 @@ class WordDetailViewController: UIViewController {
         
         view.addSubview(relatedWordsView)
         relatedWordsView.anchor(top: wordUsageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-        
+
     }
     
     private func configureUI() {
