@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */; };
+		3F24E81C288D15AB0092CEC7 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81B288D15AB0092CEC7 /* WordListView.swift */; };
+		3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
 		79318CB8287E539A003B27D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB7287E539A003B27D9 /* ViewController.swift */; };
@@ -19,6 +22,9 @@
 		F617726C28865EFD0049BA76 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617726B28865EFD0049BA76 /* KeyboardViewController.swift */; };
 		F617727028865EFD0049BA76 /* CustomKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F617726928865EFD0049BA76 /* CustomKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F68A8FCC2884F87F00391184 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A8FCB2884F87F00391184 /* Keyboard.swift */; };
+		DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */; };
+		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
+		DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056922886E55700E6F8AA /* AddWordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewController.swift; sourceTree = "<group>"; };
+		3F24E81B288D15AB0092CEC7 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
+		3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCustomCell.swift; sourceTree = "<group>"; };
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79318CB5287E539A003B27D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +70,9 @@
 		F617726B28865EFD0049BA76 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		F617726D28865EFD0049BA76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F68A8FCB2884F87F00391184 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
+		DF50569C288924F600E6F8AA /* WordDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptionView.swift; sourceTree = "<group>"; };
+		DF5056922886E55700E6F8AA /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				79318CB7287E539A003B27D9 /* ViewController.swift */,
+				DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */,
+				DF5056922886E55700E6F8AA /* AddWordViewController.swift */,
+				3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -149,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				F68A8FCB2884F87F00391184 /* Keyboard.swift */,
+				3F24E81B288D15AB0092CEC7 /* WordListView.swift */,
+				3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */,
+				DF50569E2889252100E6F8AA /* WordDetailViewUIComponent */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -188,6 +206,12 @@
 				F617726D28865EFD0049BA76 /* Info.plist */,
 			);
 			path = CustomKeyboard;
+		DF50569E2889252100E6F8AA /* WordDetailViewUIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				DF50569C288924F600E6F8AA /* WordDescriptionView.swift */,
+			);
+			path = WordDetailViewUIComponent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,12 +338,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F24E81C288D15AB0092CEC7 /* WordListView.swift in Sources */,
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				79318CB8287E539A003B27D9 /* ViewController.swift in Sources */,
+				DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */,
+				3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */,
 				79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */,
 				7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */,
 				F68A8FCC2884F87F00391184 /* Keyboard.swift in Sources */,
+				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
+				DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */,
+				DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +513,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5PD3P95F5;
+				DEVELOPMENT_TEAM = DF85MB57QP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -512,7 +542,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5PD3P95F5;
+				DEVELOPMENT_TEAM = DF85MB57QP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
