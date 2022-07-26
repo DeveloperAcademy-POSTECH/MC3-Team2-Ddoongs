@@ -62,12 +62,11 @@ class CustomTableCell: UITableViewCell {
         self.layer.shadowRadius = 5
         self.layer.masksToBounds = false
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // 메소드 부분
     private func setCellConstraint() {
         let hstack = UIStackView(arrangedSubviews: [categoryName, moreButton])
         hstack.axis = .horizontal

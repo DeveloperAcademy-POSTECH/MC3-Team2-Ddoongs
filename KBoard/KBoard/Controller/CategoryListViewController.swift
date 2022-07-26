@@ -19,7 +19,6 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         let editButton = UIButton()
         editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(.blue, for: .normal)
-        editButton.backgroundColor = UIColor.red
         return editButton
     }()
     
@@ -29,14 +28,15 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     let word4 = Word(name: "아오나1", isFavorite: true, isOriginal: false)
     let word5 = Word(name: "zz", isFavorite: false, isOriginal: true, description: "zzzz")
     let word6 = Word(name: "gg1", isFavorite: false, isOriginal: false, description: "zz")
-    lazy var categories = [Category(categoryName: "💜BTS💜", count: "8 Words", words: [word1, word2, word3]),
-                           Category(categoryName: "아이돌", count: "8 Words", words: [word4, word5]),
-                           Category(categoryName: "소녀시대", count: "8 Words", words: [word6])]
+    var categories: [Category] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        categories = [Category(categoryName: "💜BTS💜", count: "8 Words", words: [word1, word2, word3]),
+                      Category(categoryName: "아이돌", count: "8 Words", words: [word4, word5]),
+                      Category(categoryName: "소녀시대", count: "8 Words", words: [word6])]
     }
     
     private func configureUI() {
@@ -62,10 +62,11 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         tableView.delegate = self
         
-        let vstack = UIStackView(arrangedSubviews: [editButton, tableView])
-        vstack.axis = .vertical
-        self.view.addSubview(vstack)
-        vstack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
+        self.view.addSubview(tableView)
+        self.view.addSubview(editButton)
+        editButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingRight: 16)
+        tableView.anchor(top: editButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
+        
     }
     
     private func showActionSheet() {
@@ -126,7 +127,6 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         categories.remove(at: indexPath.section)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
-    
 }
 
 // MARK: - UITableVIewDataSource
@@ -139,6 +139,7 @@ extension CategoryListViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CustomTableCell
         cell.categoryInfo = categories[indexPath.section]
@@ -164,7 +165,6 @@ extension CategoryListViewController {
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
-    
 }
 
 extension CategoryListViewController: CategoryEditDelegate {
