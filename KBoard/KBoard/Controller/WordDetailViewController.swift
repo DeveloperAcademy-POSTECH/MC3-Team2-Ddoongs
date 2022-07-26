@@ -13,6 +13,24 @@ class WordDetailViewController: UIViewController {
     private let wordUsageView = WordUsageView()
     private let relatedWordsView = RelatedWordsView()
     
+    private lazy var starButton: UIButton = {
+        let starButton = UIButton()
+        starButton.setImage(UIImage(systemName: "star"), for: .normal)
+        starButton.tintColor = .systemYellow
+        starButton.addTarget(self, action: #selector(starTapped), for: .touchUpInside)
+        return starButton
+    }()
+    
+    @objc func starTapped() {
+        if starButton.currentImage != UIImage(systemName: "star.fill") {
+            let addCategoryModalViewController = AddCategoryModalViewController()
+            addCategoryModalViewController.modalPresentationStyle = .custom
+            addCategoryModalViewController.transitioningDelegate = self
+            present(addCategoryModalViewController, animated: true)
+        }
+        starButton.setImage(UIImage(systemName: (starButton.currentImage == UIImage(systemName: "star")) ?  "star.fill" :  "star"), for: .normal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         render() // layout 배치
@@ -24,6 +42,9 @@ class WordDetailViewController: UIViewController {
         view.addSubview(wordDescriptionView)
         wordDescriptionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
+        view.addSubview(starButton)
+        starButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor, paddingTop: 60, paddingRight: 60)
+        
         view.addSubview(wordUsageView)
         wordUsageView.anchor(top: wordDescriptionView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
@@ -34,7 +55,24 @@ class WordDetailViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        
     }
 
+}
+
+extension WordDetailViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+// REF: https://stackoverflow.com/a/49499531/19350352
+class HalfSizePresentationController: UIPresentationController {
+    override var frameOfPresentedViewInContainerView: CGRect {
+        get {
+            guard let theView = containerView else {
+                return CGRect.zero
+            }
+            return CGRect(x: 0, y: theView.bounds.height/2, width: theView.bounds.width, height: theView.bounds.height/2)
+        }
+    }
 }

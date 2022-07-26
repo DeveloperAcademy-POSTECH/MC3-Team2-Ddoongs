@@ -27,6 +27,7 @@
 		DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445C9288FA872004AD0FF /* UsageContextView.swift */; };
 		DF0445CD288FA872004AD0FF /* RelatedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445CA288FA872004AD0FF /* RelatedWordsView.swift */; };
 		DF0445CE288FA872004AD0FF /* WordUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445CB288FA872004AD0FF /* WordUsageView.swift */; };
+		DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */; };
 		DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056922886E55700E6F8AA /* AddWordViewController.swift */; };
 		DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */; };
 		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
@@ -81,6 +82,7 @@
 		DF0445C9288FA872004AD0FF /* UsageContextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageContextView.swift; sourceTree = "<group>"; };
 		DF0445CA288FA872004AD0FF /* RelatedWordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedWordsView.swift; sourceTree = "<group>"; };
 		DF0445CB288FA872004AD0FF /* WordUsageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordUsageView.swift; sourceTree = "<group>"; };
+		DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryModalViewController.swift; sourceTree = "<group>"; };
 		DF5056922886E55700E6F8AA /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		DF50569C288924F600E6F8AA /* WordDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptionView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				7B301F4F288FA93400E20AEB /* CategoryListViewController.swift */,
 				7B301F51288FA9A900E20AEB /* CustomTableCell.swift */,
 				7B301F53288FA9CA00E20AEB /* AddNewCategory.swift */,
+				DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */,
 				79318CB8287E539A003B27D9 /* ViewController.swift in Sources */,
+				DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */,
 				DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */,
 				7B301F4E288FA85900E20AEB /* KBoardData.swift in Sources */,
 				3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */,
