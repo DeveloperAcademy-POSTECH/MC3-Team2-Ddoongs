@@ -10,6 +10,7 @@
 		3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */; };
 		3F24E81C288D15AB0092CEC7 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81B288D15AB0092CEC7 /* WordListView.swift */; };
 		3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */; };
+		3F24E821288E1E0A0092CEC7 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E820288E1E0A0092CEC7 /* WordModel.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
 		79318CB8287E539A003B27D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB7287E539A003B27D9 /* ViewController.swift */; };
@@ -58,6 +59,7 @@
 		3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewController.swift; sourceTree = "<group>"; };
 		3F24E81B288D15AB0092CEC7 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
 		3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCustomCell.swift; sourceTree = "<group>"; };
+		3F24E820288E1E0A0092CEC7 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79318CB5287E539A003B27D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		79F801F628801C4F00D3A172 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F24E820288E1E0A0092CEC7 /* WordModel.swift */,
 				7B352C57288A3BC0000A1AB0 /* KBoardDate.swift */,
 			);
 			path = Model;
@@ -361,6 +364,7 @@
 				F68A8FCC2884F87F00391184 /* Keyboard.swift in Sources */,
 				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
+				3F24E821288E1E0A0092CEC7 /* WordModel.swift in Sources */,
 				DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */,
 				DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */,
 			);
@@ -526,6 +530,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N3H27N59VG;
 				DEVELOPMENT_TEAM = DF85MB57QP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KBoard/Info.plist;
@@ -555,6 +560,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N3H27N59VG;
 				DEVELOPMENT_TEAM = DF85MB57QP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KBoard/Info.plist;
