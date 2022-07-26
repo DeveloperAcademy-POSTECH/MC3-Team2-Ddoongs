@@ -56,12 +56,7 @@ class WordUsageView: UIView {
     }
     
     private func configureUI() {
-        self.backgroundColor = .systemBackground
-        self.layer.cornerRadius = 15
-        self.layer.masksToBounds = false
-        self.layer.shadowRadius = 5
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        self.layer.shadowOpacity = 0.2
+        self.cardShadow()
     }
     
 }
