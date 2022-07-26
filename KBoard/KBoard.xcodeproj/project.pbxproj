@@ -19,6 +19,9 @@
 		7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934B4E92880207800CF38E9 /* View+Extension.swift */; };
 		7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934B4EB2880210D00CF38E9 /* Constants.swift */; };
 		79FDFA9A2884E689006A03CB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 79FDFA992884E689006A03CB /* .swiftlint.yml */; };
+		7B352C58288A3BC0000A1AB0 /* KBoardDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B352C57288A3BC0000A1AB0 /* KBoardDate.swift */; };
+		7BFD8AF228892C5E00FBF8C6 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD8AF128892C5E00FBF8C6 /* CustomTableCell.swift */; };
+		7BFD8AF42889573500FBF8C6 /* AddNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD8AF32889573500FBF8C6 /* AddNewCategory.swift */; };
 		F617726C28865EFD0049BA76 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617726B28865EFD0049BA76 /* KeyboardViewController.swift */; };
 		F617727028865EFD0049BA76 /* CustomKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F617726928865EFD0049BA76 /* CustomKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F68A8FCC2884F87F00391184 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A8FCB2884F87F00391184 /* Keyboard.swift */; };
@@ -66,6 +69,9 @@
 		7934B4E92880207800CF38E9 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		7934B4EB2880210D00CF38E9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		79FDFA992884E689006A03CB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		7B352C57288A3BC0000A1AB0 /* KBoardDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardDate.swift; sourceTree = "<group>"; };
+		7BFD8AF128892C5E00FBF8C6 /* CustomTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
+		7BFD8AF32889573500FBF8C6 /* AddNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategory.swift; sourceTree = "<group>"; };
 		F617726928865EFD0049BA76 /* CustomKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F617726B28865EFD0049BA76 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		F617726D28865EFD0049BA76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 		79F801F628801C4F00D3A172 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7B352C57288A3BC0000A1AB0 /* KBoardDate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				79318CB7287E539A003B27D9 /* ViewController.swift */,
+				7BFD8AF128892C5E00FBF8C6 /* CustomTableCell.swift */,
+				7BFD8AF32889573500FBF8C6 /* AddNewCategory.swift */,
 				DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */,
 				DF5056922886E55700E6F8AA /* AddWordViewController.swift */,
 				3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */,
@@ -345,6 +354,10 @@
 				3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */,
 				79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */,
 				7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */,
+				7B352C58288A3BC0000A1AB0 /* KBoardDate.swift in Sources */,
+				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
+				7BFD8AF42889573500FBF8C6 /* AddNewCategory.swift in Sources */,
+				7BFD8AF228892C5E00FBF8C6 /* CustomTableCell.swift in Sources */,
 				F68A8FCC2884F87F00391184 /* Keyboard.swift in Sources */,
 				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
