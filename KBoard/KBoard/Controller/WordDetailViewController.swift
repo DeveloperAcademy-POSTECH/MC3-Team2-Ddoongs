@@ -24,8 +24,8 @@ class WordDetailViewController: UIViewController {
     @objc func starTapped() {
         if starButton.currentImage != UIImage(systemName: "star.fill") {
             let addCategoryModalViewController = AddCategoryModalViewController()
-            addCategoryModalViewController.modalPresentationStyle = .custom
-            addCategoryModalViewController.transitioningDelegate = self
+            addCategoryModalViewController.modalPresentationStyle = .pageSheet
+            addCategoryModalViewController.sheetPresentationController?.detents = [.medium()]
             present(addCategoryModalViewController, animated: true)
         }
         starButton.setImage(UIImage(systemName: (starButton.currentImage == UIImage(systemName: "star")) ?  "star.fill" :  "star"), for: .normal)
@@ -57,22 +57,4 @@ class WordDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
 
-}
-
-extension WordDetailViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
-    }
-}
-
-// REF: https://stackoverflow.com/a/49499531/19350352
-class HalfSizePresentationController: UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        get {
-            guard let theView = containerView else {
-                return CGRect.zero
-            }
-            return CGRect(x: 0, y: theView.bounds.height/2, width: theView.bounds.width, height: theView.bounds.height/2)
-        }
-    }
 }
