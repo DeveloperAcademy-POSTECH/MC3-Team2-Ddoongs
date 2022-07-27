@@ -70,7 +70,6 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     private func showActionSheet() {
         let actionSheet = UIAlertController(title: "타이틀", message: "액션시트 메시지", preferredStyle: .actionSheet)
         let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            print("수정")
             self.showRenameAlert()
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -83,7 +82,6 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
         let renameAlert = UIAlertController(title: "Rename Category", message: "Do you want to rename category?", preferredStyle: .alert)
         let save = UIAlertAction(title: "Save", style: .default) {_ in
             // To-Do : 카테고리 명 수정 시 카테고리 리스트에 적용
-            print("수정완료")
         }
         let cancel = UIAlertAction(title: "cancel", style: .cancel)
         renameAlert.addAction(save)
