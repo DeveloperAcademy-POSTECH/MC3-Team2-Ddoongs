@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CategoryListViewController: UIViewController, CategoryNameProtocol {
     
     // MARK: - Properties
     private let reuseIdentifier = "CustomTableCell"
@@ -15,26 +15,23 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     
     private let tableView = UITableView()
     
-    private let editButton: UIButton = {
-        let editButton = UIButton()
-        editButton.setTitle("Edit", for: .normal)
-        editButton.setTitleColor(.blue, for: .normal)
-        return editButton
-    }()
-    
     let word1 = KWord(name: "비티짱1", isFavorite: true, isOriginal: true, description: "바티바티", relatedWords: ["바티짱2", "바티짱3"])
     let word2 = KWord(name: "비티짱2", isFavorite: false, isOriginal: true, description: "짱", relatedWords: ["바티짱1", "바티짱3"])
     let word3 = KWord(name: "비티짱3", isFavorite: true, isOriginal: true, description: "ㅋㅋㅋㅋ", usages: [Usage(korean: "지난 주 뮤직쇼 봤어?", english: "music show you see?"), Usage(korean: "지난 치티치티치티?", english: "티clclslsl?")], relatedWords: ["바티장1", "바티짱2"])
     let word4 = KWord(name: "아오나1", isFavorite: true, isOriginal: false)
     let word5 = KWord(name: "zz", isFavorite: false, isOriginal: true, description: "zzzz")
     let word6 = KWord(name: "gg1", isFavorite: false, isOriginal: false, description: "zz")
-    static var categories: [Category] = []
+    var categories: [Category] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        CategoryListViewController.categories = [Category(categoryName: "💜BTS💜", count: "8 Words", kwords: [word1, word2, word3]),
+        categories = [Category(categoryName: "💜BTS💜", count: "8 Words", kwords: [word1, word2, word3]),
                       Category(categoryName: "아이돌", count: "8 Words", kwords: [word4, word5]),
                       Category(categoryName: "소녀시대", count: "8 Words", kwords: [word6])]
     }
@@ -48,6 +45,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     private func setNavigation() {
         self.navigationItem.title = "My Board"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEditButton(_:)))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tapAddButton(_:))),
             UIBarButtonItem(image: UIImage(systemName: "keyboard"), style: .done, target: self, action: nil)
@@ -61,12 +59,12 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.frame = view.frame
         tableView.dataSource = self
         tableView.delegate = self
-        
         self.view.addSubview(tableView)
-        self.view.addSubview(editButton)
-        editButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingRight: 16)
-        tableView.anchor(top: editButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
-        
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
+    }
+    
+    func categoryNameSend(name: String) {
+        categories.append(Category(categoryName: name, count: "0 Words", kwords: nil))
     }
     
     private func showActionSheet() {
@@ -75,26 +73,10 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
             print("수정")
             self.showRenameAlert()
         }
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
-            print("삭제")
-            self.showDeleteAlert()
-        }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheet.addAction(rename)
-        actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
         self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    private func showDeleteAlert() {
-        let deleteAlert = UIAlertController(title: "Delete Category", message: "Do you want to delete category?", preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .destructive) {_ in
-            // To-Do : 선택한 카테고리 리스트 삭제 기능
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        deleteAlert.addAction(delete)
-        deleteAlert.addAction(cancel)
-        self.present(deleteAlert, animated: true, completion: nil)
     }
     
     private func showRenameAlert() {
@@ -114,6 +96,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc private func tapAddButton(_ sender: Any) {
         let addModel = AddNewCategory()
+        addModel.categoryNameDelegate = self
         let nav = UINavigationController(rootViewController: addModel)
         nav.modalPresentationStyle = .pageSheet
         if let sheet = nav.sheetPresentationController {
@@ -122,18 +105,21 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         present(nav, animated: true, completion: nil)
     }
     
-    // TO-DO : 카테고리 삭제 기능 구현 예정..
-    func remove(at indexPath: IndexPath, to tableView: UITableView) {
-        CategoryListViewController.categories.remove(at: indexPath.section)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+    @objc func tapEditButton(_ sender: UIBarButtonItem) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        if tableView.isEditing {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapEditButton))
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEditButton))
+        }
     }
 }
 
 // MARK: - UITableVIewDataSource
-extension CategoryListViewController {
+extension CategoryListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return CategoryListViewController.categories.count
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,13 +128,15 @@ extension CategoryListViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CustomTableCell
-        cell.categoryInfo = CategoryListViewController.categories[indexPath.section]
+        cell.categoryInfo = categories[indexPath.section]
         cell.cellDelegate = self
         cell.moreButton.tag = indexPath.section
         return cell
     }
-    
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+extension CategoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
@@ -164,6 +152,21 @@ extension CategoryListViewController {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
         return headerView
+    }
+    
+    // 셀 삭제!!!!
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+            self.categories.remove(at: indexPath.section)
+            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+            self.tableView.deleteSections(indexSet, with: .automatic )
+        }
+        let swipeActions = UISwipeActionsConfiguration(actions: [delete])
+        return swipeActions
+    }
+    // 셀 이동
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        categories.swapAt(sourceIndexPath.section, destinationIndexPath.section)
     }
 }
 
