@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CategoryListView: UIView {
+class WordCategoryListView: UIView {
     
-    let categoryTitle = ["All","Happy","Sad","Angry","Good","All","Happy","Sad","Angry","Good"]
+    let categoryTitle = ["All", "Happy", "Sad", "Angry", "Good", "All", "Happy", "Sad", "Angry", "Good"]
     
     // MARK: property
     
@@ -44,10 +44,13 @@ class CategoryListView: UIView {
 
 // MARK: UICollectionView Setting
 
-extension CategoryListView : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension WordCategoryListView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 64, height: 30)
     }
+}
+
+extension WordCategoryListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryTitle.count
     }

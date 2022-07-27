@@ -18,16 +18,25 @@ class CollectionCustomCell : UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 15
-        
-        addSubview(categoryLabel)
-        categoryLabel.centerX(inView: self)
-        categoryLabel.centerY(inView: self)
+        render()
+        configureUI()
     }
     
     required init?(coder aDecoder: NSCoder){
         fatalError ("init(coder:) has not been implemented")
     }
+    
+    func render() {
+        addSubview(categoryLabel)
+        
+        categoryLabel.centerX(inView: self)
+        categoryLabel.centerY(inView: self)
+    }
+    
+    func configureUI() {
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 15
+    }
 }
+
 
