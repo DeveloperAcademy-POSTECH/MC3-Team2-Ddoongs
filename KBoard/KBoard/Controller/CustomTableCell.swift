@@ -53,14 +53,7 @@ class CustomTableCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 10
-        self.clipsToBounds = true
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowColor = UIColor.gray.cgColor
-        self.layer.shadowOpacity = 0.1
-        self.layer.shadowRadius = 5
-        self.layer.masksToBounds = false
+        self.cardShadow()
     }
     
     required init?(coder aDecoder: NSCoder) {

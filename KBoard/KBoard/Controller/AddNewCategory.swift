@@ -19,6 +19,8 @@ class AddNewCategory: UIViewController, UITextFieldDelegate {
         return categoryTextField
     }()
     
+    var categoryNameDelegate: CategoryNameProtocol?
+    
     // MARK: - Lifecycle
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -45,13 +47,17 @@ class AddNewCategory: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func addNewCategory(_ sender: Any) {
-        // TO-Do : 텍스트 필드에 입력한 텍스트로 해당 카테고리 명 변경
-//        guard let newCategoryName = categoryTextField.text else { return }
-//        if !newCategoryName.isEmpty {
-//            CategoryListViewController.categories.append(Category(categoryName: newCategoryName, count: nil, words: nil))
+        if let text = categoryTextField.text {
+            categoryNameDelegate?.categoryNameSend(name: text)
         }
+        dismiss(animated: true, completion: nil)
+    }
     
     @objc private func dismissModal(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+}
+
+protocol CategoryNameProtocol {
+    func categoryNameSend(name: String)
 }
