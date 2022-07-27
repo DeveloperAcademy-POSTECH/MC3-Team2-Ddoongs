@@ -33,6 +33,7 @@
 		DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056922886E55700E6F8AA /* AddWordViewController.swift */; };
 		DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */; };
 		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
+		F60B878028904F00000D3CC6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60B877F28904F00000D3CC6 /* Extension.swift */; };
 		F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */; };
 		F69563F1288FAEAC009A70D5 /* CustomKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -90,6 +91,7 @@
 		DF5056922886E55700E6F8AA /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		DF50569C288924F600E6F8AA /* WordDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptionView.swift; sourceTree = "<group>"; };
+		F60B877F28904F00000D3CC6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		F69563EE288FAEAC009A70D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */,
+				F60B877F28904F00000D3CC6 /* Extension.swift */,
 				F69563EE288FAEAC009A70D5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
@@ -408,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */,
+				F60B878028904F00000D3CC6 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
