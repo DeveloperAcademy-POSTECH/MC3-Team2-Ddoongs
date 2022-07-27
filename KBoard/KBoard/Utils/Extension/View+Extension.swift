@@ -79,3 +79,23 @@ extension UIView {
     }
 
 }
+
+extension UIView {
+    //https://stackoverflow.com/questions/13679923/dashed-line-border-around-uiview
+    // Dashed border 생성기
+    func addDashedBorder(x: CGFloat, y: CGFloat) {
+        let color = UIColor.lightGray.cgColor
+        let shapeLayer: CAShapeLayer = CAShapeLayer()
+        let shapeRect = CGRect(x: 0, y: 0, width: x, height: y)
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: x/2, y: y/2)
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = color
+        shapeLayer.lineWidth = 1
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        shapeLayer.lineDashPattern = [6, 3]
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
+        self.layer.addSublayer(shapeLayer)
+    }
+    
+}
