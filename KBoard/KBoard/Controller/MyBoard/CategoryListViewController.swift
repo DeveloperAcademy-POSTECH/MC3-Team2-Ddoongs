@@ -138,7 +138,8 @@ extension CategoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
-        print("카테고리선택됨")
+//        print("카테고리선택됨")
+        navigationController?.pushViewController(CategoryViewController(), animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

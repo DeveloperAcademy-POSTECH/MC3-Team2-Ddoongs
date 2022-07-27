@@ -105,6 +105,9 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout {
                 }
                 header.render()
                 header.tapHandler = {
+                    let nav = UINavigationController(rootViewController: AddWordViewController())
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true)
                     // TODO: addWordViewController
                 }
                 return header
@@ -115,5 +118,6 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: WordDetailViewController
+        present(WordDetailViewController(), animated: true)
     }
 }
