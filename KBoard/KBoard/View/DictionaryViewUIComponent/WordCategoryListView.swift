@@ -44,7 +44,7 @@ class WordCategoryListView: UIView {
 
 // MARK: UICollectionView Setting
 
-extension WordCategoryListView : UICollectionViewDelegateFlowLayout {
+extension WordCategoryListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 64, height: 30)
     }

@@ -7,11 +7,11 @@
 
 import UIKit
 
-class CollectionCustomCell : UICollectionViewCell {
+class CollectionCustomCell: UICollectionViewCell {
     
     static let collectaionCellId = "CollectaionCellId"
     
-    lazy var categoryLabel : UILabel = {
+    lazy var categoryLabel: UILabel = {
         let label = UILabel()
         return label
     }()
@@ -22,8 +22,8 @@ class CollectionCustomCell : UICollectionViewCell {
         configureUI()
     }
     
-    required init?(coder aDecoder: NSCoder){
-        fatalError ("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func render() {
@@ -38,5 +38,3 @@ class CollectionCustomCell : UICollectionViewCell {
         self.layer.cornerRadius = 15
     }
 }
-
-
