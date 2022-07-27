@@ -7,7 +7,7 @@
 
 import UIKit
 
-//TODO: 카드 둥글기 전역 함수 수정 요구
+// TODO: 카드 둥글기 전역 함수 수정 요구
 
 class CategoryViewController: UIViewController {
 
@@ -157,6 +157,10 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         data.swapAt(sourceIndexPath.section, destinationIndexPath.section)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        present(WordDetailViewController(), animated: true)
     }
     
 }
