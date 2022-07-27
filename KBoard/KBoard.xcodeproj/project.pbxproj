@@ -17,7 +17,6 @@
 		791636D42890E559003E8CB6 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
-		79318CB8287E539A003B27D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB7287E539A003B27D9 /* ViewController.swift */; };
 		79318CBB287E539A003B27D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79318CB9287E539A003B27D9 /* Main.storyboard */; };
 		79318CBD287E539B003B27D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79318CBC287E539B003B27D9 /* Assets.xcassets */; };
 		79318CC0287E539B003B27D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79318CBE287E539B003B27D9 /* LaunchScreen.storyboard */; };
@@ -78,7 +77,6 @@
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79318CB5287E539A003B27D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		79318CB7287E539A003B27D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79318CBA287E539A003B27D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79318CBC287E539B003B27D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79318CBF287E539B003B27D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,6 +141,32 @@
 			path = CategoryViewUIComponent;
 			sourceTree = "<group>";
 		};
+		791636D52890E7DD003E8CB6 /* KPopSlang */ = {
+			isa = PBXGroup;
+			children = (
+				3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */,
+			);
+			path = KPopSlang;
+			sourceTree = "<group>";
+		};
+		791636D62890E81F003E8CB6 /* KPopSlang */ = {
+			isa = PBXGroup;
+			children = (
+				3FCDE760289068AB00C936D9 /* DictionaryViewUIComponent */,
+			);
+			path = KPopSlang;
+			sourceTree = "<group>";
+		};
+		791636D72890E820003E8CB6 /* MyBoard */ = {
+			isa = PBXGroup;
+			children = (
+				791636D02890E4D8003E8CB6 /* CategoryViewUIComponent */,
+				7B301F51288FA9A900E20AEB /* CustomTableCell.swift */,
+				7B301F53288FA9CA00E20AEB /* AddNewCategory.swift */,
+			);
+			path = MyBoard;
+			sourceTree = "<group>";
+		};
 		79318CA7287E539A003B27D9 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				79E659CA288FC3BD00FD54B6 /* CategoryViewController.swift */,
+				DF5056922886E55700E6F8AA /* AddWordViewController.swift */,
+				7B301F4F288FA93400E20AEB /* CategoryListViewController.swift */,
+				DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */,
 			);
 			path = MyBoard;
 			sourceTree = "<group>";
@@ -214,14 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				79E659C9288FC32900FD54B6 /* MyBoard */,
-				79318CB7287E539A003B27D9 /* ViewController.swift */,
+				791636D52890E7DD003E8CB6 /* KPopSlang */,
 				DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */,
-				DF5056922886E55700E6F8AA /* AddWordViewController.swift */,
-				3F24E819288D14E20092CEC7 /* DictionaryViewController.swift */,
-				7B301F4F288FA93400E20AEB /* CategoryListViewController.swift */,
-				7B301F51288FA9A900E20AEB /* CustomTableCell.swift */,
-				7B301F53288FA9CA00E20AEB /* AddNewCategory.swift */,
-				DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -229,8 +250,8 @@
 		79F801FA28801C5900D3A172 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				791636D02890E4D8003E8CB6 /* CategoryViewUIComponent */,
-				3FCDE760289068AB00C936D9 /* DictionaryViewUIComponent */,
+				791636D72890E820003E8CB6 /* MyBoard */,
+				791636D62890E81F003E8CB6 /* KPopSlang */,
 				DF50569E2889252100E6F8AA /* WordDetailViewUIComponent */,
 			);
 			path = View;
@@ -416,7 +437,6 @@
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */,
 				791636D42890E559003E8CB6 /* CategoryCollectionViewCell.swift in Sources */,
-				79318CB8287E539A003B27D9 /* ViewController.swift in Sources */,
 				DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */,
 				DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */,
 				79E659D12890CB1500FD54B6 /* Color+Extension.swift in Sources */,
