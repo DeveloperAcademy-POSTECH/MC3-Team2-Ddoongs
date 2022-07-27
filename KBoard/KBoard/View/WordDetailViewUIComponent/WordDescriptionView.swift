@@ -24,14 +24,6 @@ class WordDescriptionView: UIView {
         return wordEnglish
     }()
     
-    private let starButton: UIButton = {
-        let starButton = UIButton()
-        starButton.setImage(UIImage(systemName: "star"), for: .normal)
-        starButton.tintColor = .systemYellow
-        starButton.addTarget(self, action: #selector(starTapped), for: .touchUpInside)
-        return starButton
-    }()
-    
     private let wordDescription: UILabel = {
         let wordDescription = UILabel()
         wordDescription.text = "Music Show means f let artworkf = album.asdfasdfs asfasdfpoiupopwlekjsadfdMusic Show means f let artworkf = album.asdfasdfs asfasdfp"
@@ -45,11 +37,6 @@ class WordDescriptionView: UIView {
         seperator.backgroundColor = .black
         return seperator
     }()
-    
-    // MARK: - function
-    @objc func starTapped() {
-        starButton.setImage(UIImage(systemName: (starButton.currentImage == UIImage(systemName: "star")) ?  "star.fill" :  "star"), for: .normal)
-    }
     
     // MARK: - init
     override init(frame: CGRect) {
@@ -69,9 +56,6 @@ class WordDescriptionView: UIView {
         self.addSubview(wordEnglish)
         wordEnglish.anchor(top: wordKorean.bottomAnchor, left: self.leftAnchor, paddingTop: 3, paddingLeft: 20)
         
-        self.addSubview(starButton)
-        starButton.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 50, paddingRight: 40)
-        
         self.addSubview(seperator)
         seperator.anchor(top: wordEnglish.bottomAnchor, left: self.leftAnchor, paddingTop: 20, paddingLeft: 20, height: 1)
         seperator.centerX(inView: self)
@@ -83,7 +67,6 @@ class WordDescriptionView: UIView {
     
     private func configureUI() {
         self.cardShadow()
-        
     }
 
 }
