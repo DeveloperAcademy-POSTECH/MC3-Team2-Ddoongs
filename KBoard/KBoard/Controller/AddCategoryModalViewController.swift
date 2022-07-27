@@ -49,7 +49,7 @@ class AddCategoryModalViewController: UIViewController {
     }()
     
     private let caterogyPicker =  UIPickerView()
-    private var categorylist = ["진💕진💕", "💕진💕", "💕"]
+    private var categoryList = ["진💕진💕", "💕진💕", "💕"]
     
     private let pickerToolbar: UIToolbar = {
         let pickerToolbar = UIToolbar()
@@ -126,16 +126,16 @@ extension AddCategoryModalViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categorylist.count
+        return categoryList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categorylist[row]
+        return categoryList[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(categorylist[row])
-        categoryPickerTextField.text = categorylist[row]
+        print(categoryList[row])
+        categoryPickerTextField.text = categoryList[row]
     }
 
 }
