@@ -42,12 +42,12 @@ class CategoryViewController: UIViewController {
         // TODO: CategoryName
         navigationItem.title = title
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(EditWords)),
+            UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editWords)),
             UIBarButtonItem(customView: keyBoard )
         ]
     }
 
-    @objc fileprivate func EditWords() {
+    @objc fileprivate func editWords() {
         // TODO: Edit Words
 //        let categoryEditViewController = CategoryEditViewController()
 //        navigationController?.pushViewController(categoryEditViewController, animated: true)
@@ -81,7 +81,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return data.count
         }
-        
+    
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
                     cell.wordLabel.text = data[indexPath.row]
@@ -101,18 +101,17 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-            
-        case UICollectionView.elementKindSectionHeader:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as? CategoryCollectionHeaderView else {
+            case UICollectionView.elementKindSectionHeader:
+                guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as? CategoryCollectionHeaderView else {
+                    return UICollectionReusableView()
+                }
+                header.update()
+                header.tapHandler = {
+                    // TODO: addWordViewController
+                }
+                return header
+            default:
                 return UICollectionReusableView()
-            }
-            header.update()
-            header.tapHandler = {
-                // TODO: addWordViewController
-            }
-            return header
-        default:
-            return UICollectionReusableView()
         }
     }
     
