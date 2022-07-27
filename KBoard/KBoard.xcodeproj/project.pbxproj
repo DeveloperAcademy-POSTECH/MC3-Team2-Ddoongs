@@ -13,6 +13,8 @@
 		3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E868288FA7EA0092CEC7 /* WordModel.swift */; };
 		3FCDE7622890691200C936D9 /* WordCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDE7612890691200C936D9 /* WordCategoryListView.swift */; };
 		3FCDE7642890694A00C936D9 /* CollectionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */; };
+		791636D22890E507003E8CB6 /* CategoryCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791636D12890E507003E8CB6 /* CategoryCollectionHeaderView.swift */; };
+		791636D42890E559003E8CB6 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
 		79318CB8287E539A003B27D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB7287E539A003B27D9 /* ViewController.swift */; };
@@ -71,6 +73,8 @@
 		3F24E868288FA7EA0092CEC7 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		3FCDE7612890691200C936D9 /* WordCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCategoryListView.swift; sourceTree = "<group>"; };
 		3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCustomCell.swift; sourceTree = "<group>"; };
+		791636D12890E507003E8CB6 /* CategoryCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionHeaderView.swift; sourceTree = "<group>"; };
+		791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79318CB5287E539A003B27D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,15 @@
 				3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */,
 			);
 			path = DictionaryViewUIComponent;
+			sourceTree = "<group>";
+		};
+		791636D02890E4D8003E8CB6 /* CategoryViewUIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				791636D12890E507003E8CB6 /* CategoryCollectionHeaderView.swift */,
+				791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */,
+			);
+			path = CategoryViewUIComponent;
 			sourceTree = "<group>";
 		};
 		79318CA7287E539A003B27D9 = {
@@ -216,6 +229,7 @@
 		79F801FA28801C5900D3A172 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				791636D02890E4D8003E8CB6 /* CategoryViewUIComponent */,
 				3FCDE760289068AB00C936D9 /* DictionaryViewUIComponent */,
 				DF50569E2889252100E6F8AA /* WordDetailViewUIComponent */,
 			);
@@ -401,6 +415,7 @@
 				DF0445CD288FA872004AD0FF /* RelatedWordsView.swift in Sources */,
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */,
+				791636D42890E559003E8CB6 /* CategoryCollectionViewCell.swift in Sources */,
 				79318CB8287E539A003B27D9 /* ViewController.swift in Sources */,
 				DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */,
 				DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */,
@@ -413,6 +428,7 @@
 				3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */,
 				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				DF0445CE288FA872004AD0FF /* WordUsageView.swift in Sources */,
+				791636D22890E507003E8CB6 /* CategoryCollectionHeaderView.swift in Sources */,
 				3FCDE7622890691200C936D9 /* WordCategoryListView.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
 				7B301F54288FA9CA00E20AEB /* AddNewCategory.swift in Sources */,
