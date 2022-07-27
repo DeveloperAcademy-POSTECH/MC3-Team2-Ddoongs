@@ -10,4 +10,5 @@ import UIKit
 struct Constants {
     static let intervalBetweenCells: CGFloat = 24.0
     static let cellHorizontalInterval: CGFloat = 24.0
+    static let tableViewHorizontalPadding: CGFloat = 16.0
 }
