@@ -11,6 +11,8 @@
 		3F24E81C288D15AB0092CEC7 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81B288D15AB0092CEC7 /* WordListView.swift */; };
 		3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */; };
 		3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E868288FA7EA0092CEC7 /* WordModel.swift */; };
+		3FCDE7622890691200C936D9 /* WordCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDE7612890691200C936D9 /* WordCategoryListView.swift */; };
+		3FCDE7642890694A00C936D9 /* CollectionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
 		79318CB8287E539A003B27D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB7287E539A003B27D9 /* ViewController.swift */; };
@@ -29,9 +31,11 @@
 		DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445C9288FA872004AD0FF /* UsageContextView.swift */; };
 		DF0445CD288FA872004AD0FF /* RelatedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445CA288FA872004AD0FF /* RelatedWordsView.swift */; };
 		DF0445CE288FA872004AD0FF /* WordUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445CB288FA872004AD0FF /* WordUsageView.swift */; };
+		DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */; };
 		DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5056922886E55700E6F8AA /* AddWordViewController.swift */; };
 		DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */; };
 		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
+		F60B878028904F00000D3CC6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60B877F28904F00000D3CC6 /* Extension.swift */; };
 		F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */; };
 		F69563F1288FAEAC009A70D5 /* CustomKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -65,6 +69,8 @@
 		3F24E81B288D15AB0092CEC7 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
 		3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCustomCell.swift; sourceTree = "<group>"; };
 		3F24E868288FA7EA0092CEC7 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
+		3FCDE7612890691200C936D9 /* WordCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCategoryListView.swift; sourceTree = "<group>"; };
+		3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCustomCell.swift; sourceTree = "<group>"; };
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79318CB5287E539A003B27D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,9 +91,11 @@
 		DF0445C9288FA872004AD0FF /* UsageContextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageContextView.swift; sourceTree = "<group>"; };
 		DF0445CA288FA872004AD0FF /* RelatedWordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedWordsView.swift; sourceTree = "<group>"; };
 		DF0445CB288FA872004AD0FF /* WordUsageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordUsageView.swift; sourceTree = "<group>"; };
+		DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryModalViewController.swift; sourceTree = "<group>"; };
 		DF5056922886E55700E6F8AA /* AddWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		DF50569C288924F600E6F8AA /* WordDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptionView.swift; sourceTree = "<group>"; };
+		F60B877F28904F00000D3CC6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		F69563EE288FAEAC009A70D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +119,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FCDE760289068AB00C936D9 /* DictionaryViewUIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				3F24E81B288D15AB0092CEC7 /* WordListView.swift */,
+				3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */,
+				3FCDE7612890691200C936D9 /* WordCategoryListView.swift */,
+				3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */,
+			);
+			path = DictionaryViewUIComponent;
+			sourceTree = "<group>";
+		};
 		79318CA7287E539A003B27D9 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +208,7 @@
 				7B301F4F288FA93400E20AEB /* CategoryListViewController.swift */,
 				7B301F51288FA9A900E20AEB /* CustomTableCell.swift */,
 				7B301F53288FA9CA00E20AEB /* AddNewCategory.swift */,
+				DF0445D1288FDB9C004AD0FF /* AddCategoryModalViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -196,8 +216,7 @@
 		79F801FA28801C5900D3A172 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3F24E81B288D15AB0092CEC7 /* WordListView.swift */,
-				3F24E81D288D1B1B0092CEC7 /* WordCustomCell.swift */,
+				3FCDE760289068AB00C936D9 /* DictionaryViewUIComponent */,
 				DF50569E2889252100E6F8AA /* WordDetailViewUIComponent */,
 			);
 			path = View;
@@ -246,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */,
+				F60B877F28904F00000D3CC6 /* Extension.swift */,
 				F69563EE288FAEAC009A70D5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
@@ -382,8 +402,10 @@
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */,
 				79318CB8287E539A003B27D9 /* ViewController.swift in Sources */,
+				DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */,
 				DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */,
 				79E659D12890CB1500FD54B6 /* Color+Extension.swift in Sources */,
+				3FCDE7642890694A00C936D9 /* CollectionCustomCell.swift in Sources */,
 				7B301F4E288FA85900E20AEB /* KBoardData.swift in Sources */,
 				3F24E81E288D1B1B0092CEC7 /* WordCustomCell.swift in Sources */,
 				79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */,
@@ -391,6 +413,7 @@
 				3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */,
 				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				DF0445CE288FA872004AD0FF /* WordUsageView.swift in Sources */,
+				3FCDE7622890691200C936D9 /* WordCategoryListView.swift in Sources */,
 				79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */,
 				7B301F54288FA9CA00E20AEB /* AddNewCategory.swift in Sources */,
 				DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */,
@@ -404,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */,
+				F60B878028904F00000D3CC6 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
