@@ -7,19 +7,20 @@
 
 import UIKit
 
-// TODO: MyBoardViewController에서 navigation large 적용 필요.
+// TODO: 카드 둥글기 전역 함수 수정 요구
 
 class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"
     fileprivate let reuseHeaderIdentifier = "headerID"
-    fileprivate let data = ["q", "w", "e", "r"]
     
-    fileprivate var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-        collectionView.backgroundColor = .white
-        return collectionView
-    }()
+    private var data: [String] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    fileprivate var tableView: UITableView = UITableView()
     
     lazy var keyBoard: UIButton = {
         let button = UIButton()
@@ -30,13 +31,36 @@ class CategoryViewController: UIViewController {
       return button
     }()
     
+    var addMyOwnWordLabel: UILabel {
+        let label = UILabel()
+        label.text = "Add My Own Word"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.textColor = .lightGray
+        return label
+    }
+    
+    var plusButtonImageView: UIImageView {
+        let imageView = UIImageView()
+        let image = UIImage(systemName: "plus.circle")
+        imageView.image = image
+        imageView.setWidth(width: 30)
+        imageView.setHeight(height: 30)
+        imageView.tintColor = .lightGray
+        return imageView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerCollectionView()
-        collectionViewDelegate()
+        registerTableView()
+        talbeViewDelegate()
         configureUI()
+        fetchData()
     }
-
+    
+    fileprivate func fetchData() {
+        data = ["q", "w", "e", "r"]
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         // TODO: CategoryName
         navigationItem.title = title
@@ -47,77 +71,98 @@ class CategoryViewController: UIViewController {
     }
 
     @objc fileprivate func editWords() {
-        // TODO: Edit Words
-//        let categoryEditViewController = CategoryEditViewController()
-//        navigationController?.pushViewController(categoryEditViewController, animated: true)
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(editWords))
     }
     
-    fileprivate func registerCollectionView() {
-        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.register(CategoryCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
+    fileprivate func registerTableView() {
+        tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
-    fileprivate func collectionViewDelegate() {
-            collectionView.delegate = self
-            collectionView.dataSource = self
+    fileprivate func talbeViewDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     fileprivate func configureUI() {
-        view.addSubview(collectionView)
+        tableView.rowHeight = 50
+        tableView.backgroundColor = .systemGray6
         view.backgroundColor = .systemGray6
-        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
-        collectionView.backgroundColor = .systemGray6
-    }
-}
-
-extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return data.count
-        }
+        let hstack = UIStackView(arrangedSubviews: [plusButtonImageView, addMyOwnWordLabel])
+        hstack.axis = .horizontal
+        hstack.spacing = 10
+        
+        let headerButton = UIButton()
+        headerButton.addTarget(self, action: #selector(addWord), for: .touchUpInside)
+        
+        let baseView = UIView()
+        baseView.addSubview(hstack)
+        baseView.addSubview(headerButton)
+        
+        headerButton.anchor(top: baseView.topAnchor, left: baseView.leftAnchor, bottom: baseView.bottomAnchor, right: baseView.rightAnchor, paddingTop: 0, paddingLeft: 1, paddingBottom: 0, paddingRight: 1)
+        // TODO: 가로모드 할 시 주의
+        headerButton.addDashedBorder(x: view.frame.width - (16*2+2), y: 50)
+        hstack.centerX(inView: baseView)
+        hstack.centerY(inView: baseView)
+        
+        let vstack = UIStackView(arrangedSubviews: [baseView, tableView])
+        view.addSubview(vstack)
+        vstack.axis = .vertical
+        vstack.spacing = 10
+        vstack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: Constants.tableViewHorizontalPadding, paddingBottom: 0, paddingRight: Constants.tableViewHorizontalPadding)
+        baseView.anchor(top: vstack.topAnchor, left: vstack.leftAnchor, right: vstack.rightAnchor, paddingTop: 6, paddingLeft: 1, paddingRight: 1, height: 50)
+        tableView.anchor(top: baseView.bottomAnchor, left: vstack.leftAnchor, bottom: vstack.bottomAnchor, right: vstack.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 20, paddingRight: 0)
+    }
     
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-                    cell.wordLabel.text = data[indexPath.row]
-            return cell
-        }
+    @objc fileprivate func addWord() {
+        let nav = UINavigationController(rootViewController: AddWordViewController())
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
+    }
+    
 }
 
-extension CategoryViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: 80)
+extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        data.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 50)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constants.intervalBetweenCells
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
+                cell.wordLabel.text = data[indexPath.section]
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-            case UICollectionView.elementKindSectionHeader:
-                guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as? CategoryCollectionHeaderView else {
-                    return UICollectionReusableView()
-                }
-                header.render()
-                header.tapHandler = {
-                    let nav = UINavigationController(rootViewController: AddWordViewController())
-                    nav.modalPresentationStyle = .fullScreen
-                    self.present(nav, animated: true)
-                    // TODO: addWordViewController
-                }
-                return header
-            default:
-                return UICollectionReusableView()
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let headerHeight: CGFloat = CGFloat.leastNormalMagnitude
+        return headerHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+            self.data.remove(at: indexPath.section)
         }
+        let swipeActions = UISwipeActionsConfiguration(actions: [delete])
+        return swipeActions
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: WordDetailViewController
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        data.swapAt(sourceIndexPath.section, destinationIndexPath.section)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         present(WordDetailViewController(), animated: true)
     }
+    
 }
