@@ -41,12 +41,10 @@ class DictionaryViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-
     }
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        
     }
 }
 
@@ -60,6 +58,25 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.separatorStyle = .none // cell line 없애기
         tableView.register(WordCustomCell.self, forCellReuseIdentifier: WordCustomCell.tableCellId)
         
+    }
+    
+    // TableView scroll 시 실행되는 메소드
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = scrollView.contentOffset.y // Y 축으로 스크롤 되는 크기
+
+        let swipingDown = y <= 0 // 아래로 스크롤 됐다는 상태 변수
+        let shouldSnap = y > 60 // UpperHeaderView 높이 + padding
+        let headerHeight = 170 // 전체 HeaderView 높이
+        
+        UIView.animate(withDuration: 0.3){
+            self.dictionaryHeaderView.upperHeaderView.alpha = swipingDown ? 1.0 : 0.0
+        }
+
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: [], animations: {
+            self.headerViewTopConstraint?.constant = CGFloat(shouldSnap ? -headerHeight : 0)
+            self.view.layoutIfNeeded()
+        })
+
     }
 
     // 행의 개수를 설정하는 메소드
