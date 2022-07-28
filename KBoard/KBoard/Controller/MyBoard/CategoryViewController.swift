@@ -31,10 +31,28 @@ class CategoryViewController: UIViewController {
       return button
     }()
     
+    var addMyOwnWordLabel: UILabel {
+        let label = UILabel()
+        label.text = "Add My Own Word"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.textColor = .lightGray
+        return label
+    }
+    
+    var plusButtonImageView: UIImageView {
+        let imageView = UIImageView()
+        let image = UIImage(systemName: "plus.circle")
+        imageView.image = image
+        imageView.setWidth(width: 30)
+        imageView.setHeight(height: 30)
+        imageView.tintColor = .lightGray
+        return imageView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerCollectionView()
-        collectionViewDelegate()
+        registerTableView()
+        talbeViewDelegate()
         configureUI()
         fetchData()
     }
@@ -54,18 +72,14 @@ class CategoryViewController: UIViewController {
 
     @objc fileprivate func editWords() {
         tableView.setEditing(!tableView.isEditing, animated: true)
-        if tableView.isEditing {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editWords))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editWords))
-        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(editWords))
     }
     
-    fileprivate func registerCollectionView() {
+    fileprivate func registerTableView() {
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
-    fileprivate func collectionViewDelegate() {
+    fileprivate func talbeViewDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -74,18 +88,6 @@ class CategoryViewController: UIViewController {
         tableView.rowHeight = 50
         tableView.backgroundColor = .systemGray6
         view.backgroundColor = .systemGray6
-
-        let addMyOwnWordLabel = UILabel()
-        addMyOwnWordLabel.text = "Add My Own Word"
-        addMyOwnWordLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        addMyOwnWordLabel.textColor = .lightGray
-        
-        let plusButtonImageView = UIImageView()
-        let image = UIImage(systemName: "plus.circle")!
-        plusButtonImageView.image = image
-        plusButtonImageView.setWidth(width: 30)
-        plusButtonImageView.setHeight(height: 30)
-        plusButtonImageView.tintColor = .lightGray
         
         let hstack = UIStackView(arrangedSubviews: [plusButtonImageView, addMyOwnWordLabel])
         hstack.axis = .horizontal
