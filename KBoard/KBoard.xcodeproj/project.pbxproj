@@ -13,7 +13,7 @@
 		3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24E868288FA7EA0092CEC7 /* WordModel.swift */; };
 		3FCDE7622890691200C936D9 /* WordCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDE7612890691200C936D9 /* WordCategoryListView.swift */; };
 		3FCDE7642890694A00C936D9 /* CollectionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */; };
-		791636D42890E559003E8CB6 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */; };
+		791636D42890E559003E8CB6 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791636D32890E559003E8CB6 /* CategoryTableViewCell.swift */; };
 		791636D92890F9A7003E8CB6 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791636D82890F9A7003E8CB6 /* TabViewController.swift */; };
 		79318CB4287E539A003B27D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB3287E539A003B27D9 /* AppDelegate.swift */; };
 		79318CB6287E539A003B27D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79318CB5287E539A003B27D9 /* SceneDelegate.swift */; };
@@ -72,7 +72,7 @@
 		3F24E868288FA7EA0092CEC7 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		3FCDE7612890691200C936D9 /* WordCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCategoryListView.swift; sourceTree = "<group>"; };
 		3FCDE7632890694A00C936D9 /* CollectionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCustomCell.swift; sourceTree = "<group>"; };
-		791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		791636D32890E559003E8CB6 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		791636D82890F9A7003E8CB6 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		79318CB0287E539A003B27D9 /* KBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79318CB3287E539A003B27D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,14 +132,6 @@
 			path = DictionaryViewUIComponent;
 			sourceTree = "<group>";
 		};
-		791636D02890E4D8003E8CB6 /* CategoryViewUIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				791636D32890E559003E8CB6 /* CategoryCollectionViewCell.swift */,
-			);
-			path = CategoryViewUIComponent;
-			sourceTree = "<group>";
-		};
 		791636D52890E7DD003E8CB6 /* KPopSlang */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +151,7 @@
 		791636D72890E820003E8CB6 /* MyBoard */ = {
 			isa = PBXGroup;
 			children = (
-				791636D02890E4D8003E8CB6 /* CategoryViewUIComponent */,
+				791636D32890E559003E8CB6 /* CategoryTableViewCell.swift */,
 				7B301F51288FA9A900E20AEB /* CustomTableCell.swift */,
 				7B301F53288FA9CA00E20AEB /* AddNewCategory.swift */,
 			);
@@ -437,7 +429,7 @@
 				791636D92890F9A7003E8CB6 /* TabViewController.swift in Sources */,
 				7934B4EC2880210D00CF38E9 /* Constants.swift in Sources */,
 				DF0445CC288FA872004AD0FF /* UsageContextView.swift in Sources */,
-				791636D42890E559003E8CB6 /* CategoryCollectionViewCell.swift in Sources */,
+				791636D42890E559003E8CB6 /* CategoryTableViewCell.swift in Sources */,
 				DF0445D2288FDB9C004AD0FF /* AddCategoryModalViewController.swift in Sources */,
 				DF5056932886E55700E6F8AA /* AddWordViewController.swift in Sources */,
 				79E659D12890CB1500FD54B6 /* Color+Extension.swift in Sources */,
