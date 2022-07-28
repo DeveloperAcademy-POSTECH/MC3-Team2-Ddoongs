@@ -29,7 +29,7 @@ class UpperHeaderView: UIView {
     private func render() {
         
         self.addSubview(largeTitle)
-        largeTitle.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: Constants.cellHorizontalInterval, paddingBottom: 0 , paddingRight: Constants.cellHorizontalInterval, height: 50)
+        largeTitle.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: Constants.cellHorizontalInterval, paddingBottom: 0, paddingRight: Constants.cellHorizontalInterval, height: 50)
     }
     
     private func configureUI() {

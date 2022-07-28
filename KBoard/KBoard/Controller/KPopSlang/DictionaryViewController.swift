@@ -35,7 +35,6 @@ class DictionaryViewController: UIViewController {
             headerViewTopConstraint!,
             dictionaryHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dictionaryHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
             
             tableView.topAnchor.constraint(equalTo: dictionaryHeaderView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -51,7 +50,6 @@ class DictionaryViewController: UIViewController {
     }
 }
 
-
 extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func setupTableView() {
@@ -60,7 +58,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         
         tableView.separatorStyle = .none // cell line 없애기
-        tableView.register(WordCustomCell.self , forCellReuseIdentifier: WordCustomCell.tableCellId)
+        tableView.register(WordCustomCell.self, forCellReuseIdentifier: WordCustomCell.tableCellId)
         
     }
 
@@ -81,7 +79,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     // DetailView로 들어가기
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let word = Word.words[indexPath.row]
         let vc = WordDetailViewController()
         navigationController?.pushViewController(vc, animated: true)
