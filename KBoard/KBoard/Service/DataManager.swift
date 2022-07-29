@@ -91,6 +91,10 @@ final class DataManager {
         return categoryPublisher.value.words[index].name
     }
     
+    func getCategoryIndex(category: Category2) -> Int {
+        guard let categoryIndex = categoryArrayPublisher.value.firstIndex(of: category) else { return 0 }
+        return categoryIndex
+    }
     func swapWordOrder(category: Category2, from sourceIndex: Int, to destinationIndex: Int) {
         guard let categoryIndex = categoryArrayPublisher.value.firstIndex(of: category) else { return }
         categoryArrayPublisher.value[categoryIndex].words.swapAt(sourceIndex, destinationIndex)

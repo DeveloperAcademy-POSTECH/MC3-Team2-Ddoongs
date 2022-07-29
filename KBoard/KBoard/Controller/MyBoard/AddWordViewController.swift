@@ -85,6 +85,7 @@ class AddWordViewController: UIViewController {
         newWordCategoryPicker.dataSource = self
         newWordCategoryTextField.delegate = self
         newWordDescriptionTextField.delegate = self
+        newWordCategoryPicker.selectRow(categoryViewModel.getCategoryIndex(), inComponent: 0, animated: true)
     }
     
     private func render() {

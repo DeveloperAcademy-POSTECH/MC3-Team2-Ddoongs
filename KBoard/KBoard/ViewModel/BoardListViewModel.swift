@@ -72,6 +72,10 @@ final class CategoryViewModel {
         manager.initCategory(category: category)
     }
     
+    func getCategoryIndex() -> Int {
+        manager.getCategoryIndex(category: manager.getCateogry())
+    }
+    
     func getCategoryName() -> String {
         return manager.getCateogry().categoryName
     }
