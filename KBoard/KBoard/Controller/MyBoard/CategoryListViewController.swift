@@ -11,7 +11,6 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     
     // MARK: - Properties
     private let reuseIdentifier = "CustomTableCell"
-    // reuseIdentifier = 재사용 가능한 셀을 식별하는데 사용되는 문자열
     
     private let tableView = UITableView()
     
@@ -65,31 +64,18 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     
     func categoryNameSend(name: String) {
         categories.append(Category(categoryName: name, count: "0 Words", kwords: nil))
+        
     }
     
     private func showActionSheet() {
         let actionSheet = UIAlertController(title: "타이틀", message: "액션시트 메시지", preferredStyle: .actionSheet)
         let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            self.showRenameAlert()
+            self.tapAddButton(UIButton())
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheet.addAction(rename)
         actionSheet.addAction(cancel)
         self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    private func showRenameAlert() {
-        let renameAlert = UIAlertController(title: "Rename Category", message: "Do you want to rename category?", preferredStyle: .alert)
-        let save = UIAlertAction(title: "Save", style: .default) {_ in
-            // To-Do : 카테고리 명 수정 시 카테고리 리스트에 적용
-        }
-        let cancel = UIAlertAction(title: "cancel", style: .cancel)
-        renameAlert.addAction(save)
-        renameAlert.addAction(cancel)
-        renameAlert.addTextField { (newCategoryName) in
-            newCategoryName.placeholder = "New Category Name"
-        }
-        self.present(renameAlert, animated: true, completion: nil)
     }
     
     @objc private func tapAddButton(_ sender: Any) {
@@ -98,18 +84,14 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
         let nav = UINavigationController(rootViewController: addModel)
         nav.modalPresentationStyle = .pageSheet
         if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        present(nav, animated: true, completion: nil)
+                    sheet.detents = [.medium()]
+                }
+                present(nav, animated: true, completion: nil)
     }
     
     @objc func tapEditButton(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
-        if tableView.isEditing {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapEditButton))
-        } else {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEditButton))
-        }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(tapEditButton))
     }
 }
 
@@ -137,8 +119,6 @@ extension CategoryListViewController: UITableViewDataSource {
 extension CategoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
-//        print("카테고리선택됨")
         navigationController?.pushViewController(CategoryViewController(), animated: true)
     }
     
@@ -153,16 +133,16 @@ extension CategoryListViewController: UITableViewDelegate {
         return headerView
     }
     
-    // 셀 삭제!!!!
+    // 셀 삭제
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-            self.categories.remove(at: indexPath.section)
             let indexSet = IndexSet(arrayLiteral: indexPath.section)
-            self.tableView.deleteSections(indexSet, with: .automatic )
+            self.categories.remove(at: indexPath.section)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions
     }
+    
     // 셀 이동
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         categories.swapAt(sourceIndexPath.section, destinationIndexPath.section)
