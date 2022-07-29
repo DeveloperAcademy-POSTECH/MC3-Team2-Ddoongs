@@ -52,6 +52,11 @@ final class BoardListViewModel {
         categories.value = manager.getCategories()
     }
     
+    
+    
+    
+    
+    
     func numberOfWordsAtCategory(category: Category2) -> Int {
         manager.numberOfWordsAtCategory(category: category)
     }
@@ -77,5 +82,14 @@ final class BoardListViewModel {
         manager.removeWordAt(category: category, index: index)
         categories.value = manager.getCategories()
     }
+    
+}
+
+final class CategoryViewModel {
+    
+    private let manager = DataManager.shared
+    
+    var category: ObservableObject<Category2?> = ObservableObject(nil)
+    
     
 }

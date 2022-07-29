@@ -17,12 +17,10 @@ class CategoryViewController: UIViewController {
     var boardListViewModel: BoardListViewModel?
     var category: Category2?
     
-//    private var data: [String] = [] {
-//        didSet {
-//            tableView.reloadData()
-//        }
-//    }
+    var cateogryViewModel: CategoryViewModel?
+    
     fileprivate func setUpBinding() {
+        
         boardListViewModel?.categories.bind({ [weak self] _ in
             self?.tableView.reloadData()
             self?.scrollToBottom()

@@ -60,9 +60,9 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     }
     
     private func setNavigation() {
-        navigationItem.title = "My Board"
+        navigationController?.navigationBar.topItem?.title = "My Board"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEditButton(_:)))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tapAddButton(_:))),
