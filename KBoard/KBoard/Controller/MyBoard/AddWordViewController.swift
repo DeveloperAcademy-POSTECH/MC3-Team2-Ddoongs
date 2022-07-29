@@ -11,8 +11,20 @@ class AddWordViewController: UIViewController {
     
     // MARK: - property
     
-    var boardListViewModel: BoardListViewModel?
-    var category: Category2?
+    var categoryViewModel: CategoryViewModel
+    
+    init(categoryViewModel: CategoryViewModel) {
+//        self.boardListViewModel = boardListViewModel
+//        self.category = category
+        self.categoryViewModel = categoryViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    //    var boardListViewModel: BoardListViewModel?
+//    var category: Category2?
     
     private let wordStack: UIStackView = {
         let wordStack = UIStackView()
@@ -100,7 +112,7 @@ class AddWordViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        newWordCategoryTextField.text = category?.categoryName
+        newWordCategoryTextField.text = categoryViewModel.getCategoryName()
     }
     
     private func navigationSetting() {
@@ -112,15 +124,12 @@ class AddWordViewController: UIViewController {
     
     @objc func addWord() {
         guard let wordName = newWordTextField.text, !wordName.isEmpty,
-              let categoryName = newWordCategoryTextField.text,
-              let vm = boardListViewModel,
-              let category = category
+              let categoryName = newWordCategoryTextField.text
         else {
             dismiss(animated: true)
             return
         }
-
-        vm.addWord(categoryName: categoryName, wordName: wordName, wordDescription: newWordDescription.text ?? "")
+        categoryViewModel.addWord(categoryName: categoryName, wordName: wordName, wordDescription: newWordDescription.text ?? "")
         dismiss(animated: true)
     }
     
@@ -164,15 +173,14 @@ extension AddWordViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let boardListViewModel = boardListViewModel else { return 0 }
-        return boardListViewModel.numOfCategories
+        categoryViewModel.numOfCategories()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return boardListViewModel?.userCategoryNameArray[row]
+        return categoryViewModel.userCategoryNameArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        newWordCategoryTextField.text = boardListViewModel?.userCategoryNameArray[row]
+        newWordCategoryTextField.text = categoryViewModel.userCategoryNameArray[row]
     }
 }

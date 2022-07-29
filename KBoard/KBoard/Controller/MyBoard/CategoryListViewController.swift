@@ -26,26 +26,17 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        boardListViewModel.fetchSavedCategories()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         boardListViewModel.categories.bind { [weak self] _ in
             self?.tableView.reloadData()
             // TODO 수정할때는 내려가면 안된다.
             self?.scrollToBottom()
         }
     }
+
     private func configureUI() {
         self.view.backgroundColor = .systemGray5
         setNavigation()
         setCategoryListContent()
-    }
-    
-    private func setupBinding() {
-        
-        // 여러군대에서 뷰모델 내부의 같은 프로퍼티에 대해 bind 하면, 즉 여기서 바인드 하여 저 클로저로 했으니 다른 뷰컨에서 역시 바인드가 여기로 되어있어서 좀 이상하다.
-        
     }
     
     private func scrollToBottom() {
@@ -163,11 +154,9 @@ extension CategoryListViewController: UITableViewDataSource {
 extension CategoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
-//        print("카테고리선택됨")
-        let vc = CategoryViewController()
-        vc.boardListViewModel = boardListViewModel
-        vc.category = boardListViewModel.getCategoryAt(indexPath.section)
+//        let vc = CategoryViewController(boardListViewModel: boardListViewModel, category: boardListViewModel.getCategoryAt(indexPath.section))
+        let category = boardListViewModel.getCategoryAt(indexPath.section)
+        let vc = CategoryViewController(categoryViewModel: CategoryViewModel(category: category))
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -186,7 +175,6 @@ extension CategoryListViewController: UITableViewDelegate {
     // 셀 삭제!!!!
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-//            self.categories.remove(at: indexPath.section)
             self.boardListViewModel.removeCategoryAt(indexPath.section)
 //            let indexSet = IndexSet(arrayLiteral: indexPath.section)
 //            self.tableView.deleteSections(indexSet, with: .automatic )

@@ -8,23 +8,42 @@
 import UIKit
 
 // TODO: 카드 둥글기 전역 함수 수정 요구
+// viewwill 에 table load 있어서
+// detailview
+// 우리 왼쪽 탭 계속들어가게?
 
 class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"
     fileprivate let reuseHeaderIdentifier = "headerID"
     
-    var boardListViewModel: BoardListViewModel?
-    var category: Category2?
+    var categoryViewModel: CategoryViewModel
     
-    var cateogryViewModel: CategoryViewModel?
+//    var boardListViewModel: BoardListViewModel
+//    var category: Category2
+    
+//    var cateogryViewModel: CategoryViewModel?
     
     fileprivate func setUpBinding() {
-        
-        boardListViewModel?.categories.bind({ [weak self] _ in
+        categoryViewModel.category.bind { [weak self] _ in
             self?.tableView.reloadData()
             self?.scrollToBottom()
-        })
+        }
+//        boardListViewModel.categories.bind({ [weak self] _ in
+//            self?.tableView.reloadData()
+//            self?.scrollToBottom()
+//        })
+    }
+    
+    init(categoryViewModel: CategoryViewModel) {
+//        self.boardListViewModel = boardListViewModel
+//        self.category = category
+        self.categoryViewModel = categoryViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     fileprivate var tableView: UITableView = UITableView()
@@ -122,9 +141,9 @@ class CategoryViewController: UIViewController {
     
     @objc fileprivate func addWord() {
         
-        let vc = AddWordViewController()
-        vc.category = category
-        vc.boardListViewModel = boardListViewModel
+        let vc = AddWordViewController(categoryViewModel: categoryViewModel)
+//        vc.category = category
+//        vc.boardListViewModel = boardListViewModel
         
         let nav = UINavigationController(rootViewController: vc)
         
@@ -147,13 +166,14 @@ class CategoryViewController: UIViewController {
 extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        guard let vm = boardListViewModel,
-              let category = category
-        else {
-            return 0
-        }
-        print("!", vm.numberOfWordsAtCategory(category: category))
-        return vm.numberOfWordsAtCategory(category: category)
+//        guard let vm = boardListViewModel,
+//              let category = category
+//        else {
+//            return 0
+//        }
+//        print("!", vm.numberOfWordsAtCategory(category: category))
+//        return boardListViewModel.numberOfWordsAtCategory(category: category)
+        return categoryViewModel.numberOfWordsAtCategory()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -161,12 +181,13 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell,
-              let vm = boardListViewModel,
-              let category = category
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell
+//                ,
+//              let vm = boardListViewModel,
+//              let category = category
         else { return UITableViewCell() }
-        
-        cell.wordLabel.text = vm.wordNameAtIndex(category: category, indexPath.section)
+        cell.wordLabel.text = categoryViewModel.wordNameAtIndex(indexPath.section)
+//        cell.wordLabel.text = boardListViewModel.wordNameAtIndex(category: category, indexPath.section)
         
         return cell
     }
@@ -184,16 +205,18 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-            guard let category = self.category else { return }
-            self.boardListViewModel?.removeWord(category: category, index: indexPath.section)
+//            guard let category = self.category else { return }
+//            self.boardListViewModel.removeWord(category: self.category, index: indexPath.section)
+            self.categoryViewModel.removeWordAt(indexPath.section)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let category = category else { return }
-        boardListViewModel?.swapWord(category: category, from: sourceIndexPath.section, to: destinationIndexPath.section)
+//        guard let category = category else { return }
+//        boardListViewModel.swapWord(category: category, from: sourceIndexPath.section, to: destinationIndexPath.section)
+        categoryViewModel.swapWord(from: sourceIndexPath.section, to: destinationIndexPath.section)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

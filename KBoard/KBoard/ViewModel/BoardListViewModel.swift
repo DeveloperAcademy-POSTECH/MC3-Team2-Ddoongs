@@ -6,15 +6,28 @@
 //
 
 import Foundation
+import Combine
 
 final class BoardListViewModel {
     
     private let manager = DataManager.shared
     
+    var bag = Set<AnyCancellable>()
+    
     var categories: ObservableObject<[Category2]?> = ObservableObject(nil)
     
-    var userCategoryNameArray: [String] {
-        manager.userCategories.map {$0.categoryName}
+    init() {
+
+        manager.categoryArrayPublisher.sink {
+            self.categories.value = $0
+        }
+        .store(in: &bag)
+        
+        manager.categoryPublisher.sink { _ in
+            self.categories.value = self.manager.getCategories()
+        }.store(in: &bag)
+        
+        manager.fetchSavedUserCategories2()
     }
     
     var numOfCategories: Int {
@@ -27,60 +40,18 @@ final class BoardListViewModel {
     
     func removeCategoryAt(_ index: Int) {
         manager.removeCategoryAt(index)
-        categories.value = manager.getCategories()
     }
     
     func addCategory(name: String) {
         manager.addCategory(categoryName: name)
-        print(manager.getCategories().count)
-        categories.value = manager.getCategories()
     }
     
     func swapCategory(from sourceIndex: Int, to destinationIndex: Int) {
         manager.swapCategoryOrder(from: sourceIndex, to: destinationIndex)
-        categories.value = manager.getCategories()
-    }
-    
-    func fetchSavedCategories() {
-        manager.fetchSavedUserCategories { categories in
-            self.categories.value = categories
-        }
     }
     
     func editCategoryName(category: Category2, name: String) {
         manager.editCategoryName(category: category, newName: name)
-        categories.value = manager.getCategories()
-    }
-    
-    
-    
-    
-    
-    
-    func numberOfWordsAtCategory(category: Category2) -> Int {
-        manager.numberOfWordsAtCategory(category: category)
-    }
-    
-    func wordNameAtIndex(category: Category2, _ index: Int) -> String {
-        guard let word =  manager.getWordAtIndex(category: category, index: index) else {
-            return ""
-        }
-        return word.name
-    }
-    
-    func addWord(categoryName: String, wordName: String, wordDescription: String) {
-        manager.addWord(categoryName: categoryName, wordName: wordName, description: wordDescription)
-        categories.value = manager.getCategories()
-    }
-    
-    func swapWord(category: Category2, from sourceIndex: Int, to destinationIndex: Int) {
-        manager.swapWordOrder(category: category, from: sourceIndex, to: destinationIndex)
-        categories.value = manager.getCategories()
-    }
-    
-    func removeWord(category: Category2, index: Int) {
-        manager.removeWordAt(category: category, index: index)
-        categories.value = manager.getCategories()
     }
     
 }
@@ -89,7 +60,49 @@ final class CategoryViewModel {
     
     private let manager = DataManager.shared
     
+    var bag = Set<AnyCancellable>()
+    
     var category: ObservableObject<Category2?> = ObservableObject(nil)
     
+    init(category: Category2) {
+        manager.categoryPublisher.sink {
+            self.category.value = $0
+        }
+        .store(in: &bag)
+        manager.initCategory(category: category)
+    }
+    
+    func getCategoryName() -> String {
+        return manager.getCateogry().categoryName
+    }
+    
+    func numOfCategories() -> Int {
+        return manager.numOfCategories
+    }
+    var userCategoryNameArray: [String] {
+        return manager.getCategories().map {$0.categoryName}
+    }
+    
+    func numberOfWordsAtCategory() -> Int {
+        return manager.numberOfWordsAtCategory()
+    }
+    
+    func wordNameAtIndex(_ index: Int) -> String? {
+        return manager.getWordNameAtIndex(index: index)
+    }
+    
+    func addWord(categoryName: String, wordName: String, wordDescription: String) {
+        return manager.addWord(categoryName: categoryName, wordName: wordName, description: wordDescription)
+    }
+    
+    func swapWord(from sourceIndex: Int, to destinationIndex: Int) {
+        let category = manager.getCateogry()
+        return manager.swapWordOrder(category: category, from: sourceIndex, to: destinationIndex)
+    }
+    
+    func removeWordAt(_ index: Int) {
+        let category = manager.getCateogry()
+        return manager.removeWordAt(category: category, index: index)
+    }
     
 }

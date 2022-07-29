@@ -6,15 +6,18 @@
 //
 
 import Foundation
+import Combine
 
 final class DataManager {
     
     static let shared = DataManager()
     
     private(set) var userCategories: [Category2] = []
+    var categoryArrayPublisher: CurrentValueSubject<[Category2], Never> = CurrentValueSubject([])
+    var categoryPublisher: CurrentValueSubject<Category2, Never> = CurrentValueSubject(Category2(categoryName: ""))
     
     var numOfCategories: Int {
-        userCategories.count
+        return categoryArrayPublisher.value.count
     }
     
     private(set) var defaultCategories: [DefaultCategory] = []
@@ -22,89 +25,32 @@ final class DataManager {
     private init() { }
     
     func getCategories() -> [Category2] {
-        return userCategories
+        return categoryArrayPublisher.value
     }
     
     func getCategoryAt(_ index: Int) -> Category2 {
-        userCategories[index]
+        categoryArrayPublisher.value[index]
     }
+    
     func addCategory(categoryName: String) {
         let newCategory = Category2(categoryName: categoryName)
-        userCategories.append(newCategory)
-        // TODO: 새로고침
+        categoryArrayPublisher.value.append(newCategory)
     }
     
     func editCategoryName(category: Category2, newName: String) {
-        guard let categoryIndex = userCategories.firstIndex(of: category) else { return }
-        userCategories[categoryIndex].editName(newName)
-        // TODO: 새로고침
-    }
-    
-    func numberOfWordsAtCategory(category: Category2) -> Int {
-        guard let categoryIndex = userCategories.firstIndex(of: category) else { return 0 }
-        return userCategories[categoryIndex].words.count
-    }
-    
-    func getWordAtIndex(category: Category2, index: Int) -> Word2? {
-        guard let categoryIndex = userCategories.firstIndex(of: category) else { return nil }
-        return userCategories[categoryIndex].words[index]
-    }
-    
-    func removeCategoryAt(_ index: Int) {
-        userCategories.remove(at: index)
-    }
-    func getCategory(category: Category2) -> Category2? {
-        return userCategories.first {
-            $0 == category
-        } ?? nil
+        guard let categoryIndex = categoryArrayPublisher.value.firstIndex(of: category) else { return }
+        categoryArrayPublisher.value[categoryIndex].editName(newName)
     }
     
     func swapCategoryOrder(from sourceIndex: Int, to destinationIndex: Int) {
-        userCategories.swapAt(sourceIndex, destinationIndex)
+        categoryArrayPublisher.value.swapAt(sourceIndex, destinationIndex)
     }
     
-    func swapWordOrder(category: Category2, from sourceIndex: Int, to destinationIndex: Int) {
-        guard let categoryIndex = userCategories.firstIndex(of: category) else { return }
-        userCategories[categoryIndex].words.swapAt(sourceIndex, destinationIndex)
+    func removeCategoryAt(_ index: Int) {
+        categoryArrayPublisher.value.remove(at: index)
     }
-    
-    func getRelatedWord(category: Category2, string: String) -> Word2? {
-        guard let categoryIndex = userCategories.firstIndex(of: category) else { return nil }
-        let words = userCategories[categoryIndex].words.map {$0.name}
-        guard let wordIndex = words.firstIndex(where: { word in
-            word == string
-        }) else { return nil }
-        return userCategories[categoryIndex].words[wordIndex]
-    }
-    
-    func getWord(category: Category2, word: Word2) -> Word2? {
-        guard let categoryIndex = userCategories.firstIndex(of: category) else { return nil }
-        guard let wordIndex = userCategories[categoryIndex].words.firstIndex(of: word) else { return nil }
-        return userCategories[categoryIndex].words[wordIndex]
-    }
-    
-    func addWord(categoryName: String, wordName: String, description: String) {
-        guard let index = userCategories.firstIndex(where: { $0.categoryName == categoryName }) else { return }
-        let newWord = Word2(name: wordName, isFavorite: true, userCateogry: categoryName, isOriginal: false, description: description)
-        userCategories[index].addWord(newWord)
-    }
-    
-    func getWords(category: Category2) -> [Word2]? {
-        guard let index = userCategories.firstIndex(of: category) else { return nil }
-        return userCategories[index].words
-    }
-    
-    func removeWordAt(category: Category2, index: Int) {
-        guard let index = userCategories.firstIndex(of: category) else { return }
-        userCategories[index].words.remove(at: index)
-    }
-    func updateWord(category: Category2, word: Word2) {
-        guard let index = userCategories.firstIndex(of: category) else { return }
-        guard let wordIndex = userCategories[index].words.firstIndex(of: word) else { return }
-        userCategories[index].words[wordIndex].toggleFavorite()
-    }
-    
-    func fetchSavedUserCategories(completion: @escaping (([Category2])) -> Void) {
+
+    func fetchSavedUserCategories2() {
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
             let word1 = Word2(name: "바티짱1", isFavorite: true, userCateogry: "BTS", defaultCategory: .행복, isOriginal: true, description: "바티바티", relatedWords: ["바티짱2", "바티짱3"])
@@ -122,12 +68,54 @@ final class DataManager {
             
             self?.userCategories = userCategories
             self?.defaultCategories = defaultCategories
-            
+            // TODO: background에서 받으려나? 확인
             DispatchQueue.main.async {
-                completion(userCategories)
+                self?.categoryArrayPublisher.value = userCategories
             }
-            
         }
     }
     
+    func initCategory(category: Category2) {
+        categoryPublisher.value = category
+    }
+    
+    func getCateogry() -> Category2 {
+        categoryPublisher.value
+    }
+    
+    func numberOfWordsAtCategory() -> Int {
+        return categoryPublisher.value.words.count
+    }
+    
+    func getWordNameAtIndex(index: Int) -> String {
+        return categoryPublisher.value.words[index].name
+    }
+    
+    func swapWordOrder(category: Category2, from sourceIndex: Int, to destinationIndex: Int) {
+        guard let categoryIndex = categoryArrayPublisher.value.firstIndex(of: category) else { return }
+        categoryArrayPublisher.value[categoryIndex].words.swapAt(sourceIndex, destinationIndex)
+        categoryPublisher.value.words.swapAt(sourceIndex, destinationIndex)
+    }
+
+    func getWord(category: Category2, word: Word2) -> Word2? {
+        guard let categoryIndex = userCategories.firstIndex(of: category) else { return nil }
+        guard let wordIndex = userCategories[categoryIndex].words.firstIndex(of: word) else { return nil }
+        return userCategories[categoryIndex].words[wordIndex]
+    }
+    
+    func addWord(categoryName: String, wordName: String, description: String) {
+        let newWord = Word2(name: wordName, isFavorite: true, userCateogry: categoryName, isOriginal: false, description: description)
+        if categoryPublisher.value.categoryName == categoryName {
+            categoryPublisher.value.words.append(newWord)
+        }
+        
+        guard let index = categoryArrayPublisher.value.firstIndex(where: { $0.categoryName == categoryName }) else { return }
+        categoryArrayPublisher.value[index].addWord(newWord)
+    }
+    
+    func removeWordAt(category: Category2, index: Int) {
+        categoryPublisher.value.words.remove(at: index)
+        guard let index = categoryArrayPublisher.value.firstIndex(of: category) else { return }
+        categoryArrayPublisher.value[index].words.remove(at: index)
+    }
 }
