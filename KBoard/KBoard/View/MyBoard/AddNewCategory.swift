@@ -19,6 +19,8 @@ class AddNewCategory: UIViewController, UITextFieldDelegate {
         return categoryTextField
     }()
     
+    var boardListViewModel: BoardListViewModel?
+    
     var categoryNameDelegate: CategoryNameProtocol?
     
     // MARK: - Lifecycle
@@ -47,8 +49,11 @@ class AddNewCategory: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func addNewCategory(_ sender: Any) {
-        if let text = categoryTextField.text {
-            categoryNameDelegate?.categoryNameSend(name: text)
+        if let text = categoryTextField.text, let boardListViewModel = boardListViewModel {
+            boardListViewModel.addCategory(name: text)
+            
+//            categoryNameDelegate?.categoryNameSend(name: text)
+            
         }
         dismiss(animated: true, completion: nil)
     }

@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - MoreButton Action
 protocol CategoryEditDelegate: AnyObject {
-    func tapMoreButton()
+    
+    func tapMoreButton(category: Category2)
 }
 
 // MARK: - UITableViewCell
@@ -18,7 +19,7 @@ class CustomTableCell: UITableViewCell {
     // MARK: - Properties
     var cellDelegate: CategoryEditDelegate?
     
-    var categoryInfo: Category? {
+    var categoryInfo: Category2? {
         didSet {configure()}
     }
     
@@ -73,10 +74,13 @@ class CustomTableCell: UITableViewCell {
     func configure() {
         guard let categoryInfo = categoryInfo else {return}
         categoryName.text = categoryInfo.categoryName
-        categoryWordsCount.text = categoryInfo.count
+        categoryWordsCount.text = "\(categoryInfo.count)"
     }
     
     @objc func tapMoreButton() {
-        cellDelegate?.tapMoreButton()
+        guard let categoryInfo = categoryInfo else {
+            return
+        }
+        cellDelegate?.tapMoreButton(category: categoryInfo)
     }
 }

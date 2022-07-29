@@ -6,45 +6,63 @@
 //
 
 import UIKit
-
+// TODO: Edit은 아무것도 없으면 안보이도록?
+// TODO: viewmodel을 두개만들거나, 하나로 내부에 observable을 또 만든다.
+// 스크롤 안보이게
 class CategoryListViewController: UIViewController, CategoryNameProtocol {
+    
+    deinit {
+        print("deinit")
+    }
     
     // MARK: - Properties
     private let reuseIdentifier = "CustomTableCell"
-    // reuseIdentifier = 재사용 가능한 셀을 식별하는데 사용되는 문자열
     
     private let tableView = UITableView()
-    
-    let word1 = KWord(name: "비티짱1", isFavorite: true, isOriginal: true, description: "바티바티", relatedWords: ["바티짱2", "바티짱3"])
-    let word2 = KWord(name: "비티짱2", isFavorite: false, isOriginal: true, description: "짱", relatedWords: ["바티짱1", "바티짱3"])
-    let word3 = KWord(name: "비티짱3", isFavorite: true, isOriginal: true, description: "ㅋㅋㅋㅋ", usages: [Usage(korean: "지난 주 뮤직쇼 봤어?", english: "music show you see?"), Usage(korean: "지난 치티치티치티?", english: "티clclslsl?")], relatedWords: ["바티장1", "바티짱2"])
-    let word4 = KWord(name: "아오나1", isFavorite: true, isOriginal: false)
-    let word5 = KWord(name: "zz", isFavorite: false, isOriginal: true, description: "zzzz")
-    let word6 = KWord(name: "gg1", isFavorite: false, isOriginal: false, description: "zz")
-    var categories: [Category] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+
+    private var boardListViewModel = BoardListViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        categories = [Category(categoryName: "💜BTS💜", count: "8 Words", kwords: [word1, word2, word3]),
-                      Category(categoryName: "아이돌", count: "8 Words", kwords: [word4, word5]),
-                      Category(categoryName: "소녀시대", count: "8 Words", kwords: [word6])]
+        boardListViewModel.fetchSavedCategories()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        boardListViewModel.categories.bind { [weak self] _ in
+            self?.tableView.reloadData()
+            // TODO 수정할때는 내려가면 안된다.
+            self?.scrollToBottom()
+        }
+    }
     private func configureUI() {
         self.view.backgroundColor = .systemGray5
         setNavigation()
         setCategoryListContent()
     }
     
+    private func setupBinding() {
+        
+        // 여러군대에서 뷰모델 내부의 같은 프로퍼티에 대해 bind 하면, 즉 여기서 바인드 하여 저 클로저로 했으니 다른 뷰컨에서 역시 바인드가 여기로 되어있어서 좀 이상하다.
+        
+    }
+    
+    private func scrollToBottom() {
+        let lastRowOfIndexPath = self.tableView.numberOfSections - 1
+        print(lastRowOfIndexPath)
+        if lastRowOfIndexPath >= 0 {
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(row: 0, section: lastRowOfIndexPath)
+                self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+        }
+    }
+    
     private func setNavigation() {
-        self.navigationItem.title = "My Board"
+        navigationItem.title = "My Board"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEditButton(_:)))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tapAddButton(_:))),
@@ -64,13 +82,13 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     }
     
     func categoryNameSend(name: String) {
-        categories.append(Category(categoryName: name, count: "0 Words", kwords: nil))
+//        categories.append(Category(categoryName: name, count: "0 Words", kwords: nil))
     }
     
-    private func showActionSheet() {
+    private func showActionSheet(category: Category2) {
         let actionSheet = UIAlertController(title: "타이틀", message: "액션시트 메시지", preferredStyle: .actionSheet)
         let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            self.showRenameAlert()
+            self.showRenameAlert(category: category)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheet.addAction(rename)
@@ -78,16 +96,21 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    private func showRenameAlert() {
+    private func showRenameAlert(category: Category2) {
         let renameAlert = UIAlertController(title: "Rename Category", message: "Do you want to rename category?", preferredStyle: .alert)
-        let save = UIAlertAction(title: "Save", style: .default) {_ in
+        let save = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
             // To-Do : 카테고리 명 수정 시 카테고리 리스트에 적용
+            guard let text = renameAlert.textFields?.first?.text,
+                  !text.isEmpty
+            else { return }
+            self?.boardListViewModel.editCategoryName(category: category, name: text)
+            
         }
         let cancel = UIAlertAction(title: "cancel", style: .cancel)
         renameAlert.addAction(save)
         renameAlert.addAction(cancel)
         renameAlert.addTextField { (newCategoryName) in
-            newCategoryName.placeholder = "New Category Name"
+            newCategoryName.placeholder = "\(category.categoryName)"
         }
         self.present(renameAlert, animated: true, completion: nil)
     }
@@ -95,6 +118,7 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
     @objc private func tapAddButton(_ sender: Any) {
         let addModel = AddNewCategory()
         addModel.categoryNameDelegate = self
+        addModel.boardListViewModel = boardListViewModel
         let nav = UINavigationController(rootViewController: addModel)
         nav.modalPresentationStyle = .pageSheet
         if let sheet = nav.sheetPresentationController {
@@ -117,20 +141,22 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
 extension CategoryListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return categories.count
+        return boardListViewModel.numOfCategories
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return boardListViewModel.numOfCategories == 0 ? 0 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CustomTableCell
-        cell.categoryInfo = categories[indexPath.section]
+//        cell.categoryInfo = categories[indexPath.section]
+        cell.categoryInfo = boardListViewModel.getCategoryAt(indexPath.section)
         cell.cellDelegate = self
         cell.moreButton.tag = indexPath.section
         return cell
     }
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -139,7 +165,11 @@ extension CategoryListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         // TO-Do : 카테고리 선택 시 해당 카테고리 상세로 화면이동
 //        print("카테고리선택됨")
-        navigationController?.pushViewController(CategoryViewController(), animated: true)
+        let vc = CategoryViewController()
+        vc.boardListViewModel = boardListViewModel
+        vc.category = boardListViewModel.getCategoryAt(indexPath.section)
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -156,21 +186,22 @@ extension CategoryListViewController: UITableViewDelegate {
     // 셀 삭제!!!!
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-            self.categories.remove(at: indexPath.section)
-            let indexSet = IndexSet(arrayLiteral: indexPath.section)
-            self.tableView.deleteSections(indexSet, with: .automatic )
+//            self.categories.remove(at: indexPath.section)
+            self.boardListViewModel.removeCategoryAt(indexPath.section)
+//            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+//            self.tableView.deleteSections(indexSet, with: .automatic )
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions
     }
     // 셀 이동
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        categories.swapAt(sourceIndexPath.section, destinationIndexPath.section)
+        boardListViewModel.swapCategory(from: sourceIndexPath.section, to: destinationIndexPath.section)
     }
 }
 
 extension CategoryListViewController: CategoryEditDelegate {
-    func tapMoreButton() {
-        showActionSheet()
+    func tapMoreButton(category: Category2) {
+        showActionSheet(category: category)
     }
 }

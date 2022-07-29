@@ -10,6 +10,10 @@ import UIKit
 class AddWordViewController: UIViewController {
     
     // MARK: - property
+    
+    var boardListViewModel: BoardListViewModel?
+    var category: Category2?
+    
     private let wordStack: UIStackView = {
         let wordStack = UIStackView()
         return wordStack
@@ -37,10 +41,9 @@ class AddWordViewController: UIViewController {
         return newWordTextField
     }()
     private let newWordCategoryPicker = UIPickerView()
-    private let pickerList: [String] = ["진최고", "진이대박", "나는대박", "비티에스"]
+//    private let pickerList: [String] = ["진최고", "진이대박", "나는대박", "비티에스"]
     private let newWordCategoryTextField: UITextField = {
         let newWordCategoryTextField = UITextField()
-        newWordCategoryTextField.text = "진최고"
         newWordCategoryTextField.tintColor = .clear
         return newWordCategoryTextField
     }()
@@ -97,14 +100,28 @@ class AddWordViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        
+        newWordCategoryTextField.text = category?.categoryName
     }
     
     private func navigationSetting() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(dismissPage))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(dismissPage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(addWord))
         navigationItem.title = "Add word"
+    }
+    
+    @objc func addWord() {
+        guard let wordName = newWordTextField.text, !wordName.isEmpty,
+              let categoryName = newWordCategoryTextField.text,
+              let vm = boardListViewModel,
+              let category = category
+        else {
+            dismiss(animated: true)
+            return
+        }
+
+        vm.addWord(categoryName: categoryName, wordName: wordName, wordDescription: newWordDescription.text ?? "")
+        dismiss(animated: true)
     }
     
     @objc func dismissPage() {
@@ -147,15 +164,15 @@ extension AddWordViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerList.count
+        guard let boardListViewModel = boardListViewModel else { return 0 }
+        return boardListViewModel.numOfCategories
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerList[row]
+        return boardListViewModel?.userCategoryNameArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(pickerList[row])
-        newWordCategoryTextField.text = pickerList[row]
+        newWordCategoryTextField.text = boardListViewModel?.userCategoryNameArray[row]
     }
 }

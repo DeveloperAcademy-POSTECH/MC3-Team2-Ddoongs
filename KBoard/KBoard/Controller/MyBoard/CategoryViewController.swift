@@ -14,10 +14,19 @@ class CategoryViewController: UIViewController {
     fileprivate let reuseIdentifier = "cellID"
     fileprivate let reuseHeaderIdentifier = "headerID"
     
-    private var data: [String] = [] {
-        didSet {
-            tableView.reloadData()
-        }
+    var boardListViewModel: BoardListViewModel?
+    var category: Category2?
+    
+//    private var data: [String] = [] {
+//        didSet {
+//            tableView.reloadData()
+//        }
+//    }
+    fileprivate func setUpBinding() {
+        boardListViewModel?.categories.bind({ [weak self] _ in
+            self?.tableView.reloadData()
+            self?.scrollToBottom()
+        })
     }
     
     fileprivate var tableView: UITableView = UITableView()
@@ -54,11 +63,8 @@ class CategoryViewController: UIViewController {
         registerTableView()
         talbeViewDelegate()
         configureUI()
-        fetchData()
-    }
-    
-    fileprivate func fetchData() {
-        data = ["q", "w", "e", "r"]
+        setUpBinding()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +74,7 @@ class CategoryViewController: UIViewController {
             UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editWords)),
             UIBarButtonItem(customView: keyBoard )
         ]
+        
     }
 
     @objc fileprivate func editWords() {
@@ -116,16 +123,39 @@ class CategoryViewController: UIViewController {
     }
     
     @objc fileprivate func addWord() {
-        let nav = UINavigationController(rootViewController: AddWordViewController())
+        
+        let vc = AddWordViewController()
+        vc.category = category
+        vc.boardListViewModel = boardListViewModel
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true)
     }
     
+    private func scrollToBottom() {
+        let lastRowOfIndexPath = self.tableView.numberOfSections - 1
+        print(lastRowOfIndexPath)
+        if lastRowOfIndexPath >= 0 {
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(row: 0, section: lastRowOfIndexPath)
+                self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+        }
+    }
 }
 
 extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        data.count
+        
+        guard let vm = boardListViewModel,
+              let category = category
+        else {
+            return 0
+        }
+        print("!", vm.numberOfWordsAtCategory(category: category))
+        return vm.numberOfWordsAtCategory(category: category)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -133,8 +163,13 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
-                cell.wordLabel.text = data[indexPath.section]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell,
+              let vm = boardListViewModel,
+              let category = category
+        else { return UITableViewCell() }
+        
+        cell.wordLabel.text = vm.wordNameAtIndex(category: category, indexPath.section)
+        
         return cell
     }
     
@@ -151,14 +186,16 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-            self.data.remove(at: indexPath.section)
+            guard let category = self.category else { return }
+            self.boardListViewModel?.removeWord(category: category, index: indexPath.section)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        data.swapAt(sourceIndexPath.section, destinationIndexPath.section)
+        guard let category = category else { return }
+        boardListViewModel?.swapWord(category: category, from: sourceIndexPath.section, to: destinationIndexPath.section)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
