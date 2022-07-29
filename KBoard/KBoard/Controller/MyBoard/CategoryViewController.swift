@@ -16,28 +16,16 @@ class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"
     fileprivate let reuseHeaderIdentifier = "headerID"
-    
     var categoryViewModel: CategoryViewModel
-    
-//    var boardListViewModel: BoardListViewModel
-//    var category: Category2
-    
-//    var cateogryViewModel: CategoryViewModel?
-    
+
     fileprivate func setUpBinding() {
         categoryViewModel.category.bind { [weak self] _ in
             self?.tableView.reloadData()
             self?.scrollToBottom()
         }
-//        boardListViewModel.categories.bind({ [weak self] _ in
-//            self?.tableView.reloadData()
-//            self?.scrollToBottom()
-//        })
     }
     
     init(categoryViewModel: CategoryViewModel) {
-//        self.boardListViewModel = boardListViewModel
-//        self.category = category
         self.categoryViewModel = categoryViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -142,15 +130,10 @@ class CategoryViewController: UIViewController {
     @objc fileprivate func addWord() {
         
         let vc = AddWordViewController(categoryViewModel: categoryViewModel)
-//        vc.category = category
-//        vc.boardListViewModel = boardListViewModel
-        
         let nav = UINavigationController(rootViewController: vc)
-        
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true)
     }
-    
     private func scrollToBottom() {
         let lastRowOfIndexPath = self.tableView.numberOfSections - 1
         print(lastRowOfIndexPath)
@@ -165,14 +148,6 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-//        guard let vm = boardListViewModel,
-//              let category = category
-//        else {
-//            return 0
-//        }
-//        print("!", vm.numberOfWordsAtCategory(category: category))
-//        return boardListViewModel.numberOfWordsAtCategory(category: category)
         return categoryViewModel.numberOfWordsAtCategory()
     }
     
@@ -182,13 +157,8 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell
-//                ,
-//              let vm = boardListViewModel,
-//              let category = category
         else { return UITableViewCell() }
         cell.wordLabel.text = categoryViewModel.wordNameAtIndex(indexPath.section)
-//        cell.wordLabel.text = boardListViewModel.wordNameAtIndex(category: category, indexPath.section)
-        
         return cell
     }
     
@@ -205,8 +175,6 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-//            guard let category = self.category else { return }
-//            self.boardListViewModel.removeWord(category: self.category, index: indexPath.section)
             self.categoryViewModel.removeWordAt(indexPath.section)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
@@ -214,8 +182,6 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        guard let category = category else { return }
-//        boardListViewModel.swapWord(category: category, from: sourceIndexPath.section, to: destinationIndexPath.section)
         categoryViewModel.swapWord(from: sourceIndexPath.section, to: destinationIndexPath.section)
     }
     
