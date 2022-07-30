@@ -6,9 +6,23 @@
 //
 
 import Foundation
+import Combine
+
 final class KPopSlangViewModel {
     private let manager = DataManager.shared
     
-    var words: ObservableObject<[Word]?> = ObservableObject(nil)
+    var bag = Set<AnyCancellable>()
+    
+    var defaultCategories: ObservableObject<[DefaultCategory]?> = ObservableObject(nil)
+    
+    init() {
+
+        manager.dictionaryArrayPublisher.sink {
+            self.defaultCategories.value = $0
+        }
+        .store(in: &bag)
+        print(defaultCategories.value)
+
+    }
     
 }

@@ -11,6 +11,7 @@ import UIKit
 // viewwill 에 table load 있어서
 // detailview
 // 우리 왼쪽 탭 계속들어가게?
+// 처음에는 userCategories 에 아무것도 없어야한다.
 
 class CategoryViewController: UIViewController {
 

@@ -71,7 +71,6 @@ struct DefaultCategory {
     
 }
 
-// TODO: 자기자신을 향하는 struct? String?
 struct Word2: Equatable {
     let name: String
     var isFavorite: Bool
@@ -81,7 +80,7 @@ struct Word2: Equatable {
     var userCateogry: String?
     var defaultCategory: DefaultCateogryName?
     
-    let isOriginal: Bool?
+//    let isOriginal: Bool?
     // TODO: String 메모리
     var description: String?// 없을 수 도 있다.
     var usages: [Usage]?
