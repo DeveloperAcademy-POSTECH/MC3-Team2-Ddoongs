@@ -7,17 +7,21 @@
 
 import UIKit
 
-class DictionaryViewController: UIViewController {
+class DictionaryViewController: UIViewController, UISearchBarDelegate {
     
     private let dictionaryHeaderView = DictionaryHeaderView()
     var tableView = UITableView()
     var headerViewTopConstraint: NSLayoutConstraint?
+    
+    var filteredData : [Word]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
         configureUI()
         setupTableView()
+        dictionaryHeaderView.searchBar.delegate = self
+        filteredData = Word.words
     }
     
     private func render() {
@@ -45,6 +49,31 @@ class DictionaryViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        filteredData = []
+        
+        if searchText == "" {
+            filteredData = Word.words
+            
+        } else {
+            
+            for word in Word.words {
+                if word.hangleName.lowercased().contains(searchText.lowercased()) {
+                    filteredData.append(word)
+
+                    
+                } else if word.englishName.lowercased().contains(searchText.lowercased()){
+                    filteredData.append(word)
+                    
+                }
+            }
+        }
+        
+        self.tableView.reloadData()
+        
     }
 }
 
@@ -81,7 +110,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
 
     // 행의 개수를 설정하는 메소드
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Word.words.count
+        return filteredData.count
     }
 
     // 셀을 만드는 메소드
@@ -89,8 +118,9 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCustomCell.tableCellId, for: indexPath) as! WordCustomCell
 //        cell.backgroundColor = UIColor(rgb: 0xF7F8FA)
         cell.selectionStyle = .none
-        cell.HangleName.text = Word.words[indexPath.row].hangleName
-        cell.EnglishName.text = Word.words[indexPath.row].englishName
+        
+        cell.HangleName.text = filteredData[indexPath.row].hangleName
+        cell.EnglishName.text = filteredData[indexPath.row].englishName
 
         return cell
     }
