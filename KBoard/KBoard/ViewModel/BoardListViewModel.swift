@@ -30,6 +30,9 @@ final class BoardListViewModel {
     var numOfCategories: Int {
         manager.numOfCategories
     }
+    var allCategories: [String] {
+        manager.getCategories().map {$0.categoryName}
+    }
     
     func getCategoryAt(_ index: Int) -> Category2 {
         manager.getCategoryAt(index)

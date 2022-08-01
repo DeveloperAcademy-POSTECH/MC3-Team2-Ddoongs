@@ -7,6 +7,8 @@
 
 import UIKit
 
+// 니로 스크롤_ tableview reload 관련.
+
 class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"

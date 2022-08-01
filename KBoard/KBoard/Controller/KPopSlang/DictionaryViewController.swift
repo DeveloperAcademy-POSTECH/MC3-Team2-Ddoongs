@@ -7,20 +7,22 @@
 
 import UIKit
 
-class DictionaryViewController: UIViewController {
+class DictionaryViewController: UIViewController, UISearchBarDelegate {
     
     private let dictionaryHeaderView = DictionaryHeaderView()
     var tableView = UITableView()
     var headerViewTopConstraint: NSLayoutConstraint?
     
     var kPopSlangViewModel = KPopSlangViewModel()
-    
+    var filteredData: [Word]!
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
         configureUI()
         setupTableView()
         setUpBinding()
+        dictionaryHeaderView.searchBar.delegate = self
+
     }
     
     private func setUpBinding() {
@@ -62,6 +64,31 @@ class DictionaryViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        filteredData = []
+        
+        if searchText == "" {
+            filteredData = Word.words
+            
+        } else {
+            
+            for word in Word.words {
+                if word.hangleName.lowercased().contains(searchText.lowercased()) {
+                    filteredData.append(word)
+                    
+                } else if word.englishName.lowercased().contains(searchText.lowercased()) {
+                    filteredData.append(word)
+                    
+                }
+            }
+        }
+        
+        self.tableView.reloadData()
+        
+    }
+    
 }
 
 extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -99,6 +126,25 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
         print("qqwqw", word)
         let vc = WordDetailViewController(wordViewModel: WordViewModel(word: word))
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // TableView scroll 시 실행되는 메소드
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = scrollView.contentOffset.y // Y 축으로 스크롤 되는 크기
+
+        let swipingDown = y <= 0 // 아래로 스크롤 됐다는 상태 변수
+        let shouldSnap = y > 60 // UpperHeaderView 높이 + padding
+        let headerHeight = 170 // 전체 HeaderView 높이
+        
+        UIView.animate(withDuration: 0.3) {
+            self.dictionaryHeaderView.upperHeaderView.alpha = swipingDown ? 1.0 : 0.0
+        }
+
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: [], animations: {
+            self.headerViewTopConstraint?.constant = CGFloat(shouldSnap ? -headerHeight : 0)
+            self.view.layoutIfNeeded()
+        })
+
     }
     
 }
