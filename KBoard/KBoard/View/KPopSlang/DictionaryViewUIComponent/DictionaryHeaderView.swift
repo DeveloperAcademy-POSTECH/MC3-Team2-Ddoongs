@@ -8,11 +8,10 @@
 import UIKit
 
 class DictionaryHeaderView: UIView {
-    private let wordCategoryListView = WordCategoryListView()
     
+    let wordCategoryListView = WordCategoryListView()
     let upperHeaderView  = UpperHeaderView()
-    
-    private let searchBar = UISearchBar()
+    let searchBar = UISearchBar()
     
     override init(frame: CGRect) {
              super.init(frame: frame)
