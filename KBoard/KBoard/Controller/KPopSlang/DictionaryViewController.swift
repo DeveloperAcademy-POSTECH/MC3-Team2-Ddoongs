@@ -68,7 +68,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
         let shouldSnap = y > 60 // UpperHeaderView 높이 + padding
         let headerHeight = 170 // 전체 HeaderView 높이
         
-        UIView.animate(withDuration: 0.3){
+        UIView.animate(withDuration: 0.3) {
             self.dictionaryHeaderView.upperHeaderView.alpha = swipingDown ? 1.0 : 0.0
         }
 
