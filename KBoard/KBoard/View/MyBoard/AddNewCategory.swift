@@ -121,8 +121,12 @@ extension AddNewCategory: UITextFieldDelegate {
                 return true
             }
         }
-        guard categoryTextField.text!.count < 10 else { return false }
-        return true
+        if let text = categoryTextField.text {
+            if text.count < 10 {
+                return true
+            }
+        }
+        return false
     }
 }
 
