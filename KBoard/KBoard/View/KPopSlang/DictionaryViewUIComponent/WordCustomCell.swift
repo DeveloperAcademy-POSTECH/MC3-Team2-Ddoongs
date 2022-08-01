@@ -11,6 +11,12 @@ class WordCustomCell: UITableViewCell, UITableViewDelegate {
     
     static let tableCellId = "TableCellId"
     
+    var isStar: Bool = false {
+        willSet {
+            self.favoriteButton.setImage(newValue ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"), for: .normal)
+        }
+    }
+    
     lazy var HangleName: UILabel = {
         let label = UILabel()
         label.textColor = .black

@@ -7,17 +7,29 @@
 
 import UIKit
 
-// TODO: 카드 둥글기 전역 함수 수정 요구
+// 니로 스크롤_ tableview reload 관련.
 
 class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"
     fileprivate let reuseHeaderIdentifier = "headerID"
-    
-    private var data: [String] = [] {
-        didSet {
-            tableView.reloadData()
+    var categoryViewModel: CategoryViewModel
+
+    fileprivate func setUpBinding() {
+        categoryViewModel.category.bind { [weak self] _ in
+            self?.tableView.reloadData()
+            self?.scrollToBottom()
         }
+        
+    }
+    
+    init(categoryViewModel: CategoryViewModel) {
+        self.categoryViewModel = categoryViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     fileprivate var tableView: UITableView = UITableView()
@@ -54,11 +66,8 @@ class CategoryViewController: UIViewController {
         registerTableView()
         talbeViewDelegate()
         configureUI()
-        fetchData()
-    }
-    
-    fileprivate func fetchData() {
-        data = ["q", "w", "e", "r"]
+        setUpBinding()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +77,7 @@ class CategoryViewController: UIViewController {
             UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editWords)),
             UIBarButtonItem(customView: keyBoard )
         ]
+        
     }
 
     @objc fileprivate func editWords() {
@@ -116,16 +126,27 @@ class CategoryViewController: UIViewController {
     }
     
     @objc fileprivate func addWord() {
-        let nav = UINavigationController(rootViewController: AddWordViewController())
+        
+        let vc = AddWordViewController(categoryViewModel: categoryViewModel)
+        let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true)
     }
-    
+    private func scrollToBottom() {
+        let lastRowOfIndexPath = self.tableView.numberOfSections - 1
+        print(lastRowOfIndexPath)
+        if lastRowOfIndexPath >= 0 {
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(row: 0, section: lastRowOfIndexPath)
+                self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+        }
+    }
 }
 
 extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        data.count
+        return categoryViewModel.numberOfWordsAtCategory()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -133,8 +154,9 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
-                cell.wordLabel.text = data[indexPath.section]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell
+        else { return UITableViewCell() }
+        cell.wordLabel.text = categoryViewModel.wordNameAtIndex(indexPath.section).name
         return cell
     }
     
@@ -151,18 +173,18 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-            self.data.remove(at: indexPath.section)
+            self.categoryViewModel.removeWordAt(indexPath.section)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        data.swapAt(sourceIndexPath.section, destinationIndexPath.section)
+        categoryViewModel.swapWord(from: sourceIndexPath.section, to: destinationIndexPath.section)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(WordDetailViewController(), animated: true)
+        present(WordDetailViewController(wordViewModel: WordViewModel(word: categoryViewModel.wordNameAtIndex(indexPath.section))), animated: true)
     }
     
 }

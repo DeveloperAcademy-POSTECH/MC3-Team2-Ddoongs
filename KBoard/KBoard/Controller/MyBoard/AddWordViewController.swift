@@ -10,6 +10,18 @@ import UIKit
 class AddWordViewController: UIViewController {
     
     // MARK: - property
+    
+    var categoryViewModel: CategoryViewModel
+    
+    init(categoryViewModel: CategoryViewModel) {
+        self.categoryViewModel = categoryViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let wordStack: UIStackView = {
         let wordStack = UIStackView()
         return wordStack
@@ -37,10 +49,8 @@ class AddWordViewController: UIViewController {
         return newWordTextField
     }()
     private let newWordCategoryPicker = UIPickerView()
-    private let pickerList: [String] = ["진최고", "진이대박", "나는대박", "비티에스"]
     private let newWordCategoryTextField: UITextField = {
         let newWordCategoryTextField = UITextField()
-        newWordCategoryTextField.text = "진최고"
         newWordCategoryTextField.tintColor = .clear
         return newWordCategoryTextField
     }()
@@ -70,6 +80,10 @@ class AddWordViewController: UIViewController {
         newWordCategoryPicker.dataSource = self
         newWordCategoryTextField.delegate = self
         newWordDescriptionTextField.delegate = self
+        guard let index = categoryViewModel.getCategoryIndex() else {
+            return
+        }
+        newWordCategoryPicker.selectRow(index, inComponent: 0, animated: true)
     }
     
     private func render() {
@@ -97,14 +111,25 @@ class AddWordViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        
+        newWordCategoryTextField.text = categoryViewModel.getCategoryName()
     }
     
     private func navigationSetting() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(dismissPage))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(dismissPage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(addWord))
         navigationItem.title = "Add word"
+    }
+    
+    @objc func addWord() {
+        guard let wordName = newWordTextField.text, !wordName.isEmpty,
+              let categoryName = newWordCategoryTextField.text
+        else {
+            dismiss(animated: true)
+            return
+        }
+        categoryViewModel.addWord(categoryName: categoryName, wordName: wordName, wordDescription: newWordDescription.text ?? "")
+        dismiss(animated: true)
     }
     
     @objc private func dismissPage() {
@@ -114,6 +139,11 @@ class AddWordViewController: UIViewController {
 //            present(alert, animated: true)
 //        } else {
         // TODO: Save 하는 함수를 넣어야 한다.
+//                if 중복되는 단어명을 찾는 로직 {
+//                    let alert = UIAlertController(title: "Can't Add your New Word", message: "This word already in your Board!!\n Please try another one", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+//                    present(alert, animated: true)
+//                } else {
             dismiss(animated: true, completion: nil)
 //        }
     }
@@ -153,15 +183,14 @@ extension AddWordViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerList.count
+        categoryViewModel.numOfCategories()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerList[row]
+        return categoryViewModel.userCategoryNameArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(pickerList[row])
-        newWordCategoryTextField.text = pickerList[row]
+        newWordCategoryTextField.text = categoryViewModel.userCategoryNameArray[row]
     }
 }

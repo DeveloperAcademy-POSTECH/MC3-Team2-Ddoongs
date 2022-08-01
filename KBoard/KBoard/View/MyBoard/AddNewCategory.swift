@@ -25,6 +25,8 @@ class AddNewCategory: UIViewController {
         return label
     }()
     
+    var boardListViewModel: BoardListViewModel?
+    
     var categoryNameDelegate: CategoryNameProtocol?
     
     // 더미데이터 입니다. 데이터가 들어오면 삭제해주세요
@@ -42,6 +44,7 @@ class AddNewCategory: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         underLine()
+
     }
     
     override func viewDidLoad() {
@@ -51,7 +54,7 @@ class AddNewCategory: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkTextValidation(_:)), name: UITextField.textDidChangeNotification, object: categoryTextField)
     }
-    
+
     private func configureUI() {
         view.backgroundColor = UIColor.white
         self.navigationItem.title = "Category Name"
@@ -81,7 +84,9 @@ class AddNewCategory: UIViewController {
         if let textField = notification.object as? UITextField {
             if let text = textField.text {
                 
-                let nameSet = Set(categories.map {$0.categoryName})
+//                let nameSet = Set(categories.map {$0.categoryName})
+                guard let vm = boardListViewModel else { return }
+                let nameSet = Set(vm.allCategories)
                 
                 if nameSet.contains(text) == true {
                     validationLabel.text = "Category name already exists 🥲"
@@ -101,8 +106,11 @@ class AddNewCategory: UIViewController {
     }
     
     @objc private func addNewCategory(_ sender: Any) {
-        if let text = categoryTextField.text {
-            categoryNameDelegate?.categoryNameSend(name: text)
+        if let text = categoryTextField.text, let boardListViewModel = boardListViewModel {
+            boardListViewModel.addCategory(name: text)
+            
+//            categoryNameDelegate?.categoryNameSend(name: text)
+            
         }
         dismiss(animated: true, completion: nil)
     }
@@ -132,4 +140,23 @@ extension AddNewCategory: UITextFieldDelegate {
 
 protocol CategoryNameProtocol {
     func categoryNameSend(name: String)
+}
+
+extension AddNewCategory {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        if let text = categoryTextField.text {
+            if text.count < 10 {
+                return true
+            }
+        }
+        return false
+
+    }
 }
