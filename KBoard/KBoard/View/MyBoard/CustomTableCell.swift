@@ -19,7 +19,9 @@ class CustomTableCell: UITableViewCell {
     var cellDelegate: CategoryEditDelegate?
     
     var categoryInfo: Category? {
-        didSet {configure()}
+        didSet {
+            configure()
+        }
     }
     
     lazy var categoryName: UILabel = {
