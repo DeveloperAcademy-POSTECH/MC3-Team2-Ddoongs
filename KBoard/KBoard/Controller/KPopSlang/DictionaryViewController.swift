@@ -85,22 +85,16 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     // 셀을 만드는 메소드
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCustomCell.tableCellId, for: indexPath) as! WordCustomCell
-//        cell.backgroundColor = UIColor(rgb: 0xF7F8FA)
         cell.isStar = kPopSlangViewModel.getWordAtIndex(indexPath.row).userCateogry != ""
         cell.selectionStyle = .none
         let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
         cell.HangleName.text = word.name
         cell.EnglishName.text = word.pronunciation
-        
-//        cell.HangleName.text = Word.words[indexPath.row].hangleName
-//        cell.EnglishName.text = Word.words[indexPath.row].englishName
-
         return cell
     }
     
     // DetailView로 들어가기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let word = Word.words[indexPath.row]
         let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
         print("qqwqw", word)
         let vc = WordDetailViewController(wordViewModel: WordViewModel(word: word))

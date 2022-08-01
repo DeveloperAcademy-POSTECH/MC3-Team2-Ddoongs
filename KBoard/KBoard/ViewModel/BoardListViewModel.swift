@@ -24,10 +24,6 @@ final class BoardListViewModel {
         }
         .store(in: &bag)
         
-//        manager.categoryPublisher.sink { _ in
-//            self.categories.value = self.manager.getCategories()
-//        }.store(in: &bag)
-        
         manager.fetchSavedUserCategories2()
     }
     
@@ -66,10 +62,6 @@ final class CategoryViewModel {
     var category: ObservableObject<Category2?> = ObservableObject(nil)
     
     init(category: Category2) {
-        
-//        manager.categoryArrayPublisher.sink {
-//            
-//        }
         
         manager.categoryPublisher.sink {
             self.category.value = $0

@@ -20,10 +20,6 @@ final class KPopSlangViewModel {
                                     
     init() {
         
-//        manager.dictionaryArrayPublisher.sink {
-//            self.defaultCategories.value = $0
-//        }
-//        .store(in: &bag)
         manager.categoryArrayPublisher.sink { _ in
             self.changesInUserCategories.value?.toggle()
         }.store(in: &bag)
@@ -33,10 +29,6 @@ final class KPopSlangViewModel {
         }.store(in: &bag)
 
     }
-    
-//    func getWordsAtCategory(_ defaultCategory: DefaultCategory) -> [Word2] {
-//        manager.getWordAtCategory(defaultCategory: DefaultCategory)
-//    }
     
     func getNumberOfWords() -> Int {
         manager.getNumberOfWordsAtDefaultCategory()
@@ -58,7 +50,5 @@ final class KPopSlangViewModel {
     func defaultCategoryStringAt(_ index: Int) -> String {
         DefaultCateogryName.allCases[index].rawValue
     }
-//    func clickCategoryAt(_ index: IndexPath) {
-//        manager.switchCategoryAt(category: )
-//    }
+
 }

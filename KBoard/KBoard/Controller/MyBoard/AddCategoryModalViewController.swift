@@ -31,7 +31,6 @@ class AddCategoryModalViewController: UIViewController {
     
     private let categoryPickerTextField: UITextField = {
         let categoryPickerTextField = UITextField()
-//        categoryPickerTextField.text = "진💕진💕"
         categoryPickerTextField.tintColor = .clear
         return categoryPickerTextField
     }()
@@ -62,7 +61,6 @@ class AddCategoryModalViewController: UIViewController {
     }()
     
     private let caterogyPicker =  UIPickerView()
-//    private var categoryList = ["진💕진💕", "💕진💕", "💕"]
     
     private let pickerToolbar: UIToolbar = {
         let pickerToolbar = UIToolbar()
@@ -149,19 +147,13 @@ extension AddCategoryModalViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         print("몇개일가", wordViewModel.numOfuserCategories)
         return wordViewModel.numOfuserCategories
-//        return categoryList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return categoryList[row]
-        print("아마도 없겟죠?", wordViewModel.userCategoryNameAt(row))
         return wordViewModel.userCategoryNameAt(row)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print(categoryList[row])
-//        categoryPickerTextField.text = categoryList[row]
-        print(wordViewModel.userCategoryNameAt(row))
         categoryPickerTextField.text = wordViewModel.userCategoryNameAt(row)
     }
 

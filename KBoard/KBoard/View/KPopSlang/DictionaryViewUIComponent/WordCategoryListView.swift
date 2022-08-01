@@ -9,7 +9,6 @@ import UIKit
 
 class WordCategoryListView: UIView {
     
-//    let categoryTitle = DefaultCateogryName.allCases
     var kPopSlangViewModel: KPopSlangViewModel
     
     lazy var clickedCategory: ObservableObject<DefaultCateogryName> = ObservableObject(DefaultCateogryName.firstCateogryName)
@@ -33,11 +32,6 @@ class WordCategoryListView: UIView {
         super.init(frame: CGRect())
         render()
     }
-    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        render()
-//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,14 +60,12 @@ extension WordCategoryListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectaionCellId", for: indexPath) as! CollectionCustomCell
         cell.backgroundColor = .gray
-//        cell.categoryLabel.text = categoryTitle[indexPath.row].rawValue
         cell.categoryLabel.text = kPopSlangViewModel.defaultCategoryStringAt(indexPath.row)
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        clickedCategory = DefaultCateogryName.allCases[indexPath.row]
         kPopSlangViewModel.switchCategoryAt(indexPath.row)
     }
 }

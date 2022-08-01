@@ -18,13 +18,13 @@ class WordDetailViewController: UIViewController {
     init(wordViewModel: WordViewModel) {
 
         self.wordViewModel = wordViewModel
+        
         super.init(nibName: nil, bundle: nil)
+        
         wordViewModel.word2.bind { [weak self] _ in
-            print("qqwqw1")
             self?.view.reloadInputViews()
         }
         wordViewModel.changesInUserCategories.bind { [weak self] _ in
-            print("qqwqw2")
             self?.view.reloadInputViews()
         }
     }
@@ -59,18 +59,6 @@ class WordDetailViewController: UIViewController {
         super.viewDidLoad()
         render() // layout 배치
         configureUI() // background 색상등 추가 설정
-        setupBinding()
-    }
-    
-    private func setupBinding() {
-//        self.wordViewModel.categories.bind { [weak self] _ in
-//            print("reload detail")
-//
-//        }
-//        self.wordViewModel.changesInUserCategories.bind { [weak self] _ in
-//            print("qqwqw2")
-//            self?.reloadInputViews()
-//        }
     }
     
     private func render() {

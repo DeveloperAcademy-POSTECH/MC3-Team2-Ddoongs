@@ -7,18 +7,6 @@
 
 import UIKit
 
-// TODO: 카드 둥글기 전역 함수 수정 요구
-// viewwill 에 table load 있어서
-// detailview
-// 우리 왼쪽 탭 계속들어가게?
-// 처음에는 userCategories 에 아무것도 없어야한다.
-// tableView.separatorStyle = .none // cell line 없애기
-// 모델을 class로?
-// relatedwords 는 무엇일까?
-// detailword 에서 카테고리 쓰는거 말고 지우는거는 아무것도 안되어있다.
-// 시작하자마자 scrolltoBottom
-// 카테고리 없어지면 기존 것 별 제거
-// 
 class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"

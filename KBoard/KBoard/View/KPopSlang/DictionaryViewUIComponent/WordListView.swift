@@ -55,12 +55,4 @@ extension WordListView: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
-    
-    // DetailView로 들어가기
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-//        let word = Word.words[indexPath.row]
-//        let vc = WordDetailViewController()
-//        vc.wordName = word.hangleName
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
 }

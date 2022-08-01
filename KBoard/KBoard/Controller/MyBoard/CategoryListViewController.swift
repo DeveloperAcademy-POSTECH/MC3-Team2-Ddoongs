@@ -6,9 +6,7 @@
 //
 
 import UIKit
-// TODO: Edit은 아무것도 없으면 안보이도록?
-// TODO: viewmodel을 두개만들거나, 하나로 내부에 observable을 또 만든다.
-// 스크롤 안보이게
+
 class CategoryListViewController: UIViewController, CategoryNameProtocol {
     
     deinit {
@@ -178,8 +176,6 @@ extension CategoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
             self.boardListViewModel.removeCategoryAt(indexPath.section)
-//            let indexSet = IndexSet(arrayLiteral: indexPath.section)
-//            self.tableView.deleteSections(indexSet, with: .automatic )
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions

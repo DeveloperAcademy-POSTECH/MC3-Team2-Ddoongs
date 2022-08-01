@@ -14,8 +14,6 @@ class AddWordViewController: UIViewController {
     var categoryViewModel: CategoryViewModel
     
     init(categoryViewModel: CategoryViewModel) {
-//        self.boardListViewModel = boardListViewModel
-//        self.category = category
         self.categoryViewModel = categoryViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,8 +21,6 @@ class AddWordViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //    var boardListViewModel: BoardListViewModel?
-//    var category: Category2?
     
     private let wordStack: UIStackView = {
         let wordStack = UIStackView()
@@ -53,7 +49,6 @@ class AddWordViewController: UIViewController {
         return newWordTextField
     }()
     private let newWordCategoryPicker = UIPickerView()
-//    private let pickerList: [String] = ["진최고", "진이대박", "나는대박", "비티에스"]
     private let newWordCategoryTextField: UITextField = {
         let newWordCategoryTextField = UITextField()
         newWordCategoryTextField.tintColor = .clear
