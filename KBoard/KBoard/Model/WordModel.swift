@@ -25,4 +25,3 @@ extension Word {
                                 Word(hangleName: "별다줄", englishName: "abc", category: ["All", "Sad"], isFavorite: false),
                                 Word(hangleName: "노잼", englishName: "no fun", category: ["All", "Angry"], isFavorite: true)]
 }
-

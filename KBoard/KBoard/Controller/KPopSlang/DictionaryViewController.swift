@@ -13,9 +13,6 @@ class DictionaryViewController: UIViewController, UISearchBarDelegate {
     var tableView = UITableView()
     var headerViewTopConstraint: NSLayoutConstraint?
     
-    
-    
-    
     var kPopSlangViewModel = KPopSlangViewModel()
     
     var filteredData: [Word]!
@@ -152,4 +149,3 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-

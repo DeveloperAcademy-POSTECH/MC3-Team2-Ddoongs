@@ -10,7 +10,6 @@ import UIKit
 class DictionaryHeaderView: UIView {
     let wordCategoryListView = WordCategoryListView(kPopSlangViewModel: KPopSlangViewModel())
     
-    let wordCategoryListView = WordCategoryListView()
     let upperHeaderView  = UpperHeaderView()
     
     let searchBar = UISearchBar()
