@@ -9,6 +9,19 @@ import UIKit
 
 class AddCategoryModalViewController: UIViewController {
     
+    var wordViewModel: WordViewModel
+    init(wordViewModel: WordViewModel) {
+        self.wordViewModel = wordViewModel
+        super.init(nibName: nil, bundle: nil)
+        wordViewModel.changesInUserCategories.bind { [weak self] _ in
+            self?.view.reloadInputViews()
+        }
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - property
     private let categoryPickLabel: UILabel = {
         let categoryPickLabel = UILabel()
@@ -18,7 +31,7 @@ class AddCategoryModalViewController: UIViewController {
     
     private let categoryPickerTextField: UITextField = {
         let categoryPickerTextField = UITextField()
-        categoryPickerTextField.text = "진💕진💕"
+//        categoryPickerTextField.text = "진💕진💕"
         categoryPickerTextField.tintColor = .clear
         return categoryPickerTextField
     }()
@@ -49,7 +62,7 @@ class AddCategoryModalViewController: UIViewController {
     }()
     
     private let caterogyPicker =  UIPickerView()
-    private var categoryList = ["진💕진💕", "💕진💕", "💕"]
+//    private var categoryList = ["진💕진💕", "💕진💕", "💕"]
     
     private let pickerToolbar: UIToolbar = {
         let pickerToolbar = UIToolbar()
@@ -67,6 +80,7 @@ class AddCategoryModalViewController: UIViewController {
     }
     
     @objc func saveTapped() {
+        wordViewModel.switchUserCategory(category: categoryPickerTextField.text ?? "")
         self.dismiss(animated: true)
     }
 
@@ -77,7 +91,9 @@ class AddCategoryModalViewController: UIViewController {
         configureUI()
         categoryPickerSetting()
         categoryTextFieldSetting()
-        
+
+        guard let index = wordViewModel.getCategoryIndex() else { return }
+        caterogyPicker.selectRow(0, inComponent: 0, animated: true)
     }
     
     private func render() {
@@ -97,6 +113,11 @@ class AddCategoryModalViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
+        if wordViewModel.userCategory == "" {
+            categoryPickerTextField.text = "카테고리를 선택하세요"
+        } else {
+            categoryPickerTextField.text = wordViewModel.userCategory
+        }
     }
     
     private func categoryPickerSetting() {
@@ -126,16 +147,22 @@ extension AddCategoryModalViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categoryList.count
+        print("몇개일가", wordViewModel.numOfuserCategories)
+        return wordViewModel.numOfuserCategories
+//        return categoryList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoryList[row]
+//        return categoryList[row]
+        print("아마도 없겟죠?", wordViewModel.userCategoryNameAt(row))
+        return wordViewModel.userCategoryNameAt(row)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(categoryList[row])
-        categoryPickerTextField.text = categoryList[row]
+//        print(categoryList[row])
+//        categoryPickerTextField.text = categoryList[row]
+        print(wordViewModel.userCategoryNameAt(row))
+        categoryPickerTextField.text = wordViewModel.userCategoryNameAt(row)
     }
 
 }

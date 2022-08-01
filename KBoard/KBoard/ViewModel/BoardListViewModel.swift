@@ -19,13 +19,14 @@ final class BoardListViewModel {
     init() {
 
         manager.categoryArrayPublisher.sink {
+            print("여기는역시")
             self.categories.value = $0
         }
         .store(in: &bag)
         
-        manager.categoryPublisher.sink { _ in
-            self.categories.value = self.manager.getCategories()
-        }.store(in: &bag)
+//        manager.categoryPublisher.sink { _ in
+//            self.categories.value = self.manager.getCategories()
+//        }.store(in: &bag)
         
         manager.fetchSavedUserCategories2()
     }
@@ -65,6 +66,11 @@ final class CategoryViewModel {
     var category: ObservableObject<Category2?> = ObservableObject(nil)
     
     init(category: Category2) {
+        
+//        manager.categoryArrayPublisher.sink {
+//            
+//        }
+        
         manager.categoryPublisher.sink {
             self.category.value = $0
         }
@@ -72,8 +78,8 @@ final class CategoryViewModel {
         manager.initCategory(category: category)
     }
     
-    func getCategoryIndex() -> Int {
-        manager.getCategoryIndex(category: manager.getCateogry())
+    func getCategoryIndex() -> Int? {
+        manager.getCategoryIndexWithCategoryName(categoryName: getCategoryName())
     }
     
     func getCategoryName() -> String {
@@ -91,7 +97,7 @@ final class CategoryViewModel {
         return manager.numberOfWordsAtCategory()
     }
     
-    func wordNameAtIndex(_ index: Int) -> String? {
+    func wordNameAtIndex(_ index: Int) -> Word2 {
         return manager.getWordNameAtIndex(index: index)
     }
     

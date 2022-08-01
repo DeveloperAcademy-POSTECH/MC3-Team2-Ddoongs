@@ -8,7 +8,7 @@
 import UIKit
 
 class DictionaryHeaderView: UIView {
-    private let wordCategoryListView = WordCategoryListView()
+    let wordCategoryListView = WordCategoryListView(kPopSlangViewModel: KPopSlangViewModel())
     
     let upperHeaderView  = UpperHeaderView()
     

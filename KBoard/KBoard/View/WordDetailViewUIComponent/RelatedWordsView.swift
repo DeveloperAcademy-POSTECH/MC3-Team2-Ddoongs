@@ -16,46 +16,65 @@ class RelatedWordsView: UIView {
         relatedWordsLabel.font = .boldSystemFont(ofSize: 16)
         return relatedWordsLabel
     }()
-    private lazy var relatedLabel: UILabel = {
-        let relatedLabel = UILabel()
-        relatedLabel.text = "Umak Bang song"
-        relatedLabel.frame.size.width = relatedLabel.intrinsicContentSize.width + tagPadding
-        relatedLabel.frame.size.height = tagHeight
-        return relatedLabel
-    }()
-    private lazy var relatedLabel2: UILabel = {
-        let relatedLabel2 = UILabel()
-        relatedLabel2.text = "sa geon nok hwa"
-        relatedLabel2.frame.size.width = relatedLabel2.intrinsicContentSize.width + tagPadding
-        relatedLabel2.frame.size.height = tagHeight
-        return relatedLabel2
-    }()
-    private lazy var relatedLabel3: UILabel = {
-        let relatedLabel3 = UILabel()
-        relatedLabel3.text = "ASAP"
-        relatedLabel3.frame.size.width = relatedLabel3.intrinsicContentSize.width + tagPadding
-        relatedLabel3.frame.size.height = tagHeight
-        return relatedLabel3
-    }()
-    private lazy var relatedLabel4: UILabel = {
-        let relatedLabel4 = UILabel()
-        relatedLabel4.text = "Chut bangsong"
-        relatedLabel4.frame.size.width = relatedLabel4.intrinsicContentSize.width + tagPadding
-        relatedLabel4.frame.size.height = tagHeight
-        return relatedLabel4
-    }()
-    private lazy var relatedLabel5: UILabel = {
-        let relatedLabel5 = UILabel()
-        relatedLabel5.text = "sadfassdfasfsasfdasdasfasdfdfa"
-        relatedLabel5.frame.size.width = relatedLabel5.intrinsicContentSize.width + tagPadding
-        relatedLabel5.frame.size.height = tagHeight
-        return relatedLabel5
-    }()
+    
+//    private lazy var relatedLabel: UILabel = {
+//        let relatedLabel = UILabel()
+////        relatedLabel.text = "Umak Bang song"
+//        relatedLabel.frame.size.width = relatedLabel.intrinsicContentSize.width + tagPadding
+//        relatedLabel.frame.size.height = tagHeight
+//        return relatedLabel
+//    }()
+//    private lazy var relatedLabel2: UILabel = {
+//        let relatedLabel2 = UILabel()
+////        relatedLabel2.text = "sa geon nok hwa"
+//        relatedLabel2.frame.size.width = relatedLabel2.intrinsicContentSize.width + tagPadding
+//        relatedLabel2.frame.size.height = tagHeight
+//        return relatedLabel2
+//    }()
+//    private lazy var relatedLabel3: UILabel = {
+//        let relatedLabel3 = UILabel()
+////        relatedLabel3.text = "ASAP"
+//        relatedLabel3.frame.size.width = relatedLabel3.intrinsicContentSize.width + tagPadding
+//        relatedLabel3.frame.size.height = tagHeight
+//        return relatedLabel3
+//    }()
+//    private lazy var relatedLabel4: UILabel = {
+//        let relatedLabel4 = UILabel()
+//        relatedLabel4.text = "Chut bangsong"
+//        relatedLabel4.frame.size.width = relatedLabel4.intrinsicContentSize.width + tagPadding
+//        relatedLabel4.frame.size.height = tagHeight
+//        return relatedLabel4
+//    }()
+//    private lazy var relatedLabel5: UILabel = {
+//        let relatedLabel5 = UILabel()
+////        relatedLabel5.text = "sadfassdfasfsasfdasdasfasdfdfa"
+//        relatedLabel5.frame.size.width = relatedLabel5.intrinsicContentSize.width + tagPadding
+//        relatedLabel5.frame.size.height = tagHeight
+//        return relatedLabel5
+//    }()
     private lazy var containerView: UIView = {
         let containerView = UIView()
         return containerView
     }()
-    private lazy var relatedWordArray: [UILabel] = [relatedLabel, relatedLabel2, relatedLabel3, relatedLabel4, relatedLabel5]
+//    private lazy var relatedWordArray: [UILabel] = [relatedLabel, relatedLabel2, relatedLabel3, relatedLabel4, relatedLabel5]
+    var relatedWords: [String] = [] {
+        didSet {
+            var labels: [UILabel] = []
+            self.relatedWords.forEach { wordName in
+                let label = UILabel()
+                label.text = wordName
+                label.frame.size.width = label.intrinsicContentSize.width + tagPadding
+                label.frame.size.height = tagHeight
+                labels.append(label)
+            }
+            relatedWordArray = labels
+            render()
+            configureUI()
+            displayTagLabels()
+        }
+    }
+    
+    var relatedWordArray: [UILabel] = []
     private let tagHeight: CGFloat = 30
     private let tagPadding: CGFloat = 16
     private let tagSpacingX: CGFloat = 8
@@ -64,10 +83,6 @@ class RelatedWordsView: UIView {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        render()
-        configureUI()
-        displayTagLabels()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -84,6 +99,7 @@ class RelatedWordsView: UIView {
         relatedWordArray.forEach { word in
             containerView.addSubview(word)
         }
+        
         containerView.anchor(top: relatedWordsLabel.bottomAnchor, paddingTop: 15, width: self.bounds.width, height: self.bounds.height)
         if let last = relatedWordArray.last {
             last.anchor(bottom: self.bottomAnchor, paddingBottom: 20)

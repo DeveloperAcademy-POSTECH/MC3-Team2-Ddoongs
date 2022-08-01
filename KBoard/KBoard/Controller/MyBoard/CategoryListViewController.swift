@@ -28,6 +28,8 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
         configureUI()
         boardListViewModel.categories.bind { [weak self] _ in
             self?.tableView.reloadData()
+            print("reload listview")
+            print("zz", self?.boardListViewModel.categories.value)
             // TODO 수정할때는 내려가면 안된다.
             self?.scrollToBottom()
         }

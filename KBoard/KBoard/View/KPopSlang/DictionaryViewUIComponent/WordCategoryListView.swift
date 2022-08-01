@@ -9,8 +9,10 @@ import UIKit
 
 class WordCategoryListView: UIView {
     
-    let categoryTitle = ["All", "Happy", "Sad", "Angry", "Good", "All", "Happy", "Sad", "Angry", "Good"]
+//    let categoryTitle = DefaultCateogryName.allCases
+    var kPopSlangViewModel: KPopSlangViewModel
     
+    lazy var clickedCategory: ObservableObject<DefaultCateogryName> = ObservableObject(DefaultCateogryName.firstCateogryName)
     // MARK: property
     
     private lazy var categorycollectionView: UICollectionView = {
@@ -26,10 +28,16 @@ class WordCategoryListView: UIView {
         return collectionView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(kPopSlangViewModel: KPopSlangViewModel) {
+        self.kPopSlangViewModel = kPopSlangViewModel
+        super.init(frame: CGRect())
         render()
     }
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        render()
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -52,13 +60,20 @@ extension WordCategoryListView: UICollectionViewDelegateFlowLayout {
 
 extension WordCategoryListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryTitle.count
+//        return categoryTitle.count
+        return kPopSlangViewModel.getNumberOfDefaultCategories()
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectaionCellId", for: indexPath) as! CollectionCustomCell
         cell.backgroundColor = .gray
-        cell.categoryLabel.text = categoryTitle[indexPath.row]
+//        cell.categoryLabel.text = categoryTitle[indexPath.row].rawValue
+        cell.categoryLabel.text = kPopSlangViewModel.defaultCategoryStringAt(indexPath.row)
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        clickedCategory = DefaultCateogryName.allCases[indexPath.row]
+        kPopSlangViewModel.switchCategoryAt(indexPath.row)
     }
 }

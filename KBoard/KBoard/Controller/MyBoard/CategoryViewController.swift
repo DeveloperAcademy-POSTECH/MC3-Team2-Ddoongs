@@ -12,7 +12,13 @@ import UIKit
 // detailview
 // 우리 왼쪽 탭 계속들어가게?
 // 처음에는 userCategories 에 아무것도 없어야한다.
-
+// tableView.separatorStyle = .none // cell line 없애기
+// 모델을 class로?
+// relatedwords 는 무엇일까?
+// detailword 에서 카테고리 쓰는거 말고 지우는거는 아무것도 안되어있다.
+// 시작하자마자 scrolltoBottom
+// 카테고리 없어지면 기존 것 별 제거
+// 
 class CategoryViewController: UIViewController {
 
     fileprivate let reuseIdentifier = "cellID"
@@ -24,6 +30,7 @@ class CategoryViewController: UIViewController {
             self?.tableView.reloadData()
             self?.scrollToBottom()
         }
+        
     }
     
     init(categoryViewModel: CategoryViewModel) {
@@ -159,7 +166,7 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? CategoryTableViewCell
         else { return UITableViewCell() }
-        cell.wordLabel.text = categoryViewModel.wordNameAtIndex(indexPath.section)
+        cell.wordLabel.text = categoryViewModel.wordNameAtIndex(indexPath.section).name
         return cell
     }
     
@@ -187,7 +194,7 @@ extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(WordDetailViewController(), animated: true)
+        present(WordDetailViewController(wordViewModel: WordViewModel(word: categoryViewModel.wordNameAtIndex(indexPath.section))), animated: true)
     }
     
 }

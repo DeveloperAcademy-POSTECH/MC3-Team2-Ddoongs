@@ -28,6 +28,7 @@
 		797A4D6228922C9C0016C79A /* BoardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D6128922C9C0016C79A /* BoardListViewModel.swift */; };
 		797A4D6428922CC60016C79A /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D6328922CC60016C79A /* ObservableObject.swift */; };
 		797A4D66289259650016C79A /* KPopSlangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D65289259650016C79A /* KPopSlangViewModel.swift */; };
+		797A4D6C28953A680016C79A /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D6B28953A680016C79A /* WordViewModel.swift */; };
 		79E659CB288FC3BD00FD54B6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E659CA288FC3BD00FD54B6 /* CategoryViewController.swift */; };
 		79E659D12890CB1500FD54B6 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E659D02890CB1400FD54B6 /* Color+Extension.swift */; };
 		79FDFA9A2884E689006A03CB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 79FDFA992884E689006A03CB /* .swiftlint.yml */; };
@@ -95,6 +96,7 @@
 		797A4D6128922C9C0016C79A /* BoardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListViewModel.swift; sourceTree = "<group>"; };
 		797A4D6328922CC60016C79A /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		797A4D65289259650016C79A /* KPopSlangViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPopSlangViewModel.swift; sourceTree = "<group>"; };
+		797A4D6B28953A680016C79A /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
 		79E659CA288FC3BD00FD54B6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		79E659D02890CB1400FD54B6 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		79FDFA992884E689006A03CB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				797A4D6128922C9C0016C79A /* BoardListViewModel.swift */,
 				797A4D65289259650016C79A /* KPopSlangViewModel.swift */,
+				797A4D6B28953A680016C79A /* WordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				7934B4EA2880207800CF38E9 /* View+Extension.swift in Sources */,
 				797A4D6028922C300016C79A /* DataManager.swift in Sources */,
 				3F24E869288FA7EA0092CEC7 /* WordModel.swift in Sources */,
+				797A4D6C28953A680016C79A /* WordViewModel.swift in Sources */,
 				3F24E81A288D14E20092CEC7 /* DictionaryViewController.swift in Sources */,
 				DF0445CE288FA872004AD0FF /* WordUsageView.swift in Sources */,
 				3FCDE7682891707600C936D9 /* UpperHeaderView.swift in Sources */,

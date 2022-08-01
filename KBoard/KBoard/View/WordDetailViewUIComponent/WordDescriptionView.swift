@@ -10,23 +10,23 @@ import UIKit
 class WordDescriptionView: UIView {
 
     // MARK: - property
-    private let wordKorean: UILabel = {
+    let wordKorean: UILabel = {
         let wordKorean = UILabel()
-        wordKorean.text = "뮤직쇼"
+//        wordKorean.text = "뮤직쇼"
         wordKorean.font = UIFont.boldSystemFont(ofSize: 28)
         return wordKorean
     }()
     
-    private let wordEnglish: UILabel = {
+    let wordEnglish: UILabel = {
         let wordEnglish = UILabel()
-        wordEnglish.text = "Music Show"
+//        wordEnglish.text = "Music Show"
         wordEnglish.font = wordEnglish.font.withSize(18)
         return wordEnglish
     }()
     
-    private let wordDescription: UILabel = {
+    let wordDescription: UILabel = {
         let wordDescription = UILabel()
-        wordDescription.text = "Music Show means f let artworkf = album.asdfasdfs asfasdfpoiupopwlekjsadfdMusic Show means f let artworkf = album.asdfasdfs asfasdfp"
+//        wordDescription.text = "Music Show means f let artworkf = album.asdfasdfs asfasdfpoiupopwlekjsadfdMusic Show means f let artworkf = album.asdfasdfs asfasdfp"
         wordDescription.numberOfLines = 0
         return wordDescription
     }()

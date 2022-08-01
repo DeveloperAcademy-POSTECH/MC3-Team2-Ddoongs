@@ -56,17 +56,21 @@ struct Category2: Equatable {
     
     public static func ==(lhs: Category2, rhs: Category2) -> Bool {
         return lhs.categoryName == rhs.categoryName
-        }
+    }
 }
 
-enum DefaultCateogryName: String {
+enum DefaultCateogryName: String, CaseIterable {
     case 행복
     case 기쁨
+    
+    static var firstCateogryName: Self {
+        DefaultCateogryName.allCases[0]
+    }
 }
+
 struct DefaultCategory {
     
-    let categoryName: DefaultCateogryName
-    
+    var categoryName: DefaultCateogryName
     var words: [Word2] = []
     
 }
@@ -79,29 +83,21 @@ struct Word2: Equatable {
     var shortDestination: String?
     var userCateogry: String?
     var defaultCategory: DefaultCateogryName?
-    
-//    let isOriginal: Bool?
-    // TODO: String 메모리
-    var description: String?// 없을 수 도 있다.
+
+    var description: String?
     var usages: [Usage]?
-    // 굳이 Word로 하지 않는다.
     var relatedWords: [String]?
-    
-//    init(name: String, isFavorite: Bool, isOriginal: Bool, description: String? = "", usages: [Usage]? = nil, relatedWords: [String]? = nil) {
-//        self.name = name
-//        self.isFavorite = isFavorite
-//        self.isOriginal = isOriginal
-//        self.description = description
-//        self.usages = usages
-//    }
     
     public static func ==(lhs: Word2, rhs: Word2) -> Bool {
         return lhs.name == rhs.name
     }
     
-    // TODO: mutating 자제?
     mutating func toggleFavorite() {
         isFavorite.toggle()
+    }
+    
+    mutating func applyUserCategory(cateogry: String) {
+        userCateogry = cateogry
     }
     
 }
