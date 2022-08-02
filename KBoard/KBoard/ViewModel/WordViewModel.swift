@@ -12,12 +12,11 @@ final class WordViewModel {
     // TODO: toggle로 바꿀 생각하자.
     var categories: ObservableObject<[Category2]?> = ObservableObject(nil)
     var changesInUserCategories: ObservableObject<Bool?> = ObservableObject(nil)
+    var bag = Set<AnyCancellable>()
     
     var word2: ObservableObject<Word2?> = ObservableObject(nil)
     
     private let manager = DataManager.shared
-
-    var bag = Set<AnyCancellable>()
 
     init(word: Word2) {
         manager.wordPublisher.sink { _ in

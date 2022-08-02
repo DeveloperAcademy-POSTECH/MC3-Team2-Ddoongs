@@ -23,11 +23,9 @@ class WordDetailViewController: UIViewController {
         
         wordViewModel.word2.bind { [weak self] _ in
             self?.view.reloadInputViews()
-            print("11", wordViewModel.word2.value?.name)
         }
         wordViewModel.changesInUserCategories.bind { [weak self] _ in
             self?.view.reloadInputViews()
-            print("111", wordViewModel.word2.value?.userCateogry)
         }
     }
     
@@ -74,8 +72,9 @@ class WordDetailViewController: UIViewController {
 
         view.addSubview(starButton)
         starButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor, paddingTop: 60, paddingRight: 60)
-
-        wordUsageView.usageArray = wordViewModel.usages ?? []
+        if let usages = wordViewModel.usages {
+            wordUsageView.usageArray = usages
+        }
 
         view.addSubview(wordUsageView)
         wordUsageView.anchor(top: wordDescriptionView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)

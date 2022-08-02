@@ -17,7 +17,6 @@ final class BoardListViewModel {
     var categories: ObservableObject<[Category2]?> = ObservableObject(nil)
     
     init() {
-
         manager.categoryArrayPublisher.sink {
             self.categories.value = $0
         }

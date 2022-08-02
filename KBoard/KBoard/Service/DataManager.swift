@@ -86,7 +86,7 @@ final class DataManager {
 
     func fetchSavedUserCategories2() {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
-            let word1 = Word2(name: "바티짱1", isFavorite: true, userCateogry: "BTS", defaultCategory: .행복, description: "바티바티", relatedWords: ["바티짱2", "바티짱3"])
+            let word1 = Word2(name: "바티짱1", isFavorite: true, userCateogry: "BTS", defaultCategory: .행복, description: "바티바티", usages: [Usage(korean: "qw", english: "qwe"), Usage(korean: "asdvasdv", english: "qweqwe")], relatedWords: ["바티짱2", "바티짱3"])
             let word2 = Word2(name: "바티짱2", isFavorite: false, userCateogry: "BTS", defaultCategory: .행복, description: "짱", relatedWords: ["바티짱1", "바티짱3"])
             let word3 = Word2(name: "바티짱3", isFavorite: true, userCateogry: "BTS", defaultCategory: .기쁨, description: "ㅋㅋㅋㅋ", usages: [Usage(korean: "지난 주 뮤직쇼 봤어?", english: "music show you see?"), Usage(korean: "지난 치티치티치티?", english: "티clclslsl?")], relatedWords: ["바티짱1", "바티짱2"])
             

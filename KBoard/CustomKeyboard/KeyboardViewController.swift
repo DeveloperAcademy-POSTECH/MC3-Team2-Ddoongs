@@ -22,6 +22,8 @@ class KeyboardViewController: UIInputViewController {
 
     @IBOutlet var nextKeyboardButton: UIButton!
 
+    let keyboardViewModel = KeyboardViewModel()
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
 
@@ -70,8 +72,21 @@ class KeyboardViewController: UIInputViewController {
         return view
     }()
 
+    private func setupBinding() {
+        print("kk")
+        keyboardViewModel.categories.bind { [weak self] categories in
+            guard let categories = categories else { return }
+            print("gogo")
+            guard categories.count > 0 else { return }
+            self?.finalRow = categories[0].words.map {$0.name}
+            self?.categoryCollectionView.reloadData()
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print("제발")
+    }
     lazy var category = ["💜BTS💜", "V-App", "💜JungKook💜"]
-    lazy var finalRow = ["보라해💜", "💜JungKook💜", "💜JIN💜", "최애", "존멋", "💜제이홉💜", "LOVE", "애교폭탄", "카톡왔숑", "사랑해제이홉오빠", "ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!", "ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!"]
+    lazy var finalRow: [String] = ["보라해💜", "💜JungKook💜", "💜JIN💜", "최애", "존멋", "💜제이홉💜", "LOVE", "애교폭탄", "카톡왔숑", "사랑해제이홉오빠", "ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!", "ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!"]
     func createFinalArray(input: [String]) -> [[String]] {
         var row: [[String]] = []
         var index = 0
@@ -99,7 +114,8 @@ class KeyboardViewController: UIInputViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("kk")
+        self.setupBinding()
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
 
@@ -168,6 +184,7 @@ class KeyboardViewController: UIInputViewController {
     }
 
     override func viewWillLayoutSubviews() {
+        print("kk")
         self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
         super.viewWillLayoutSubviews()
     }
