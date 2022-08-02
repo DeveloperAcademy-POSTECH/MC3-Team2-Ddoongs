@@ -49,7 +49,7 @@ class WordUsageView: UIView {
         
         self.addSubview(usageStack)
         
-        usageStack.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 10, paddingRight: 20)
+        usageStack.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 15, paddingRight: 20)
     }
     
     private func configureUI() {
