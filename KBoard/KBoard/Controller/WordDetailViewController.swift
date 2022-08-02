@@ -74,6 +74,8 @@ class WordDetailViewController: UIViewController {
         starButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor, paddingTop: 60, paddingRight: 60)
         if let usages = wordViewModel.usages {
             wordUsageView.usageArray = usages
+        } else {
+            wordUsageView.usageArray = []
         }
 
         view.addSubview(wordUsageView)
