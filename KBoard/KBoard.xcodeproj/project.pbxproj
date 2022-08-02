@@ -29,6 +29,7 @@
 		797A4D6428922CC60016C79A /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D6328922CC60016C79A /* ObservableObject.swift */; };
 		797A4D66289259650016C79A /* KPopSlangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D65289259650016C79A /* KPopSlangViewModel.swift */; };
 		797A4D6C28953A680016C79A /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A4D6B28953A680016C79A /* WordViewModel.swift */; };
+		79BBF67328990F7B0003FAD8 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */; };
 		79E659CB288FC3BD00FD54B6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E659CA288FC3BD00FD54B6 /* CategoryViewController.swift */; };
 		79E659D12890CB1500FD54B6 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E659D02890CB1400FD54B6 /* Color+Extension.swift */; };
 		79FDFA9A2884E689006A03CB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 79FDFA992884E689006A03CB /* .swiftlint.yml */; };
@@ -44,7 +45,6 @@
 		DF50569B288924EA00E6F8AA /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569A288924EA00E6F8AA /* WordDetailViewController.swift */; };
 		DF50569D288924F600E6F8AA /* WordDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50569C288924F600E6F8AA /* WordDescriptionView.swift */; };
 		F60B878028904F00000D3CC6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60B877F28904F00000D3CC6 /* Extension.swift */; };
-		F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */; };
 		F69563F1288FAEAC009A70D5 /* CustomKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F6F4B0C82898ECA80066AD44 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F4B0C72898ECA80066AD44 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -485,8 +485,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */,
 				F60B878028904F00000D3CC6 /* Extension.swift in Sources */,
+				79BBF67328990F7B0003FAD8 /* KeyboardViewController.swift in Sources */,
 				F6F4B0C82898ECA80066AD44 /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,7 +571,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,7 +625,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -703,7 +703,7 @@
 				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CustomKeyboard;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -729,7 +729,7 @@
 				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CustomKeyboard;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

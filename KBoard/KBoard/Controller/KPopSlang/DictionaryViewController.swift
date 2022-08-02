@@ -98,15 +98,6 @@ class DictionaryViewController: UIViewController, UISearchBarDelegate {
                 }
 
             }
-//            for word in Word.words {
-//                if word.hangleName.lowercased().contains(searchText.lowercased()) {
-//                    filteredData.append(word)
-//
-//                } else if word.englishName.lowercased().contains(searchText.lowercased()) {
-//                    filteredData.append(word)
-//
-//                }
-//            }
         }
         
         self.tableView.reloadData()
@@ -124,9 +115,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.separatorStyle = .none // cell line 없애기
         tableView.register(WordCustomCell.self, forCellReuseIdentifier: WordCustomCell.tableCellId)
-        
     }
-
     // 행의 개수를 설정하는 메소드
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return Word.words.count
@@ -137,10 +126,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     // 셀을 만드는 메소드
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCustomCell.tableCellId, for: indexPath) as! WordCustomCell
-//        cell.isStar = kPopSlangViewModel.getWordAtIndex(indexPath.row).userCateogry != ""
-//        let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
-//        cell.HangleName.text = word.name
-//        cell.EnglishName.text = word.pronunciation
+
         guard !filtered.isEmpty else { return UITableViewCell()}
         cell.isStar = filtered[indexPath.row].userCateogry != ""
         let word = filtered[indexPath.row]
@@ -154,11 +140,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     
     // DetailView로 들어가기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
-//        print("qqwqw", word)
-//        let vc = WordDetailViewController(wordViewModel: WordViewModel(word: word))
-//        navigationController?.pushViewController(vc, animated: true)
-        
+
         let word = filtered[indexPath.row]
         print("qqwqw", word)
         let vc = WordDetailViewController(wordViewModel: WordViewModel(word: word))
@@ -169,7 +151,7 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     // TableView scroll 시 실행되는 메소드
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let y = scrollView.contentOffset.y // Y 축으로 스크롤 되는 크기
-
+        guard kPopSlangViewModel.getNumberOfWords() > 4 else { return }
         let swipingDown = y <= 0 // 아래로 스크롤 됐다는 상태 변수
         let shouldSnap = y > 60 // UpperHeaderView 높이 + padding
         let headerHeight = 170 // 전체 HeaderView 높이
