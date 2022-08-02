@@ -15,7 +15,9 @@ class DictionaryViewController: UIViewController, UISearchBarDelegate {
     
     var kPopSlangViewModel = KPopSlangViewModel()
     
-    var filteredData: [Word]!
+    var allWords: [Word2]!
+    var filtered: [Word2]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
@@ -33,7 +35,10 @@ class DictionaryViewController: UIViewController, UISearchBarDelegate {
             self?.tableView.reloadData()
         }
         
-        kPopSlangViewModel.category.bind { [weak self] _ in
+        kPopSlangViewModel.category.bind { [weak self] category in
+            guard let category = category else { return }
+            self?.allWords = category.words
+            self?.filtered = self?.allWords
             self?.tableView.reloadData()
         }
     }
@@ -68,22 +73,40 @@ class DictionaryViewController: UIViewController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        filteredData = []
+        filtered = []
         
         if searchText == "" {
-            filteredData = Word.words
+            print("~!", searchText)
+            filtered = allWords
             
         } else {
-            
-            for word in Word.words {
-                if word.hangleName.lowercased().contains(searchText.lowercased()) {
-                    filteredData.append(word)
-                    
-                } else if word.englishName.lowercased().contains(searchText.lowercased()) {
-                    filteredData.append(word)
-                    
+            print("~!!")
+            print("~!!,", allWords.map {$0.name})
+            for word in allWords {
+                if word.name.lowercased().contains(searchText.lowercased()) {
+                    print("~!!추가됩니다.", word.name)
+                    filtered.append(word)
+                    print("~!!", filtered.map {$0.name})
                 }
+            
+                if let pronunciation = word.pronunciation {
+                    if pronunciation.lowercased().contains(searchText.lowercased()) {
+                        print("~!!!", word.name)
+                        filtered.append(word)
+
+                    }
+                }
+
             }
+//            for word in Word.words {
+//                if word.hangleName.lowercased().contains(searchText.lowercased()) {
+//                    filteredData.append(word)
+//
+//                } else if word.englishName.lowercased().contains(searchText.lowercased()) {
+//                    filteredData.append(word)
+//
+//                }
+//            }
         }
         
         self.tableView.reloadData()
@@ -107,26 +130,40 @@ extension DictionaryViewController: UITableViewDelegate, UITableViewDataSource {
     // 행의 개수를 설정하는 메소드
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return Word.words.count
-        return kPopSlangViewModel.getNumberOfWords()
+        guard let filtered = filtered else { return 0}
+        return filtered.count
     }
 
     // 셀을 만드는 메소드
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCustomCell.tableCellId, for: indexPath) as! WordCustomCell
-        cell.isStar = kPopSlangViewModel.getWordAtIndex(indexPath.row).userCateogry != ""
+//        cell.isStar = kPopSlangViewModel.getWordAtIndex(indexPath.row).userCateogry != ""
+//        let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
+//        cell.HangleName.text = word.name
+//        cell.EnglishName.text = word.pronunciation
+        guard !filtered.isEmpty else { return UITableViewCell()}
+        cell.isStar = filtered[indexPath.row].userCateogry != ""
+        let word = filtered[indexPath.row]
+        print(filtered[indexPath.row].name)
+        cell.HangleName.text = filtered[indexPath.row].name
+        cell.EnglishName.text = filtered[indexPath.row].pronunciation
+        
         cell.selectionStyle = .none
-        let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
-        cell.HangleName.text = word.name
-        cell.EnglishName.text = word.pronunciation
         return cell
     }
     
     // DetailView로 들어가기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
+//        let word = kPopSlangViewModel.getWordAtIndex(indexPath.row)
+//        print("qqwqw", word)
+//        let vc = WordDetailViewController(wordViewModel: WordViewModel(word: word))
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        let word = filtered[indexPath.row]
         print("qqwqw", word)
         let vc = WordDetailViewController(wordViewModel: WordViewModel(word: word))
         navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     // TableView scroll 시 실행되는 메소드

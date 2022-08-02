@@ -23,9 +23,11 @@ class WordDetailViewController: UIViewController {
         
         wordViewModel.word2.bind { [weak self] _ in
             self?.view.reloadInputViews()
+            print("11", wordViewModel.word2.value?.name)
         }
         wordViewModel.changesInUserCategories.bind { [weak self] _ in
             self?.view.reloadInputViews()
+            print("111", wordViewModel.word2.value?.userCateogry)
         }
     }
     
@@ -42,17 +44,18 @@ class WordDetailViewController: UIViewController {
     }()
     
     @objc func starTapped() {
-        if starButton.currentImage != UIImage(systemName: "star.fill") {
-            
+        
+        if starButton.currentImage == UIImage(systemName: "star.fill") {
+            starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            wordViewModel.switchUserCategory(category: "")
+        } else {
+            starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             let addCategoryModalViewController = AddCategoryModalViewController(wordViewModel: wordViewModel)
-            
             addCategoryModalViewController.modalPresentationStyle = .pageSheet
             addCategoryModalViewController.sheetPresentationController?.detents = [.medium()]
             present(addCategoryModalViewController, animated: true)
-        } else {
-            wordViewModel.switchUserCategory(category: "")
         }
-        starButton.setImage(UIImage(systemName: (starButton.currentImage == UIImage(systemName: "star")) ?  "star.fill" :  "star"), for: .normal)
+
     }
     
     override func viewDidLoad() {

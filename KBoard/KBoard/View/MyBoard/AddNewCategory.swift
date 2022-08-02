@@ -99,6 +99,7 @@ class AddNewCategory: UIViewController {
                 } else {
                     validationLabel.text = "Good name 😎"
                     validationLabel.textColor = .blue
+                    navigationItem.rightBarButtonItem?.isEnabled = true
                 }
             }
             
@@ -108,8 +109,6 @@ class AddNewCategory: UIViewController {
     @objc private func addNewCategory(_ sender: Any) {
         if let text = categoryTextField.text, let boardListViewModel = boardListViewModel {
             boardListViewModel.addCategory(name: text)
-            
-//            categoryNameDelegate?.categoryNameSend(name: text)
             
         }
         dismiss(animated: true, completion: nil)
@@ -122,20 +121,6 @@ class AddNewCategory: UIViewController {
 
 extension AddNewCategory: UITextFieldDelegate {
 
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if let char = string.cString(using: String.Encoding.utf8) {
-//            let isBackSpace = strcmp(char, "\\b")
-//            if isBackSpace == -92 {
-//                return true
-//            }
-//        }
-//        if let text = categoryTextField.text {
-//            if text.count < 10 {
-//                return true
-//            }
-//        }
-//        return false
-//    }
 }
 
 protocol CategoryNameProtocol {

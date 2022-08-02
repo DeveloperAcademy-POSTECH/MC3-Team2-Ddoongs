@@ -19,11 +19,9 @@ final class BoardListViewModel {
     init() {
 
         manager.categoryArrayPublisher.sink {
-            print("여기는역시")
             self.categories.value = $0
         }
         .store(in: &bag)
-        
         manager.fetchSavedUserCategories2()
     }
     

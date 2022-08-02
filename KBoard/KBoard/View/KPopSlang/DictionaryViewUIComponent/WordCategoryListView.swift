@@ -29,7 +29,11 @@ class WordCategoryListView: UIView {
     
     init(kPopSlangViewModel: KPopSlangViewModel) {
         self.kPopSlangViewModel = kPopSlangViewModel
+        
         super.init(frame: CGRect())
+        kPopSlangViewModel.category.bind { [weak self] _ in
+            self?.categorycollectionView.reloadData()
+        }
         render()
     }
     
@@ -59,13 +63,14 @@ extension WordCategoryListView: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectaionCellId", for: indexPath) as! CollectionCustomCell
-        cell.backgroundColor = .gray
+        
         cell.categoryLabel.text = kPopSlangViewModel.defaultCategoryStringAt(indexPath.row)
-
+        cell.backgroundColor = kPopSlangViewModel.currentDefaultCategoryIndex(index: indexPath.row) ? .systemGray2 : .systemGray6
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         kPopSlangViewModel.switchCategoryAt(indexPath.row)
     }
+
 }

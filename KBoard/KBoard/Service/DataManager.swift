@@ -80,14 +80,11 @@ final class DataManager {
             }
         }
         categoryArrayPublisher.value.remove(at: index)
-//
         guard let dictIndex = dictionaryArray.map {$0.categoryName}.firstIndex(of: dictionaryPublisher.value.categoryName) else { return }
-        
         dictionaryPublisher.value = dictionaryArray[dictIndex]
     }
 
     func fetchSavedUserCategories2() {
-        
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
             let word1 = Word2(name: "바티짱1", isFavorite: true, userCateogry: "BTS", defaultCategory: .행복, description: "바티바티", relatedWords: ["바티짱2", "바티짱3"])
             let word2 = Word2(name: "바티짱2", isFavorite: false, userCateogry: "BTS", defaultCategory: .행복, description: "짱", relatedWords: ["바티짱1", "바티짱3"])
@@ -105,7 +102,6 @@ final class DataManager {
             // TODO: background에서 받으려나? 확인
             DispatchQueue.main.async {
                 self?.categoryArrayPublisher.value = userCategories
-//                self?.dictionaryArrayPublisher.value = defaultCategories
                 self?.dictionaryArray = defaultCategories
                 self?.dictionaryPublisher.value = self?.dictionaryArray.filter { $0.categoryName == .firstCateogryName}[0] ?? DefaultCategory(categoryName: .firstCateogryName)
             }
@@ -143,7 +139,7 @@ final class DataManager {
         let newWord = Word2(name: wordName, isFavorite: true, userCateogry: categoryName, description: description)
         guard let index = categoryArrayPublisher.value.firstIndex(where: { $0.categoryName == categoryName }) else { return }
         categoryArrayPublisher.value[index].addWord(newWord)
-        categoryPublisher.value.words = categoryArrayPublisher.value[index].words
+        categoryPublisher.value = categoryArrayPublisher.value[index]
     }
     
     func removeWordAt(category: Category2, index: Int) {
@@ -157,14 +153,16 @@ final class DataManager {
     }
     
     func getWordAtIndexInDefaultCategory(_ index: Int) -> Word2 {
-        print("qqwqw in datamanager", dictionaryPublisher.value.words[index])
         return dictionaryPublisher.value.words[index]
-        
     }
     
     func switchCategoryAt(_ index: Int) {
         guard let defualtCategory = dictionaryArray.filter({ $0.categoryName == DefaultCateogryName.allCases[index] }).first else { return }
         dictionaryPublisher.value = defualtCategory
+    }
+    
+    func getDefaultCategoryName() -> DefaultCateogryName {
+        dictionaryPublisher.value.categoryName
     }
     
     func initWord(word: Word2) {
@@ -202,7 +200,7 @@ final class DataManager {
     }
     // 모델이 클래스 아니어서 일일히 해야한다.?
     func selectFavoriteCategory(word: Word2, userCategory: String) {
-        
+        // dictionary 변경
         guard let index = dictionaryArray.firstIndex(where: {$0.categoryName == word.defaultCategory}) else { return }
         guard let wordIndex = dictionaryArray[index].words.firstIndex(of: word) else { return }
         
@@ -210,7 +208,7 @@ final class DataManager {
         if dictionaryPublisher.value.categoryName == dictionaryArray[index].categoryName {
             dictionaryPublisher.value = dictionaryArray[index]
         }
-        print(word.userCateogry)
+        // 이전 단어가 빈 거 일때
         if word.userCateogry == "" {
             guard let changedPublisherIndex = categoryArrayPublisher.value.firstIndex(where: {$0.categoryName == userCategory}) else { return}
             var newWord = word
@@ -219,11 +217,15 @@ final class DataManager {
             wordPublisher.value = newWord
             if categoryPublisher.value.categoryName == newWord.userCateogry {
                 categoryPublisher.value = categoryArrayPublisher.value[changedPublisherIndex]
-                
             }
-            
         }
-        guard let categoryIndex = categoryArrayPublisher.value.firstIndex(where: {$0.categoryName == word.userCateogry}) else { return }
+        // 카테고리 바꾸기
+        guard let categoryIndex = categoryArrayPublisher.value.firstIndex(where: { a in
+            print(a.categoryName)
+            print(word.userCateogry)
+            return a.categoryName == word.userCateogry
+            
+        }) else { return }
         guard let wordIndex = categoryArrayPublisher.value[categoryIndex].words.firstIndex(of: word) else { return }
 //
         var changedWord = categoryArrayPublisher.value[categoryIndex].words.remove(at: wordIndex)
@@ -232,14 +234,17 @@ final class DataManager {
         if categoryPublisher.value.categoryName == word.userCateogry {
             categoryPublisher.value = categoryArrayPublisher.value[categoryIndex]
         }
-        
+        if userCategory == "" {
+            wordPublisher.value = changedWord
+        }
+        // 새로운 카테고리와 같은곳을 찾는다.
         guard let changedPublisherIndex = categoryArrayPublisher.value.firstIndex(where: {$0.categoryName == userCategory}) else { return}
         categoryArrayPublisher.value[changedPublisherIndex].words.append(changedWord)
         wordPublisher.value = changedWord
-//
-        if categoryPublisher.value.categoryName == word.userCateogry ||
-            categoryPublisher.value.categoryName == changedWord.userCateogry {
+        if categoryPublisher.value.categoryName == word.userCateogry {
             categoryPublisher.value = categoryArrayPublisher.value[categoryIndex]
+        } else if categoryPublisher.value.categoryName == userCategory {
+            categoryPublisher.value = categoryArrayPublisher.value[changedPublisherIndex]
         }
         
     }

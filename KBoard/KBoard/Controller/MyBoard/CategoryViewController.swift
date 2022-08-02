@@ -8,6 +8,7 @@
 import UIKit
 
 // 니로 스크롤_ tableview reload 관련.
+// TODO: edit category 텍스트 필드 반영 안됨
 
 class CategoryViewController: UIViewController {
 
@@ -72,12 +73,11 @@ class CategoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // TODO: CategoryName
-        navigationItem.title = title
+        navigationItem.title = categoryViewModel.getCategoryName()
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editWords)),
-            UIBarButtonItem(customView: keyBoard )
+            UIBarButtonItem(title: " edit", style: .plain, target: self, action: #selector(editWords)),
+            UIBarButtonItem(image: UIImage(systemName: "keyboard"), style: .done, target: self, action: nil)
         ]
-        
     }
 
     @objc fileprivate func editWords() {

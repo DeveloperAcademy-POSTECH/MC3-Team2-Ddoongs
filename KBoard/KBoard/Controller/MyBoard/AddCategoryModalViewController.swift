@@ -91,7 +91,7 @@ class AddCategoryModalViewController: UIViewController {
         categoryTextFieldSetting()
 
         guard let index = wordViewModel.getCategoryIndex() else { return }
-        caterogyPicker.selectRow(0, inComponent: 0, animated: true)
+        caterogyPicker.selectRow(wordViewModel.getCategoryIndex() ?? 0, inComponent: 0, animated: true)
     }
     
     private func render() {
@@ -114,6 +114,7 @@ class AddCategoryModalViewController: UIViewController {
         if wordViewModel.userCategory == "" {
             categoryPickerTextField.text = "카테고리를 선택하세요"
         } else {
+            print("wordViewModel, userCategory", wordViewModel.userCategory)
             categoryPickerTextField.text = wordViewModel.userCategory
         }
     }

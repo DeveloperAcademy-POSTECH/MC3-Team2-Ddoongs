@@ -16,6 +16,11 @@ class CollectionCustomCell: UICollectionViewCell {
         return label
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            self.backgroundColor = isSelected ? UIColor.systemGray2 : UIColor.systemGray6
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()

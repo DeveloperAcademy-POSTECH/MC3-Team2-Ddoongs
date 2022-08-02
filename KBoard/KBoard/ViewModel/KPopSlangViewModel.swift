@@ -27,7 +27,6 @@ final class KPopSlangViewModel {
         manager.dictionaryPublisher.sink {
             self.category.value = $0
         }.store(in: &bag)
-
     }
     
     func getNumberOfWords() -> Int {
@@ -49,6 +48,10 @@ final class KPopSlangViewModel {
     
     func defaultCategoryStringAt(_ index: Int) -> String {
         DefaultCateogryName.allCases[index].rawValue
+    }
+  
+    func currentDefaultCategoryIndex(index: Int) -> Bool {
+        manager.dictionaryPublisher.value.categoryName == DefaultCateogryName.allCases[index]
     }
 
 }

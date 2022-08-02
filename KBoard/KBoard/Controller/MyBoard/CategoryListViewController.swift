@@ -80,7 +80,8 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
         let actionSheet = UIAlertController(title: "타이틀", message: "액션시트 메시지", preferredStyle: .actionSheet)
         let rename = UIAlertAction(title: "Rename", style: .default) { _ in
 //            self.showRenameAlert(category: category)
-            self.tapAddButton(UIButton())
+            self.showRenameAlert(category: category)
+//            self.tapAddButton(UIButton())
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheet.addAction(rename)
@@ -88,24 +89,24 @@ class CategoryListViewController: UIViewController, CategoryNameProtocol {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-//    private func showRenameAlert(category: Category2) {
-//        let renameAlert = UIAlertController(title: "Rename Category", message: "Do you want to rename category?", preferredStyle: .alert)
-//        let save = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
-//            // To-Do : 카테고리 명 수정 시 카테고리 리스트에 적용
-//            guard let text = renameAlert.textFields?.first?.text,
-//                  !text.isEmpty
-//            else { return }
-//            self?.boardListViewModel.editCategoryName(category: category, name: text)
-//
-//        }
-//        let cancel = UIAlertAction(title: "cancel", style: .cancel)
-//        renameAlert.addAction(save)
-//        renameAlert.addAction(cancel)
-//        renameAlert.addTextField { (newCategoryName) in
-//            newCategoryName.placeholder = "\(category.categoryName)"
-//        }
-//        self.present(renameAlert, animated: true, completion: nil)
-//    }
+    private func showRenameAlert(category: Category2) {
+        let renameAlert = UIAlertController(title: "Rename Category", message: "Do you want to rename category?", preferredStyle: .alert)
+        let save = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            // To-Do : 카테고리 명 수정 시 카테고리 리스트에 적용
+            guard let text = renameAlert.textFields?.first?.text,
+                  !text.isEmpty
+            else { return }
+            self?.boardListViewModel.editCategoryName(category: category, name: text)
+
+        }
+        let cancel = UIAlertAction(title: "cancel", style: .cancel)
+        renameAlert.addAction(save)
+        renameAlert.addAction(cancel)
+        renameAlert.addTextField { (newCategoryName) in
+            newCategoryName.placeholder = "\(category.categoryName)"
+        }
+        self.present(renameAlert, animated: true, completion: nil)
+    }
     
     @objc private func tapAddButton(_ sender: Any) {
         let addModel = AddNewCategory()
@@ -158,10 +159,8 @@ extension CategoryListViewController: UITableViewDataSource {
 extension CategoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let vc = CategoryViewController(boardListViewModel: boardListViewModel, category: boardListViewModel.getCategoryAt(indexPath.section))
         let category = boardListViewModel.getCategoryAt(indexPath.section)
         let vc = CategoryViewController(categoryViewModel: CategoryViewModel(category: category))
-        
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -194,5 +193,6 @@ extension CategoryListViewController: UITableViewDelegate {
 extension CategoryListViewController: CategoryEditDelegate {
     func tapMoreButton(category: Category2) {
         showActionSheet(category: category)
+        
     }
 }

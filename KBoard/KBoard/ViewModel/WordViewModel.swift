@@ -74,6 +74,7 @@ final class WordViewModel {
     
     func switchUserCategory(category: String) {
         manager.selectFavoriteCategory(word: manager.getWord(), userCategory: category)
+        
     }
     
     func getCategoryIndex() -> Int? {

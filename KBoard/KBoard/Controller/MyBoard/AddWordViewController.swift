@@ -133,19 +133,7 @@ class AddWordViewController: UIViewController {
     }
     
     @objc private func dismissPage() {
-//        if 중복되는 단어명을 찾는 로직 {
-//            let alert = UIAlertController(title: "Can't Add your New Word", message: "This word already in your Board!!\n Please try another one", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-//            present(alert, animated: true)
-//        } else {
-        // TODO: Save 하는 함수를 넣어야 한다.
-//                if 중복되는 단어명을 찾는 로직 {
-//                    let alert = UIAlertController(title: "Can't Add your New Word", message: "This word already in your Board!!\n Please try another one", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-//                    present(alert, animated: true)
-//                } else {
             dismiss(animated: true, completion: nil)
-//        }
     }
     
     @objc private func doneTapped() {
@@ -193,4 +181,5 @@ extension AddWordViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         newWordCategoryTextField.text = categoryViewModel.userCategoryNameArray[row]
     }
+    
 }
