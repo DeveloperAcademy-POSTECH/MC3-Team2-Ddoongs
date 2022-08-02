@@ -36,6 +36,14 @@ class KeyboardViewController: UIInputViewController {
         return guideline
     }()
 
+    private let categoryLayout: UICollectionViewFlowLayout = {
+        let guideline = UICollectionViewFlowLayout()
+        guideline.scrollDirection = .horizontal
+        guideline.minimumLineSpacing = 50
+        guideline.minimumInteritemSpacing = 0
+        return guideline
+    }()
+
     private lazy var customCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
         view.isScrollEnabled = true
@@ -45,19 +53,49 @@ class KeyboardViewController: UIInputViewController {
         view.contentInset = .zero
         view.backgroundColor = .systemGray5
         view.clipsToBounds = true
-//            view.register(MyCell.self, forCellWithReuseIdentifier: MyCell.id)
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.heightAnchor.constraint(equalToConstant: 250)
         return view
     }()
 
-    lazy var row1 = ["보라해💜", "💜JungKook💜", "💜JIN💜"]
-    lazy var row2 = ["최애", "존멋", "💜제이홉💜", "LOVE"]
-    lazy var row3 = ["애교폭탄", "카톡왔숑", "사랑해제이홉오빠"]
-    lazy var row4 = ["ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!"]
-    lazy var row5 = ["ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!"]
+    private lazy var categoryCollectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: self.categoryLayout)
+        view.isScrollEnabled = true
+        view.showsHorizontalScrollIndicator = false
+        view.showsVerticalScrollIndicator = true
+        view.scrollIndicatorInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 4)
+        view.contentInset = .zero
+        view.backgroundColor = .systemGray5
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
-    private lazy var memberName = [row1, row2, row3, row4, row5]
+    lazy var category = ["💜BTS💜", "V-App", "💜JungKook💜"]
+    lazy var finalRow = ["보라해💜", "💜JungKook💜", "💜JIN💜", "최애", "존멋", "💜제이홉💜", "LOVE", "애교폭탄", "카톡왔숑", "사랑해제이홉오빠", "ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!", "ㄹㅇㅋㅋ", "뀨", "음방", "뷔 내꺼!"]
+    func createFinalArray(input: [String]) -> [[String]] {
+        var row: [[String]] = []
+        var index = 0
+        while finalRow.isEmpty == false {
+            var subRow1: [String] = []
+            var length: Int = 0
+            while length <= Int(view.frame.width-14) {
+                if index > finalRow.count - 1 {
+                    break
+                }
+                length += Int(textSize(text: input[index]) + 30 + 10)
+                if length <= Int(view.frame.width) {
+                    subRow1.append(input[index])
+                    index += 1
+                } else {break}
+            }
+            row.append(subRow1)
+            if index > finalRow.count - 1 {
+                break
+            }
+        }
+        return row
+    }
+    private lazy var memberName = createFinalArray(input: finalRow)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,19 +116,50 @@ class KeyboardViewController: UIInputViewController {
 
         customCollectionView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(customCollectionView)
-        var row =  UIView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 30))
-//        self.view.addSubview(row)
-        customCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        customCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        customCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        customCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        var row = UIView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 30))
+        var categoryRow = UIView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 30))
+        self.view.addSubview(row)
+        self.view.addSubview(categoryRow)
+        row.backgroundColor = UIColor.blue
+
+        customCollectionView.anchor(top: categoryRow.bottomAnchor, left: view.leftAnchor, bottom: row.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
+        customCollectionView.anchor(height: 200)
         customCollectionView.register(CollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cellIdentifier")
         customCollectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         collectionViewDelegate()
-        row.backgroundColor = UIColor.blue
+
         row.translatesAutoresizingMaskIntoConstraints = false
-//        row.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 1).isActive = true
-//        row.topAnchor.constraint(equalTo: view.topAnchor, constant: 1).isActive = true
+        categoryRow.translatesAutoresizingMaskIntoConstraints = false
+        row.backgroundColor = .systemGray5
+        categoryRow.backgroundColor = .systemGray5
+        categoryRow.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 0, paddingLeft: 0)
+        categoryRow.anchor(bottom: customCollectionView.topAnchor, right: view.rightAnchor, paddingBottom: 0, paddingRight: 0)
+        categoryRow.anchor(height: 50)
+        row.anchor(top: customCollectionView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        row.anchor(height: 50)
+        let firstCategoryButton = createFirstCategoryButton(name: category[0])
+        let secondCategoryButton = createCategoryButton(name: category[1])
+        let thirdCategoryButton = createCategoryButton(name: category[2])
+
+        let backButton = createBackButton(name: "<=")
+        let spaceButton = createSpaceButton(name: "Space")
+        let enterButton = createEnterButton(name: "Enter")
+
+        categoryRow.addSubview(firstCategoryButton)
+        categoryRow.addSubview(secondCategoryButton)
+        categoryRow.addSubview(thirdCategoryButton)
+        categoryRow.addSubview(backButton)
+        firstCategoryButton.anchor(left: view.leftAnchor, paddingLeft: 0)
+        secondCategoryButton.anchor(left: firstCategoryButton.rightAnchor, paddingLeft: 0)
+        thirdCategoryButton.anchor(left: secondCategoryButton.rightAnchor, paddingLeft: 0)
+        backButton.anchor(left: thirdCategoryButton.rightAnchor, paddingLeft: 2)
+        backButton.centerY(inView: categoryRow)
+
+        row.addSubview(spaceButton)
+        spaceButton.centerY(inView: row)
+        spaceButton.centerX(inView: row)
+        row.addSubview(enterButton)
+        enterButton.centerY(inView: row, leftAnchor: spaceButton.rightAnchor, paddingLeft: 10)
     }
 
     func collectionViewDelegate() {
@@ -148,4 +217,95 @@ extension KeyboardViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
 
+    func createBackButton(name: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        button.widthAnchor.constraint(equalToConstant: textSize(text: name) + 22).isActive = true
+        button.layer.cornerRadius = 8
+        button.layer.borderColor = UIColor.black.cgColor
+//        button.setTitle(name, for: UIControl.State.normal)
+        button.setImage(UIImage(systemName: "delete.backward"), for: UIControl.State.normal)
+        button.backgroundColor = UIColor.systemGray2
+        button.tintColor = UIColor.black
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        button.addTarget(self, action: #selector(backSpacePressed), for: .touchUpInside)
+        return button
+    }
+
+    func createSpaceButton(name: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: textSize(text: name) + 130).isActive = true
+        button.layer.cornerRadius = 8
+        button.layer.borderColor = UIColor.black.cgColor
+        button.setTitle(name, for: UIControl.State.normal)
+        button.backgroundColor = UIColor.white
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        button.addTarget(self, action: #selector(spacePressed), for: .touchUpInside)
+        return button
+    }
+
+    func createEnterButton(name: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: textSize(text: name) + 30).isActive = true
+        button.layer.cornerRadius = 8
+        button.layer.borderColor = UIColor.black.cgColor
+        button.setTitle(name, for: UIControl.State.normal)
+        button.backgroundColor = UIColor.systemBlue
+        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        button.addTarget(self, action: #selector(returnPressed), for: .touchUpInside)
+        return button
+    }
+
+    func textSize(text: String) -> CGFloat {
+        return (text as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 17)]).width
+    }
+
+    func createFirstCategoryButton(name: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: textSize(text: name) + 30).isActive = true
+//        button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 300)
+        button.layer.cornerRadius = 0
+        button.layer.borderColor = UIColor.black.cgColor
+//        button.layer.masksToBounds = true
+        button.setTitle(name, for: UIControl.State.normal)
+        button.backgroundColor = UIColor.systemGray2
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+//        button.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
+        return button
+    }
+
+    func createCategoryButton(name: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: textSize(text: name) + 30).isActive = true
+//        button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 300)
+        button.layer.cornerRadius = 0
+        button.layer.borderColor = UIColor.black.cgColor
+//        button.layer.masksToBounds = true
+        button.setTitle(name, for: UIControl.State.normal)
+        button.backgroundColor = UIColor.systemGray5
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+//        button.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
+        return button
+    }
+
+    @objc func backSpacePressed(button: UIButton) {
+        (textDocumentProxy as UIKeyInput).deleteBackward()
+    }
+
+    @objc func spacePressed(button: UIButton) {
+        (textDocumentProxy as UIKeyInput).insertText(" ")
+    }
+
+    @objc func returnPressed(button: UIButton) {
+        (textDocumentProxy as UIKeyInput).insertText("\n")
+    }
 }
