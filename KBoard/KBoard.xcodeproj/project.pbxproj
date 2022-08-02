@@ -46,6 +46,7 @@
 		F60B878028904F00000D3CC6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60B877F28904F00000D3CC6 /* Extension.swift */; };
 		F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */; };
 		F69563F1288FAEAC009A70D5 /* CustomKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F6F4B0C82898ECA80066AD44 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F4B0C72898ECA80066AD44 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		F69563EA288FAEAC009A70D5 /* CustomKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		F69563EE288FAEAC009A70D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6F4B0C72898ECA80066AD44 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				F69563EC288FAEAC009A70D5 /* KeyboardViewController.swift */,
+				F6F4B0C72898ECA80066AD44 /* CollectionViewCell.swift */,
 				F60B877F28904F00000D3CC6 /* Extension.swift */,
 				F69563EE288FAEAC009A70D5 /* Info.plist */,
 			);
@@ -484,6 +487,7 @@
 			files = (
 				F69563ED288FAEAC009A70D5 /* KeyboardViewController.swift in Sources */,
 				F60B878028904F00000D3CC6 /* Extension.swift in Sources */,
+				F6F4B0C82898ECA80066AD44 /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
